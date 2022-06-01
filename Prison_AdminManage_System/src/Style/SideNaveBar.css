@@ -1,0 +1,138 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.nav-main-container{
+    /* height: 670px; */
+    width: 100%;                                       
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    
+}
+
+.inner-container{
+    height: 670px;
+    width: 210px;
+    background-color: black;
+    border-top-right-radius: 20px  ;
+    border-bottom-right-radius: 20px;
+    top: 0%;
+    left: 0;
+    right: 30%;
+}
+.logo{
+    top: 0;
+    height: 200px;
+    /* position: absolute; */
+    width: 200px;
+    object-fit: fill;
+}
+.nav-list{
+    
+}
+
+.nav-menu{
+    display: flex;
+  justify-content: space-between;
+    /* margin-bottom: 20%; */
+    padding: 25px ;
+    border-radius: 6px;
+  transition: 0.3s all ease;
+  cursor: pointer;
+  height: fit-content;
+  color: white;
+ 
+    
+
+}
+.loguot-btn{
+    padding: 18px 25px;
+    border-radius: 6px;
+  transition: 0.3s all ease;
+  cursor: pointer;
+  height: fit-content;
+  color: white;
+  bottom: 0;  
+}
+.SidebarList{
+    height: auto;
+    padding: 0;
+    width: 100%;
+}
+.SidebarList .row{
+ width: 100%; 
+ height: 70px;
+ /* border: 1px solid white; */
+list-style-type: none;
+margin: 0%;
+display: flex;
+flex-direction: row;
+color: white; 
+justify-content: center;
+align-items: center;
+font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+.SidebarList .row:hover{
+    cursor: pointer;
+    background-color: yellow;
+    color: #000;
+}
+.row .nav-icon{
+    flex: 30%;
+    display: grid;
+    place-items: center;
+}
+.row .title{
+    flex: 70%;
+}
+/* .nav-menu{
+    background: linear-gradient(145deg,#e2e8ec,#ffffff);
+    box-shadow: 4px 4px 8px #cbcbcb,4px -4px 8px #ffffff;
+} */
+.nav-menu ul li a{
+    transition: 0.5s;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    
+}
+.nav-menu:hover{
+    background-color: yellow;
+    color: black;
+    margin: 20px;
+    margin-top: 30%;
+    margin-left: 15%;
+}
+
+.nav-icons{
+   
+    width: 50%;
+    float: left;
+}
+.loguot-btn button{
+    /* background: linear-gradient(145deg,#e2e8ec,#ffffff); */
+    background: red;
+  box-shadow: 4px 4px 8px #cbcbcb,4px -4px 8px #ffffff;
+  padding: 18px 25px;
+  border-radius: 6px;
+  transition: 0.5s all ease;
+  cursor: pointer;
+  color: #000;
+
+}
+.loguot-btn p{
+    transition: 0.5s;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+.inner_Container{
+    background-color: red;
+    width: 100%;
+    height: 650px;
+}
+

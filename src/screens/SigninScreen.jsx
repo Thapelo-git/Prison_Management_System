@@ -95,7 +95,8 @@ const SigninScreen = ({navigation}) => {
                 >Forget Password</Text>
             </View>
     
-            <TouchableOpacity style={styles.signinButton}>
+            <TouchableOpacity style={styles.signinButton}
+              onPress={()=>navigation.navigate('homeScreen')}>
                 <Text style={styles.signinButtonText}
                 
                 >Sign in</Text>

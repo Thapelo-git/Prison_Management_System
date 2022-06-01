@@ -8,6 +8,7 @@ import WelcomScreen from './component/WelcomScreen';
 import { Dashboard } from './component/Dashboard';
 import Home from './component/home';
 import Account from './component/Account';
+import Visits from './component/Visits';
 function App() {
   return (
   <BrowserRouter>
@@ -19,7 +20,7 @@ function App() {
      <Route  path="/" element={<SideNaveBar/>}>
     <Route path='account' element={<Account/>}/>
     <Route  path='dashboard/*' element={<Home/>}/>
-    
+    <Route path='visits' element={<Visits/>}/>
    
     </Route>
      </Routes>

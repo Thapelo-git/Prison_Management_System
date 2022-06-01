@@ -33,7 +33,7 @@ function SideNaveBar() {
                     <i className='fab fa-facebook-f'></i>
                     </div>
                     <div className='title'>
-                    <Link to="AddScreen"><a>Dashboard</a></Link>
+                    <Link to="visits"><a>Visits</a></Link>
                 </div>
                    
             </li>

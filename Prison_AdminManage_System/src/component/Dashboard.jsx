@@ -1,10 +1,26 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import '../Style/Dashboard.css'
 import {  Routes,Route  } from 'react-router-dom'
 import AddScreen from './AddScreen'
 import logo from "../IMAGES/logo.png"
+import { db } from '../firebase'
 export const Dashboard = () => {
+  const [user,setUser] = useState({});
+    useEffect(()=>{
+        db.child("contacts").on("value",(snapshot)=>{
+            setUser({
+                ...snapshot.val(),
+            })
+            // if(snapshot.val() !== null){
+            //     setUser({
+            //         ...snapshot.val(),
+            //     })
+            // }else{
+            //     snapshot({});
+            // }
+        })
+    },[]);
   return (
     <div className='dashboard_cover'>
         <div className='addbutton_cover'>
@@ -19,11 +35,11 @@ export const Dashboard = () => {
             <input type="text" className='search_input'/>
             </div>
             <div className='users_container'>
-              {/* <Link to="viewuser"> */}
+              
             <div className='users'>
             <img src={logo} className="profile_pic"/>
             </div>
-            {/* </Link> */}
+          
             </div>
             
    

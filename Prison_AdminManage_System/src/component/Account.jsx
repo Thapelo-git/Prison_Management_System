@@ -10,25 +10,25 @@ function Account() {
     </div>
     <div className='Account_form'>
         <div className='Acc_column'>
-            <div className='row_input'>
+            <div className='row_Accinput'>
     <div className='Acc_input'>
         <div><i class="bi bi-envelope-fill"></i></div>
     <input name='email' type='email' className='input' placeholder='example@gmail.com'/>
     </div>
     </div>
-    <div className='row_input'>
+    <div className='row_Accinput'>
     <div className='Acc_input'>
         <div><i class="bi bi-telephone-fill"></i></div>
         <input name='phonenumber' type='number' className='input' placeholder='123456789'/>
     </div>
     </div>
-    <div className='row_input'>
+    <div className='row_Accinput'>
     <div className='Acc_input'>
         <div><i class="bi bi-lock-fill"></i></div>
         <input name='password' type='password' className='input' placeholder='********' />
     </div>
     </div>
-    <div className='row_input'>
+    <div className='row_Accinput'>
     <div className='Acc_input'>
         <div><i class="bi bi-lock-fill"></i></div>
         <input name='confirmpassword' type='password' className='input' placeholder='*******'/>

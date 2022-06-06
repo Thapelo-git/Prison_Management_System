@@ -9,7 +9,8 @@ const Home = () => {
    <Routes>
     <Route  path='/' element={<Dashboard/>}/>
      <Route  path='AddScreen' element={<AddScreen/>}/>
-   <Route path='viewuser' element={<Viewuser/>}/>
+   
+   <Route path='viewuser/:id' element={<Viewuser/>}/>
    </Routes>
    
    </div>

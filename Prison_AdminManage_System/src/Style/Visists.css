@@ -1,0 +1,23 @@
+.heading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.pickers{
+    display: flex;
+    justify-content:space-between;
+    align-items:stretch;
+    flex-direction: row;
+    padding: 50px;  
+}
+.button_cover{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.visits_list{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction:column; 
+}

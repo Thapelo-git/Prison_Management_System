@@ -15,7 +15,7 @@ function SideNaveBar() {
             <li className='row'>
                  
                     <div className='nav-icon'>
-                    <i className='fab fa-facebook-f'></i>
+                    <i class="	fas fa-users"></i>
                     </div>
                     <div className='title'>
                     
@@ -40,13 +40,13 @@ function SideNaveBar() {
             <li className='row'>
                  
                     <div className='nav-icon'>
-                    <i className='fab fa-facebook-f'></i>
+                    <i className='fas fa-user-circle'></i>
                     </div>
                     
                     <div className='title'>
-                    <Link to="account" >
+                    <Link to="interviews" >
                     <a >
-                   Account
+                   Interviews
                 </a>
                 </Link>
                 </div>
@@ -55,14 +55,14 @@ function SideNaveBar() {
             <li className='row'>
                   
                     <div className='nav-icon'>
-                    <i className='fab fa-facebook-f'></i>
+                    <i class="fas fa-user-circle"></i>
                     </div>
                     <div className='title'>
+                    <Link to="account" >
                     <a >
-                    Dashbout
-                    {/* <Link to="/">Dashboard</Link> */}
-                    
+                   Account
                 </a>
+                </Link>
                 </div>
                    
             </li>
@@ -77,7 +77,8 @@ function SideNaveBar() {
     <div className='loguot-btn'>
     <button className='btn'>
     <Link to="login"><a>Logout</a></Link>
-        
+    <i class="fas fa-sign-out-alt"></i>
+    
     </button>
     </div>
         </div>

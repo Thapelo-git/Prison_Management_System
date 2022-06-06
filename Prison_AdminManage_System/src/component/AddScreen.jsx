@@ -8,19 +8,9 @@ function AddScreen() {
   const values={
     name:'',surname:'',age:'',IDnumber:'',
     familyname:'',familysurname:'',familyphonenumber:'',familyemail:'',
-    lawyername:'',lawyersurname:'',lawyerphonenumber:'',lawyeremail:''
+    // lawyername:'',lawyersurname:'',lawyerphonenumber:'',lawyeremail:''
   }
-  const [initialState,setState]=useState(values)
-  const {name,surname,age,IDnumber,familyname,familysurname,
-  familyphonenumber,familyemail,lawyername,lawyersurname,lawyerphonenumber,lawyeremail}=initialState
 
-  const handleInputChange=(e)=>{
-    let {name,value}=e.target;
-    setState({
-      ...initialState,
-      [name]:value,
-    })
-  }
   const [url, setUrl] = useState();
   const [image,setImage]=useState(null)
   const handleImgChange=e=>{
@@ -54,10 +44,24 @@ function AddScreen() {
       }
     );
   };
+  const [initialState,setState]=useState(values)
+  const {name,surname,age,IDnumber,familyname,familysurname,
+  familyphonenumber,familyemail
+  // ,lawyername,lawyersurname,lawyerphonenumber,lawyeremail
+}=initialState
+
+  const handleInputChange=(e)=>{
+    let {name,value}=e.target;
+    setState({
+      ...initialState,
+      [name]:value,
+    })
+  }
   const handleSubmit = (e)=>{
     e.preventDefault();
     
-        db.ref('Puser').push({initialState,url})
+        db.ref('Puser').push({name,surname,age,IDnumber,familyname,familysurname,
+          familyphonenumber,familyemail,url})
        navigate('dashboad')
 }
   return (

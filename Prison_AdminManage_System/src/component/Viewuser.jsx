@@ -13,8 +13,7 @@ function Viewuser() {
       })
     })
   },[id]);
-  console.log(data,'mmmmmmmmmmmmm')
-  console.log(id)
+  
   return (
     <>
     {

@@ -8,10 +8,13 @@ import Separator from '../components/Separator'
 import { Images ,Colors} from '../contants'
 import { Display } from '../utils'
 import forgetPassword from './forgetPassword'
+import FamilySignIn from './FamilySignIn'
+import PoliceSignin from './PoliceSignin'
 const deviceHeight=Dimensions.get("window").height
 const SigninScreen = ({navigation}) => {
     const [isPasswordShow,setPasswordShow]=useState(false)
     const [modalopen,setModalopen]=useState(true)
+    const [page,setPage]=useState(0)
     return (
         <View >
              <StatusBar
@@ -39,77 +42,44 @@ const SigninScreen = ({navigation}) => {
             </View>
         <View style={{backgroundColor:'#fff',width:'100%',borderTopLeftRadius:20,
     borderTopRightRadius:20,paddingHorizontal:10,
-    maxHeight:deviceHeight * 0.9}}>
+    height:deviceHeight * 0.7}}>
          <View style={{justifyContent:'center',alignItems:'center'}}>
-            <Text style={styles.title}>SignIn</Text>
-            </View>
-            <View>
-            <View style={{ paddingHorizontal:15,
-        marginHorizontal:15,}}>
-               <Text style={{fontWeight:'bold'}}>Email Address</Text>
-        </View>
-        
-            <View style={styles.inputContainer}>
-                <View style={styles.inputSubContainer}>
-                    <Feather name="user" size={22}
-      
-                    style={{marginRight:10}}/>
-                    
-                    <TextInput placeholder="Email"
-                    selectionColor='gainsboro'
-                    style={styles.inputText}
-                    />
-                </View>
-            </View>
-            <View style={{height:15}}></View>
-            <View style={{ paddingHorizontal:15,
-        marginHorizontal:15,}}>
-            <Text style={{fontWeight:'bold'}}>Password</Text>
-        </View>
+          <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center',
+        width:250,height:60,backgroundColor:'gainsboro',borderRadius:30}}>
+              <TouchableOpacity style={{width:130,height:58,backgroundColor:page === 0?'#EC8F05':'gainsboro',justifyContent:'center',
+            alignItems:'center',borderRadius:30}} 
+            onPress={()=>setPage(0)}>
+                  <Text style={{color:page===0?'#fff':'#000',fontWeight:'bold'}}>Family/Friends</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={{width:130,height:58,backgroundColor:page === 1?'#EC8F05':'gainsboro',justifyContent:'center',
+            alignItems:'center',borderRadius:30}}
+            onPress={()=>setPage(1)}>
+                  <Text style={{color:page===1?'#fff':'#000',fontWeight:'bold'}}>Police</Text>
+              </TouchableOpacity>
+          </View>
+          <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center',
+        width:'100%'}}>
+            {
+                page === 0?(<FamilySignIn/>):(null)
+            }
+            {
+                page === 1?(<PoliceSignin/>):(null)
+            }
             
-            <View style={styles.inputContainer}>
-                <View style={styles.inputSubContainer}>
-                <Feather name="lock" size={22} color="#000"
-                    style={{marginRight:10}}/>
-                 <TextInput
-                 secureTextEntry={isPasswordShow? false :true}
-                 placeholder="Password"
-                 
-                 selectionColor='gainsboro'
-                 style={styles.inputText}/>
-                 <Feather
-                 name="eye" size={22}
-                 style={{marginRight:10}}
-                 onPress={()=>setPasswordShow(!isPasswordShow)}
-                 />
-                </View>
             </View>
-            </View>
-            <Text></Text>
-            <View style={styles.forgotPasswordContainer}>
-                <View>
-                    <Text style={styles.rememberMeText}></Text>
-                </View>
-                <Text style={styles.forgotPasswordText}
-                onPress={()=>navigation.navigate('forgetPassword')}
-                >Forget Password</Text>
-            </View>
-    
-            <TouchableOpacity style={styles.signinButton}
-              onPress={()=>navigation.navigate('homeScreen')}>
-                <Text style={styles.signinButtonText}
-                
-                >Sign in</Text>
-            </TouchableOpacity>
             <View style={styles.signupContainer}>
                 <Text style={styles.accountText}>
                     Don't have account?
                 </Text>
+                <TouchableOpacity   onPress={()=>navigation.navigate('Signup')}>
                 <Text style={styles.signupText}
-                onPress={()=>navigation.navigate('Signup')}
+        
                 >Sign Up</Text>
+           
+           </TouchableOpacity>
             </View>
-    
+            </View>
+            
             </View>
     </View>
    </Modal>

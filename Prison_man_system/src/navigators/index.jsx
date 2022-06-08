@@ -8,6 +8,7 @@ import { forgetPassword } from "../screens";
 import { RegisterPhone } from "../screens";
 import GetStarted from "../screens/GetStarted";
 import AuthStack from "../screens/AuthStack";
+import TabScreen from "../screens/TabScreen";
 
 const Stack = createNativeStackNavigator()
 
@@ -22,7 +23,8 @@ const Navigators =()=>{
                 <Stack.Screen name="Signin" component={SigninScreen}/> 
                 <Stack.Screen name="forgetPassword" component={forgetPassword}/>
                 <Stack.Screen name="RegisterPhone" component={RegisterPhone}/> 
-                <Stack.Screen name="homeScreen" component={AuthStack}/> 
+                <Stack.Screen name="homeScreen" component={AuthStack}/>
+                <Stack.Screen name="Polhome" component={TabScreen}/>
             </Stack.Navigator>
         </NavigationContainer>
     )

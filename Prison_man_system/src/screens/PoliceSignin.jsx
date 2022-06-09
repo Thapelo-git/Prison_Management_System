@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import { StyleSheet, Text, View ,StatusBar,
     TextInput,TouchableOpacity,Image,Modal,Dimensions,SafeAreaView,ScrollView} from 'react-native'
-import Ionicons from "react-native-vector-icons/Ionicons"
+import Icon from "react-native-vector-icons/Ionicons"
 import Feather from "react-native-vector-icons/Feather"
 import Separator from '../components/Separator'
 import { Images,Colors  } from '../contants'
@@ -9,10 +9,12 @@ import { db } from '../../firebase'
 import { Formik } from 'formik'
 import * as yup from 'yup'
 import { Display } from '../utils'
+import { useNavigation } from '@react-navigation/native'
 import forgetPassword from './forgetPassword'
 const deviceHeight=Dimensions.get("window").height
 const deviceWidth=Dimensions.get("window").width
-const PoliceSignin = ({navigation}) => {
+const PoliceSignin = () => {
+    const navigation =useNavigation()
     // const [persalnumber,setPersalnumber]=useState()
     const [isPasswordShow,setPasswordShow]=useState(false)
     

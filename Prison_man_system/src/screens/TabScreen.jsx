@@ -1,5 +1,6 @@
 import { View, Text } from 'react-native'
 import React from 'react'
+import Icon from 'react-native-vector-icons/Ionicons';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
 import SearchScreen from './SearchScreen'
 import PolProfile from './PolProfile'

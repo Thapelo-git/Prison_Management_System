@@ -5,7 +5,7 @@ import Ionicons from "react-native-vector-icons/Ionicons"
 import Feather from "react-native-vector-icons/Feather"
 import Separator from '../components/Separator'
 import { Images,Colors  } from '../contants'
-
+import { useNavigation } from '@react-navigation/native'
 import { Formik } from 'formik'
 import * as yup from 'yup'
 import { Display } from '../utils'
@@ -14,7 +14,8 @@ import { db } from '../../firebase'
 import { ScrollView } from 'react-native-gesture-handler'
 const deviceHeight=Dimensions.get("window").height
 const deviceWidth=Dimensions.get("window").width
-const FamilySignIn = ({navigation}) => {
+const FamilySignIn = ({props}) => {
+    const navigation =useNavigation()
     const [IDnumber,setIdnumber]=useState()
     const [isPasswordShow,setPasswordShow]=useState(false)
     useEffect(()=>{
@@ -130,18 +131,18 @@ const FamilySignIn = ({navigation}) => {
                 >Forget Password</Text> */}
             </View>
     
+         
+            </>
+            )}
+            </Formik>
+            </ScrollView>
+            </View>
             <TouchableOpacity style={styles.signinButton}
               onPress={()=>navigation.navigate('homeScreen')}>
                 <Text style={styles.signinButtonText}
                 
                 >Sign in</Text>
             </TouchableOpacity>
-            </>
-            )}
-            </Formik>
-            </ScrollView>
-            </View>
-          
  
     
     </SafeAreaView>

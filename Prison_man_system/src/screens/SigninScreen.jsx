@@ -60,7 +60,7 @@ const SigninScreen = ({navigation}) => {
           <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center',
         width:'100%'}}>
             {
-                page === 0?(<FamilySignIn props={navigation}/>):(null)
+                page === 0?(<FamilySignIn />):(null)
             }
             {
                 page === 1?(<PoliceSignin/>):(null)

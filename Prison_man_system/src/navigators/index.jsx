@@ -9,6 +9,9 @@ import { RegisterPhone } from "../screens";
 import GetStarted from "../screens/GetStarted";
 import AuthStack from "../screens/AuthStack";
 import TabScreen from "../screens/TabScreen";
+import SearchScreen from "../screens/SearchScreen";
+import PolLocation from "../screens/PolLocation";
+import PolProfile from "../screens/PolProfile";
 
 const Stack = createNativeStackNavigator()
 
@@ -25,6 +28,9 @@ const Navigators =()=>{
                 <Stack.Screen name="RegisterPhone" component={RegisterPhone}/> 
                 <Stack.Screen name="homeScreen" component={AuthStack}/>
                 <Stack.Screen name="Polhome" component={TabScreen}/>
+                <Stack.Screen name="Search" component={SearchScreen}/>
+                <Stack.Screen name="PolLocation" component={PolLocation}/>
+                <Stack.Screen name="PolProfile" component={PolProfile}/>
             </Stack.Navigator>
         </NavigationContainer>
     )

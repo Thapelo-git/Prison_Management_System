@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View ,Image} from 'react-native'
 import React from 'react'
 import { DrawerContentScrollView,DrawerItemList } from '@react-navigation/drawer'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 const CustomDrrawer = (props) => {
   return (
     <View style={{flex:1}}>
@@ -13,6 +14,11 @@ const CustomDrrawer = (props) => {
       </View>
         <DrawerItemList {...props}/>
     </DrawerContentScrollView>
+    <View style={{padding:20,borderTopWidth:1,borderTopColor:'#ccc'}}>
+      <TouchableOpacity  onPress={()=>{}}>
+      <Text>Sign Out</Text>
+      </TouchableOpacity>
+    </View>
     </View>
   )
 }

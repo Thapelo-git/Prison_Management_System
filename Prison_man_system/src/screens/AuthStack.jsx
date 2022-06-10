@@ -10,13 +10,15 @@ import Interviews from './Interviews';
 
 const Drawer = createDrawerNavigator();
 const AuthStack = () => {
-  // drawerLabelStyle:{marginLeft:-25}
+  // drawerLabelStyle:{marginLeft:-25}screenOptions={{headerShown:false,}}
   return (
     <Drawer.Navigator drawerContent={props=><CustomDrrawer {...props}/>}
-    screenOptions={{headerShown:false,}}>
+    screenOptions={{drawerActiveBackgroundColor:'#EC8F05',drawerActiveTintColor:'#fff',
+    drawerLabelStyle:{fontSize:15,}}}>
     <Drawer.Screen name="Home" component={HomeScreen} options={{
-      drawerIcon:()=>{
-          <FontAwesome name='home' size={20} />
+      title:'Home',
+      drawerIcon:({focused,size})=>{
+          <FontAwesome name='home'  size={size} color={focused?'#EC8F05':'#000'}/>
       }
     }}
     />

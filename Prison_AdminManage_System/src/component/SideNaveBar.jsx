@@ -1,8 +1,24 @@
-import React from 'react'
+import React,{useState} from 'react'
 import "../Style/SideNaveBar.css"
 import logo from "../IMAGES/logo.png"
 import { Link, Outlet } from 'react-router-dom'
+import { useAuth } from './contexts/AuthContext'
+import { useNavigate } from 'react-router-dom'
 function SideNaveBar() {
+    const {logOut}=useAuth()
+    const [error,setError]=useState('')
+    const navigate=useNavigate()
+
+    const handleLogout=async()=>{
+        try{
+            setError('')
+
+            await logOut()
+           navigate('login')
+        }catch{
+            setError('Failed to log out')
+        }
+    }
   return (
     <div className='nav-main-container'>
         <div className='inner-container'>
@@ -27,7 +43,7 @@ function SideNaveBar() {
                    
             </li>
             <li className='row'
-            href='/home'>
+            >
                  
                     <div className='nav-icon'>
                     <i className='fab fa-facebook-f'></i>
@@ -75,8 +91,8 @@ function SideNaveBar() {
     </div>
     
     <div className='loguot-btn'>
-    <button className='btn'>
-    <Link to="login"><a>Logout</a></Link>
+    <button className='btn' onClick={handleLogout}>
+    <a>Logout</a>
     <i class="fas fa-sign-out-alt"></i>
     
     </button>

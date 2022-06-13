@@ -1,11 +1,40 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import TimePicker from 'react-time-picker';
+import { db } from '../firebase';
 import '../Style/Visists.css'
 function Visits() {
-    const [startDate, setStartDate] = useState(new Date());
+  let temDate=new Date()
+  let nowTime=temDate.getDate()+'/'+(temDate.getMonth()+1)+'/'+temDate.getFullYear()
+    const [startDate, setStartDate] = useState(temDate);
     const [time, setTime] = useState('10:00');
+    const [Visits,setVisits]=useState([])
+    let startDateone=startDate.getDate()+'/'+(startDate.getMonth()+1)+'/'+startDate.getFullYear()
+    const handleSubmit=()=>{
+      
+      db.ref('Visits').push({startDateone,time})
+    }
+    useEffect(()=>{
+      db.ref('Visits').on('value',(snapshot)=>{
+        setVisits({
+          ...snapshot.val(),
+        })
+      })
+    },[])
+
+    const handleDateChange=(e)=>{
+     
+      setStartDate(
+       e
+        );
+      
+    }
+    const onDelete =(id)=>{
+      db.ref(`/Visits/${id}`).remove()
+     
+     }
+    console.log(startDateone,'dfghjkdfghjk')
   return (
       <>
       <div className='heading'>
@@ -13,8 +42,11 @@ function Visits() {
       </div>
       <div className='pickers'>
         <div>
-          <p>Enter Date</p>
-        <DatePicker selected={startDate} onChange={(date) => setStartDate(date)}/>
+          <p>Enter Date </p>
+          {/* value={startDate} */}
+        <DatePicker selected={startDate}  dateFormat='dd/Mo/yyyy' 
+         onChange={handleDateChange} value={startDate} name='startDate'/>
+        <p>{startDateone}</p>
         </div>
         <div>
           <p>Enter Time</p>
@@ -24,10 +56,26 @@ function Visits() {
     
       </div>
       <div className='button_cover'>
-      <button className='button'><h4 className='button_Lable'>Submit</h4></button>
+      <button className='button'
+      onClick={()=>handleSubmit()}><h4 className='button_Lable'>Submit</h4></button>
       </div>
-      <div className='visits_list'>
-
+      <div>
+      {
+        Object.keys(Visits).map((id)=>
+        <div className='visits_list'>
+        <div>
+          <h4>Date</h4>
+          <p>{Visits[id].startDateone}</p>
+          <button className='btn' onClick={()=>onDelete(id)}>Delete</button>
+          <h4>Time</h4>
+          <p>{Visits[id].time}</p>
+        </div>
+        
+          
+       
+        </div>
+        )
+      }
       </div>
     
     </>

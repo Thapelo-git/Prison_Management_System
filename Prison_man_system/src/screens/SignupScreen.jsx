@@ -1,43 +1,84 @@
 import React,{useState} from 'react'
 import { StyleSheet, Text, View ,StatusBar,TextInput,
-TouchableOpacity,Image,Dimensions} from 'react-native'
+TouchableOpacity,Image,Dimensions,Alert} from 'react-native'
 
 import Ionicons from "react-native-vector-icons/Ionicons"
 import Feather from "react-native-vector-icons/Feather"
 import {Separator} from '../components/Separator'
 import { Images,Colors } from '../contants'
 import { Display } from '../utils'
+import { Formik } from 'formik'
+import * as yup from 'yup'
+import { auth,db } from '../../firebase'
 const deviceHeight=Dimensions.get("window").height
 const SignupScreen = ({navigation}) => {
     const [isPasswordShow,setPasswordShow]=useState(false)
+    const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+    const ReviewSchem=yup.object({
+        name:yup.string().required().min(2),
+        phonenumber:yup.string().matches(phoneRegExp,'Phone number is not valid'),
+        email:yup.string().required().min(6),
+        password:yup.string().required().min(6),
+        confirmpassword:yup.string().required().min(6).oneOf([yup.ref('password'),null],'password does not match')
+    })
+    const addUser= async (data)=>{
+        try{
+          const {uid,email,password,name,phonenumber} =data
+  await auth.createUserWithEmailAndPassword(
+      email.trim().toLowerCase(),password
+    ).then(res =>{
+       
+          db.ref(`/Pfamily&police`).child(res.user.uid).set({
+            name:name,
+            email:email.trim().toLowerCase(),
+            phonenumber:phonenumber,
+            uid:res.user.uid
+          })
+          navigation.navigate('Signin')
+          res.user.sendEmailVerification()
+          })
+        }
+        catch(error){
+          if(error.code === 'auth/email-already-in-use'){
+            Alert.alert(
+              'That email address is already inuse'
+            )
+          }
+          if(error.code === 'auth/invalid-email'){
+            Alert.alert(
+              'That email address is invalid'
+            )
+          }
+          else{
+            Alert.alert(error.code)
+          }
+          
+        }
+        
+      }
     return (
         <View style={styles.container}>
-             {/* <StatusBar
-            barStyle="dark-content"
-            style={{backgroundColor:'#fff'}}
-           translucent
-            />
-            <Separator
-            height={StatusBar.currentHeight}
-            /> */}
-            {/* <View style={styles.headerContainer} 
-            >
-            <Ionicons name="chevron-back-outline" size={30}
-            onPress={()=>navigation.goBack()}/>
-            <Text style={styles.headerTitle}></Text>
-            </View> */}
+          
             <View style={{flex:1,justifyContent:'center',alignItems:'center', }}>
             <Image style={{height:100,width:100}} source={require('../assets/Images/logo2.png')}/>
             </View>
-            {/* <Text style={styles.title}>Create Account</Text>
-            <Text style={styles.content}>Enter your Username and password</Text>
-            <View style={{height:15}}></View> */}
+            
             <View style={{backgroundColor:'#fff',width:'100%',borderTopLeftRadius:20,
     borderTopRightRadius:20,paddingHorizontal:10,
     maxHeight:deviceHeight * 0.9}}>
         <View style={{justifyContent:'center',alignItems:'center'}}>
             <Text style={styles.title}>SignUp</Text>
             </View>
+            <Formik
+        initialValues={{name:'',phonenumber:'',email:'',password:'',confirmpassword:''}}
+        validationSchema={ReviewSchem}
+        onSubmit={(values,action)=>{
+            action.resetForm()
+            addUser(values)
+        }}
+        >
+            {(props)=>(
+                <>
             <View style={{ paddingHorizontal:15,
         marginHorizontal:15,}}>
             <Text style={{fontWeight:'bold'}}>FirstName</Text>
@@ -51,10 +92,13 @@ const SignupScreen = ({navigation}) => {
                     <TextInput placeholder="FirstName"
                     selectionColor='gainsboro'
                     style={styles.inputText}
+                    onChangeText={props.handleChange('name')}
+                    value={props.values.name}
+                    onBlur={props.handleBlur('name')}
                     />
                 </View>
             </View>
-           
+            <Text style={{color:'red',marginTop:-10}}>{props.touched.name && props.errors.name}</Text>
             <View style={{height:7}}></View>
             <View style={{ paddingHorizontal:15,
         marginHorizontal:15,}}>
@@ -69,9 +113,14 @@ const SignupScreen = ({navigation}) => {
                     <TextInput placeholder="email@gmail.com"
                     selectionColor='gainsboro'
                     style={styles.inputText}
+                    keyboardType='email-address'
+             onChangeText={props.handleChange('email')}
+             value={props.values.email}
+             onBlur={props.handleBlur('email')}
                     />
                 </View>
             </View>
+            <Text style={{color:'red',marginTop:-15}}>{props.touched.email && props.errors.email}</Text>
             <View style={{height:7}}></View>
             <View style={{ paddingHorizontal:15,
         marginHorizontal:15,}}>
@@ -86,9 +135,14 @@ const SignupScreen = ({navigation}) => {
                     <TextInput placeholder="Phone number"
                     selectionColor='gainsboro'
                     style={styles.inputText}
+                    keyboardType='numeric'
+             onChangeText={props.handleChange('phonenumber')}
+             value={props.values.phonenumber}
+             onBlur={props.handleBlur('phonenumber')}
                     />
                 </View>
             </View>
+            <Text style={{color:'red',marginTop:-15}}>{props.touched.phonenumber && props.errors.phonenumber}</Text>
             <View style={{height:7}}></View>
             <View style={{ paddingHorizontal:15,
         marginHorizontal:15,}}>
@@ -103,7 +157,10 @@ const SignupScreen = ({navigation}) => {
                  secureTextEntry={isPasswordShow? false :true}
                  placeholder="Password"
                  selectionColor='gainsboro'
-                 style={styles.inputText}/>
+                 style={styles.inputText}
+                 onChangeText={props.handleChange('password')}
+             value={props.values.password}
+             onBlur={props.handleBlur('password')}/>
                  <Feather
                  name="eye" size={22}
                  color='#000'
@@ -112,6 +169,7 @@ const SignupScreen = ({navigation}) => {
                  />
                 </View>
             </View>
+            <Text style={{color:'red',marginTop:-15}}>{props.touched.password && props.errors.password}</Text>
             <View style={{height:7}}></View>
             <View style={{ paddingHorizontal:15,
         marginHorizontal:15,}}>
@@ -126,7 +184,10 @@ const SignupScreen = ({navigation}) => {
                  secureTextEntry={isPasswordShow? false :true}
                  placeholder=" confirm Password"
                  selectionColor='gainsboro'
-                 style={styles.inputText}/>
+                 style={styles.inputText}
+                 onChangeText={props.handleChange('confirmpassword')}
+                 value={props.values.confirmpassword}
+                 onBlur={props.handleBlur('confirmpassword')}/>
                  <Feather
                  name="eye" size={22}
                  color='#000'
@@ -135,11 +196,16 @@ const SignupScreen = ({navigation}) => {
                  />
                 </View>
             </View>
+            <Text style={{color:'red',marginTop:-15}}>{props.touched.confirmpassword && props.errors.confirmpassword}</Text>
             <TouchableOpacity style={styles.signinButton}
-            onPress={()=>navigation.navigate('RegisterPhone')}
+            // onPress={()=>navigation.navigate('RegisterPhone')}
+            onPress={props.handleSubmit}
             >
                 <Text style={styles.signinButtonText}>Create Account</Text>
             </TouchableOpacity>
+            </>
+                )}
+            </Formik>
             <View style={styles.signupContainer}>
                 <Text style={styles.accountText}>
                     Already have account?

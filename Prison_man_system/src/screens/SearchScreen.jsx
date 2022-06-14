@@ -103,7 +103,7 @@ const SearchScreen = () => {
         <Text>Prison Management System</Text>
       </ImageBackground>
       <View style={{marginTop:imgContainer-container, backgroundColor:'#fff',padding:20,height:'100%'}}>
-      <View>
+      <View> 
       <View style={styles.inputContainer}>
            <View style={styles.inputSubContainer}>
                <FontAwesome name="search" size={15}

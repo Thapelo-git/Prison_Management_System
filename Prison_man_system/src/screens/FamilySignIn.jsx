@@ -10,14 +10,17 @@ import { Formik } from 'formik'
 import * as yup from 'yup'
 import { Display } from '../utils'
 import forgetPassword from './forgetPassword'
-import { db } from '../../firebase'
+
 import { ScrollView } from 'react-native-gesture-handler'
+import AsyncStorageLib from '@react-native-async-storage/async-storage'
+import { db,auth } from '../../firebase'
 const deviceHeight=Dimensions.get("window").height
 const deviceWidth=Dimensions.get("window").width
 const FamilySignIn = ({props}) => {
     const navigation =useNavigation()
-    const [IDnumber,setIdnumber]=useState()
+    const [Idnumber,setIdnumber]=useState([])
     const [isPasswordShow,setPasswordShow]=useState(false)
+    
     useEffect(()=>{
         db.ref('Puser').on('value',snap=>{
             let item =[];
@@ -29,25 +32,49 @@ const FamilySignIn = ({props}) => {
             setIdnumber(item)
         })
     },[])
+    console.log(Idnumber,"no data ");
+    
     const signIn = async(data)=>{
+        const { email, password ,idnumber} = data;
+        try {
+           
+                    const user = await auth
+                    .signInWithEmailAndPassword(email.trim().toLowerCase(), password)
+                    .then( async res => {
+                        try {
+                            const jsonValue = JSON.stringify(res.user)
+                            await AsyncStorageLib.setItem("Pfamily&police", res.user.uid)
+                          
+        
+                            navigation.navigate('homeScreen')
+                        } catch (e) {
+                            console.log("no data ");
+                        }
+                    });
 
+                // ToastAndroid.show("Succussfully loged in ", ToastAndroid.SHORT)
+    
+             
+       
+         
+        } catch (error) {
+            Alert.alert(error.name, error.message);
+        }
     }
 
     const ReviewSchem=yup.object({
-        idnumber:yup.number().required().min(13),
+        
         email:yup.string().email().required().min(6),
         password:yup.string().required().min(6),
     })
   return (
 <SafeAreaView>
-            
-       
-        
-         
+
             <View style={{width:deviceWidth *0.9,top:20}}>
+            
               <ScrollView>
                   <Formik
-                  initialValues={{idnumber:'',email:'',password:''}}
+                  initialValues={{email:'',password:''}}
                  validationSchema={ReviewSchem}
                  onSubmit={(values,action)=>{
                      action.resetForm()
@@ -56,25 +83,7 @@ const FamilySignIn = ({props}) => {
                  >
                      {(props)=>(
                          <>
-            <Text style={{fontWeight:'bold'}}>Enter Prisoner ID number</Text>
-       
         
-       <View style={styles.inputContainer}>
-           <View style={styles.inputSubContainer}>
-               <Feather name="user" size={22}
- 
-               style={{marginRight:10}}/>
-               
-               <TextInput placeholder="Id number"
-               selectionColor='gainsboro'
-               onChangeText={props.handleChange('idnumber')}
-               value={props.values.idnumber}
-               onBlur={props.handleBlur('idnumber')}
-               style={styles.inputText}
-               />
-           </View>
-       </View>
-       {props.errors.idnumber? <Text style={{color:"red"}}>{props.errors.idnumber}</Text>:null}
        <View style={{height:15}}></View>
                <Text style={{fontWeight:'bold'}}>Email Address</Text>
        
@@ -131,18 +140,18 @@ const FamilySignIn = ({props}) => {
                 >Forget Password</Text> */}
             </View>
     
-         
+            <TouchableOpacity style={styles.signinButton}
+              onPress={props.handleSubmit}>
+                <Text style={styles.signinButtonText}
+                
+                >Sign in</Text>
+            </TouchableOpacity>
             </>
             )}
             </Formik>
             </ScrollView>
             </View>
-            <TouchableOpacity style={styles.signinButton}
-              onPress={()=>navigation.navigate('homeScreen')}>
-                <Text style={styles.signinButtonText}
-                
-                >Sign in</Text>
-            </TouchableOpacity>
+            
  
     
     </SafeAreaView>

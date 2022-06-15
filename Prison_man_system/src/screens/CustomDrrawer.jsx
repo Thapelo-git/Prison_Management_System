@@ -12,7 +12,6 @@ const CustomDrrawer = (props) => {
   const user = auth.currentUser.uid;
   useEffect(()=>{
       db.ref(`/Pfamily&police/`+ user).on('value',snap=>{
-        
         setName(snap.val() && snap.val().name);
     setEmail(snap.val().email)
     setPhonenumber(snap.val().phonenumber)

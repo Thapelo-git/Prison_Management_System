@@ -33,12 +33,13 @@ const HomeScreen = ({navigation,route}) => {
      })
   },[])
   console.log(Pusers)
+  const [Pidnumber,setPidnumber]=useState()
   const Search=(text)=>{
     {
       Pusers.map( (element)=>{
         if(element.IDnumber === text){
-          
-          navigation.navigate('UserDetails')
+          setPidnumber(text)
+          navigation.navigate('UserDetails',{IDnumber:Pidnumber})
         }else{
           setError('No such ID Number in our Place')
       }
@@ -54,34 +55,46 @@ const HomeScreen = ({navigation,route}) => {
       <ImageBackground 
       source={{ uri: 'https://images.vexels.com/media/users/3/140759/isolated/preview/328ff48684eef92268d8e22b173925ac-man-cartoon-thinking.png'}}
       style={{width:'100%',height:imgContainer}}>
-        <Text>Prison Management System</Text>
+       
       </ImageBackground>
       <View style={{marginTop:imgContainer-container, backgroundColor:'#fff',padding:20,height:'100%'}}>
       
      <Text style={{fontWeight:'bold'}}>Enter Prisoner ID number</Text>
-       
-        
-       <View style={styles.inputContainer}>
-           <View style={styles.inputSubContainer}>
-               <Feather name="user" size={22}
+
+       <View
+                      style={{
+                        flexDirection: "row",
+                        alignItems: "center",
+                        borderColor: "rgba(0,0,0,.2)",
+                        borderWidth: 1,
+                        height: 60,
+                        borderRadius: 15,
+                        paddingHorizontal: 5,
+                        marginVertical: 10
+                      }}
+                    >
+                      <View
+                        style={{
+                          justifyContent: "center",
+                          alignItems: "center",
+                          backgroundColor: "#DEEDF0",
+                          width: 40,
+                          height: 40,
+                          borderRadius: 10
+                        }}
+                      ><Feather name="user" size={22}
  
-               style={{marginRight:10}}/>
-               
-               <TextInput placeholder="Id number"
-               selectionColor='gainsboro'
-              //  keyboardType='numeric'
-               onChangeText={(text) => Search(text)}
-               style={styles.inputText}
-               />
-           </View>
-       </View>
+                      style={{marginRight:10}}/></View>
+                       <TextInput
+                        style={styles.input}
+                        autoCorrect={false}
+                        placeholder="Title"
+                        onChangeText={(text) => Search(text)}
+
+                      />
+                    </View>
        <Text style={{color:'red'}}>{error}</Text>
-       <TouchableOpacity style={styles.signinButton}
-              onPress={Search}>
-                <Text style={styles.signinButtonText}
-                
-                >Submit</Text>
-            </TouchableOpacity>
+      
      
       </View>
       </>

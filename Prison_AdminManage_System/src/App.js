@@ -27,9 +27,18 @@ function App() {
   <BrowserRouter>
    
    <Routes>
+   
+   {/* <Route  path="login" element={<WelcomScreen/>} />
+   <Route  path="/" element={<SideNaveBar/>}>
+    <Route path='account' element={<Account/>}/>
+    <Route  path='dashboard/*' element={<Home/>}/>
+    <Route path='visits' element={<Visits/>}/>
+    <Route path='interviews' element={<Interveiws/>}/>
+   
+    </Route> */}
      {!signedin?(
        <>
-       <Route  path="login" element={<WelcomScreen/>} />
+     <Route  path="login" element={<WelcomScreen/>} />
        </>
      ):(
       <>

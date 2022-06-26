@@ -1,10 +1,22 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import "../Style/SideNaveBar.css"
 import logo from "../IMAGES/logo.png"
 import { Link, Outlet } from 'react-router-dom'
 import { useAuth } from './contexts/AuthContext'
 import { useNavigate } from 'react-router-dom'
+import { db } from '../firebase'
 function SideNaveBar() {
+    const [Prisoners,setPrisoners]=useState([])
+    useEffect(()=>{
+        db.ref("Puser").on("value",(snap)=>{
+          setPrisoners({
+            ...snap.val(),
+          })
+        })
+      },[]);
+    
+    let plength=Prisoners.length
+      console.log(plength)
     const {logOut}=useAuth()
     const [error,setError]=useState('')
     const navigate=useNavigate()
@@ -46,7 +58,7 @@ function SideNaveBar() {
             >
                  
                     <div className='nav-icon'>
-                    <i className='fab fa-facebook-f'></i>
+                    <i className='fas fa-handshake-o'></i>
                     </div>
                     <div className='title'>
                     <Link to="visits"><a>Visits</a></Link>
@@ -100,6 +112,14 @@ function SideNaveBar() {
         </div>
         <div className='inner_Container'>
     <Outlet/>
+    {/* <div className='headings'>
+        <h3>Welcome</h3>
+      </div>
+    <div className='boxRow'>
+        <div className='numberBox'>
+    <h2></h2>
+        </div>
+    </div> */}
     </div>
     </div>
   )

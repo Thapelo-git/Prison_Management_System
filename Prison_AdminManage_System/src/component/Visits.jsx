@@ -44,9 +44,9 @@ function Visits() {
         <div>
           <p>Enter Date </p>
           {/* value={startDate} */}
-        <DatePicker selected={startDate}  dateFormat='dd/Mo/yyyy' 
+        <DatePicker selected={startDate}  dateFormat='yyyy/MM/dd' 
          onChange={handleDateChange} value={startDate} name='startDate'/>
-        <p>{startDateone}</p>
+        {/* <p>{startDateone}</p> */}
         </div>
         <div>
           <p>Enter Time</p>
@@ -63,12 +63,15 @@ function Visits() {
       {
         Object.keys(Visits).map((id)=>
         <div className='visits_list'>
-        <div>
+        <div className='conView'>
+          <div className='innerView'>
           <h4>Date</h4>
           <p>{Visits[id].startDateone}</p>
-          <button className='btn' onClick={()=>onDelete(id)}>Delete</button>
+          
           <h4>Time</h4>
           <p>{Visits[id].time}</p>
+          </div>
+          <button className='deletebtn' onClick={()=>onDelete(id)}>Delete</button>
         </div>
         
           

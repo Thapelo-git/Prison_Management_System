@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import { StyleSheet, Text, View ,StatusBar,
+import { StyleSheet, Text, View ,StatusBar,Alert,
     TextInput,TouchableOpacity,Image,Modal,Dimensions,SafeAreaView,ScrollView} from 'react-native'
 import Icon from "react-native-vector-icons/Ionicons"
 import Feather from "react-native-vector-icons/Feather"
@@ -11,6 +11,7 @@ import * as yup from 'yup'
 import { Display } from '../utils'
 import { useNavigation } from '@react-navigation/native'
 import forgetPassword from './forgetPassword'
+import { auth } from '../../firebase'
 import AsyncStorageLib from '@react-native-async-storage/async-storage'
 const deviceHeight=Dimensions.get("window").height
 const deviceWidth=Dimensions.get("window").width
@@ -20,11 +21,35 @@ const PoliceSignin = () => {
     const [isPasswordShow,setPasswordShow]=useState(false)
     
     const signIn = async(data)=>{
+        const { email, password } = data;
+        try {
+           
+                    const user = await auth
+                    .signInWithEmailAndPassword(email.trim().toLowerCase(), password)
+                    .then( async res => {
+                        try {
+                            const jsonValue = JSON.stringify(res.user)
+                            await AsyncStorageLib.setItem("Police", res.user.uid)
+                          
+        
+                            navigation.navigate('Polhome')
+                        } catch (e) {
+                            console.log("no data ");
+                        }
+                    });
 
+                // ToastAndroid.show("Succussfully loged in ", ToastAndroid.SHORT)
+    
+             
+       
+         
+        } catch (error) {
+            Alert.alert(error.name, error.message);
+        }
     }
 
     const ReviewSchem=yup.object({
-        persalnumber:yup.number().required().min(8),
+       
         email:yup.string().email().required().min(6),
         password:yup.string().required().min(6),
     })
@@ -37,7 +62,7 @@ const PoliceSignin = () => {
             <View style={{width:deviceWidth *0.9,top:20}}>
               <ScrollView>
                   <Formik
-                  initialValues={{idnumber:'',email:'',persalnumber:''}}
+                  initialValues={{idnumber:'',email:'',}}
                  validationSchema={ReviewSchem}
                  onSubmit={(values,action)=>{
                      action.resetForm()
@@ -46,10 +71,10 @@ const PoliceSignin = () => {
                  >
                      {(props)=>(
                          <>
-            <Text style={{fontWeight:'bold'}}>Enter Persal number</Text>
+            {/* <Text style={{fontWeight:'bold'}}>Enter Persal number</Text> */}
        
         
-       <View style={styles.inputContainer}>
+       {/* <View style={styles.inputContainer}>
            <View style={styles.inputSubContainer}>
                <Feather name="user" size={22}
  
@@ -65,7 +90,7 @@ const PoliceSignin = () => {
            </View>
        </View>
        {props.errors.persalnumber? <Text style={{color:"red"}}>{props.errors.persalnumber}</Text>:null}
-       <View style={{height:15}}></View>
+       <View style={{height:15}}></View> */}
                <Text style={{fontWeight:'bold'}}>Email Address</Text>
        
         
@@ -122,7 +147,7 @@ const PoliceSignin = () => {
             </View>
     
             <TouchableOpacity style={styles.signinButton}
-              onPress={()=>navigation.navigate('Polhome')}>
+            onPress={props.handleSubmit}>
                 <Text style={styles.signinButtonText}
                 
                 >Sign in</Text>

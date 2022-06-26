@@ -48,7 +48,7 @@ function SignUp() {
                     console.log(result, "<<<<<<<<<<<<<<<<<<<<<<<<")
                     try {
             
-                        localStorage.setItem("user", res.user.uid)
+                        localStorage.setItem("AdminPuser", res.user.uid)
                     } catch (e) {
                       // saving error
                       console.log('no data')

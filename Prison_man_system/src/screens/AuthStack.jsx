@@ -7,6 +7,7 @@ import Profile from './Profile';
 import Location from './Location';
 import CustomDrrawer from './CustomDrrawer';
 import Interviews from './Interviews';
+import Visits from './Visits';
 
 const Drawer = createDrawerNavigator();
 const AuthStack = () => {
@@ -25,11 +26,13 @@ const AuthStack = () => {
     
     <Drawer.Screen name="location" component={Location} />
     <Drawer.Screen name="Interview" component={Interviews} />
+    <Drawer.Screen name="Visits" component={Visits} />
     <Drawer.Screen name="Profile" component={Profile} options={{
       drawerIcon:({color})=>{
           <FontAwesome name='user' size={20} color={color}/>
       }
     }}/>
+    
   </Drawer.Navigator>
   )
 }

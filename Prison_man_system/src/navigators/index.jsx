@@ -14,6 +14,10 @@ import PolLocation from "../screens/PolLocation";
 import PolProfile from "../screens/PolProfile";
 import { auth } from "../../firebase";
 import UserDetails from "../screens/UserDetails";
+import PolUserDetails from "../screens/PolUserDetails";
+import Visits from "../screens/Visits";
+import Visitshistory from "../screens/Visitshistory";
+import Visitsupcoming from "../screens/Visitsupcoming";
 const Stack = createNativeStackNavigator()
 
 const Navigators =()=>{
@@ -44,7 +48,7 @@ const Navigators =()=>{
                 </>
             ):(
                 <>
-                          <Stack.Navigator screenOptions={{headerShown:false}}>
+             <Stack.Navigator screenOptions={{headerShown:false}}>
             
  
             <Stack.Screen name="homeScreen" component={AuthStack}/>
@@ -53,6 +57,10 @@ const Navigators =()=>{
             <Stack.Screen name="Search" component={SearchScreen}/>
             <Stack.Screen name="PolLocation" component={PolLocation}/>
             <Stack.Screen name="PolProfile" component={PolProfile}/>
+            <Stack.Screen name="PolUserDetails" component={PolUserDetails}/>
+            {/* <Stack.Screen name="Visits" component={Visits}/> */}
+            <Stack.Screen name="Visisthistory" component={Visitshistory}/>
+            <Stack.Screen name="Visistupcoming" component={Visitsupcoming}/>
         </Stack.Navigator>
                 </>
             )}

@@ -19,7 +19,7 @@ const Interviews = ({route}) => {
   const [uid,setUid]=useState('')
   const user = auth.currentUser.uid;
   useEffect(()=>{
-    db.ref(`/Pfamily&police/`+ user).on('value',snap=>{
+    db.ref(`/Pfamily/`+ user).on('value',snap=>{
   setEmail(snap.val().email)
   setPhonenumber(snap.val().phonenumber)
   setUid(snap.val().uid)
@@ -87,7 +87,7 @@ const Interviews = ({route}) => {
         db.ref('Interview').push({
           Status:'Pending',
           title,
-          desc,
+          desc, 
           interviewDate,
           interviewTime,email,phonenumber,
           userId:uid

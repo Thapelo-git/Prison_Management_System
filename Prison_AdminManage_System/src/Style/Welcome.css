@@ -59,6 +59,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    
-   
+ 
+}
+.forgetPassword_container{
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    width: 100%;
+    position: absolute;
+    top: 90%;
+    right: 5%;
+    left: 10%;
+    cursor:'pointer'
+    /* height: 100px; */
 }

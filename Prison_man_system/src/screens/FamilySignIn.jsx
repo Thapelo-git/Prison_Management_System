@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from 'react'
-import { StyleSheet, Text, View ,StatusBar,
+import { StyleSheet, Text, View ,StatusBar,Alert,
     TextInput,TouchableOpacity,Image,Modal,Dimensions, SafeAreaView} from 'react-native'
 import Ionicons from "react-native-vector-icons/Ionicons"
 import Feather from "react-native-vector-icons/Feather"
@@ -43,7 +43,7 @@ const FamilySignIn = ({props}) => {
                     .then( async res => {
                         try {
                             const jsonValue = JSON.stringify(res.user)
-                            await AsyncStorageLib.setItem("Pfamily&police", res.user.uid)
+                            await AsyncStorageLib.setItem("Pfamily", res.user.uid)
                           
         
                             navigation.navigate('homeScreen')

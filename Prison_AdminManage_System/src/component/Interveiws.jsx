@@ -1,6 +1,7 @@
 import React,{useEffect,useState} from 'react'
 import styled from 'styled-components'
 import Table from 'react-bootstrap/Table'
+import { db } from '../firebase'
 import {FaCheckCircle,FaTimesCircle} from 'react-icons/fa'
 const StatusTD=styled.td`
 font-weight:bold;
@@ -9,11 +10,22 @@ color:${(props)=>(props.type === "Accepted" ? "green" :"")}
 color:${(props)=> (props.type === "Rejected"?"red":"")}
 `
 const Interveiws = () => {
-  const [Interveiws,SetInterviews]=useState([])
+  const [Interveiws,setInterviews]=useState([])
+  useEffect(()=>{
+
+  
+    db.ref('Interview').on('value',snap=>{
+      
+      setInterviews({...snap.val() });
+      
+
+    }) 
+  },[])
+  console.log(Interveiws)
   const updateBooking = (bookingNumb, status) => {
 
-    // db.ref('BookEvent').child(bookingNumb).update({Status:status})
-    // .then(()=>db.ref('BookEvent').once('value'))
+    // db.ref('Interveiws').child(bookingNumb).update({Status:status})
+    // .then(()=>db.ref('Interveiws').once('value'))
     // .then(snapshot=>snapshot.val())
     // .catch(error => ({
     //   errorCode: error.code,
@@ -24,6 +36,9 @@ const Interveiws = () => {
   };
   return (
     <div>
+       <div className='heading'>
+        <h2>Interviews</h2>
+      </div>
           {Interveiws ? (
         <Table
           striped
@@ -35,13 +50,13 @@ const Interveiws = () => {
           <thead>
             <tr>
               <th>ID</th>
-              <th>Events</th>
-              <th>Fee</th>
-              
+              <th>Email</th>
+              <th>Phone Number</th>
+              <th>Title</th>
               <th>Description</th>
               <th>Date</th>
               <th>Time</th>
-              <th>Location</th>
+              
               <th>Status</th>
               <th>Accept</th>
               <th>Reject</th>
@@ -62,13 +77,13 @@ const Interveiws = () => {
               
                
                   <td>{id}</td>
-                  <td>{Interveiws[id].events}</td>
-                  <td>{Interveiws[id].price}</td>
+                  <td>{Interveiws[id].email}</td>
+                  <td>{Interveiws[id].phonenumber}</td>
                   
-                  <td>{Interveiws[id].Description}</td>
-                  <td>{Interveiws[id].date}</td>
-                  <td>{Interveiws[id].time}</td>
-                  <td>{Interveiws[id].location}</td>
+                  <td>{Interveiws[id].title}</td>
+                  <td>{Interveiws[id].desc}</td>
+                  <td>{Interveiws[id].interviewDate}</td>
+                  <td>{Interveiws[id].interviewTime}</td>
                   <StatusTD type={Interveiws[id].Status}>{Interveiws[id].Status}</StatusTD>
                   {Interveiws[id].Status === "Pending" ? (
                     <>

@@ -3,13 +3,14 @@ import '../Style/Welcome.css'
 import Logo from '../IMAGES/logo.png'
 import SignUp from './SignUp'
 import SignIn from './SignIn'
+import ForgetPassword from './ForgetPassword'
 function WelcomScreen() {
     const [page,setPage]=useState(0)
   return (
     <div className='cover'>
         <div className='logo-container'>
         <img  src={Logo} className="logoH"/>
-        <h1>Welco</h1>
+        {/* <h1>Welco</h1> */}
         </div>
         <div className='form-cover'>
             <div className='button-container'>
@@ -42,8 +43,14 @@ function WelcomScreen() {
             {
               page===1?<SignIn/>:null
             }
+             {
+              page===2?<ForgetPassword/>:null
+            }
             </div>
+           
             </div>
+            <div className='forgetPassword_container'>
+              <p  onClick={()=>setPage(2)} className='forgetPassword'>ForgetPassword</p></div>
         </div>
         
     </div>

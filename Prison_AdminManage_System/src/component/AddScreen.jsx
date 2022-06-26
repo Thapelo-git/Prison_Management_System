@@ -7,8 +7,9 @@ function AddScreen() {
   let navigate =useNavigate()
   const values={
     name:'',surname:'',age:'',IDnumber:'',
-    familyname:'',familysurname:'',familyphonenumber:'',familyemail:'',
-    // lawyername:'',lawyersurname:'',lawyerphonenumber:'',lawyeremail:''
+    Arrestdesc:'',mentality:'',
+  sentence:'',caseDesc:''
+  
   }
 
   const [url, setUrl] = useState();
@@ -45,9 +46,10 @@ function AddScreen() {
     );
   };
   const [initialState,setState]=useState(values)
-  const {name,surname,age,IDnumber,familyname,familysurname,
-  familyphonenumber,familyemail
-  // ,lawyername,lawyersurname,lawyerphonenumber,lawyeremail
+  const {name,surname,age,IDnumber,
+    Arrestdesc,mentality,
+  sentence,caseDesc
+
 }=initialState
 
   const handleInputChange=(e)=>{
@@ -60,9 +62,10 @@ function AddScreen() {
   const handleSubmit = (e)=>{
     e.preventDefault();
     
-        db.ref('Puser').push({name,surname,age,IDnumber,familyname,familysurname,
-          familyphonenumber,familyemail,url})
-       navigate('dashboad')
+        db.ref('Puser').push({name,surname,age,IDnumber,
+          Arrestdesc,mentality,
+          sentence,caseDesc,url})
+       navigate('dashboard/*')
 }
   return (
     <>
@@ -88,17 +91,19 @@ function AddScreen() {
       <form onSubmit={handleSubmit}>
         <div className='input_row'>
           <div className='input_column'>
-            <label>Name</label>
-            <input name='name' type='text' className='input_infor' required="required" 
-            onChange={handleInputChange} value={name}/>
+          <label>Name</label>
+            <input name='name' type='text' className='input_infor' required="required"
+            onChange={handleInputChange} value={name} />
+           
           </div>
           <div className='input_column'>
-            <label>Surname</label>
-            <input name='surname' type='text' className='input_infor' required="required"
-            onChange={handleInputChange} value={surname}/>
+          <label>Surname</label>
+            <input name='surname' type='text' className='input_infor' required="required" 
+            onChange={handleInputChange} value={surname} />
+         
           </div>
           <div className='input_column'>
-            <label>Age</label>
+            <label>age</label>
             <input name='age' type='number' className='input_infor' required="required"
             onChange={handleInputChange} value={age}/>
           </div>
@@ -110,28 +115,40 @@ function AddScreen() {
         </div>
       
         <div className='headings'>
-        <h3>Family Information</h3>
+        <h3>Other Information</h3>
       </div>
       <div className='input_row'>
           <div className='input_column'>
-            <label>Name</label>
-            <input name='familyname' type='text' className='input_infor' required="required"
-            onChange={handleInputChange} value={familyname} />
+          <label>Arrest Description</label>
+            <select class="custom-select" id="gender3" name='Arrestdesc'
+          value={Arrestdesc} onChange={handleInputChange} >
+            <option selected>Choose...</option>
+            <option  name="underArrest" >Under Arrest</option>
+            <option name="waitingTrial" >waiting for trial</option>
+           
+          </select>
+        
           </div>
           <div className='input_column'>
-            <label>Surname</label>
-            <input name='familysurname' type='text' className='input_infor' required="required" 
-            onChange={handleInputChange} value={familysurname} />
+          <label>mentality</label> 
+            <select class="custom-select" id="gender3" name='mentality'
+          value={mentality} onChange={handleInputChange} >
+            <option selected>Choose...</option>
+            <option  name="Normal" >Normal</option>
+            <option name="Abnormal" >Abnormal</option>
+           
+          </select>
+          
           </div>
           <div className='input_column'>
-            <label>Phone Number</label>
-            <input name='familyphonenumber' type='number' className='input_infor' required="required" 
-            onChange={handleInputChange} value={familyphonenumber} />
+          <label>Sentence</label>
+            <input name='sentence' type='number' className='input_infor' required="required"
+            onChange={handleInputChange} value={sentence}/>
           </div>
           <div className='input_column'>
-            <label>Email</label>
-            <input name='familyemail' type='text' className='input_infor' required="required" 
-            onChange={handleInputChange} value={familyemail}/>
+          <label>Case Description</label>
+            <input name='caseDesc' type='text' className='input_infor' required="required" 
+            onChange={handleInputChange} value={caseDesc}/>
           </div>
         </div>
        

@@ -1,13 +1,42 @@
-import { SafeAreaView, StyleSheet, Text, View ,Dimensions,ImageBackground} from 'react-native'
+
 import React,{useState,useEffect} from 'react'
-import { db } from '../../firebase'
-const screenHeight=Dimensions.get('screen').height
-const imgContainer = screenHeight *0.3
-const container =screenHeight *0.3
-const UserDetails = ({route}) => {
-  // const [Idnumber,setIdnumber]=useState(route.params)
+import {
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  ScrollView,
+  FlatList,
+  ImageBackground,ToastAndroid,
+  Dimensions,ImageBackgroud,Animated,Pressable,TextInput
+} from "react-native";
+import Feather from 'react-native-vector-icons/Feather'
+import { db ,auth} from '../../firebase'
+import { Card } from 'react-native-elements'
+  const screenWidth = Dimensions.get("screen").width;
+const screenHeight = Dimensions.get("screen").height;
+const {height} = Dimensions.get('window')
+const imgContainerHeight = screenHeight * 0.4;
+const sub = imgContainerHeight * 0.2;
+const UserDetails = ({route,navigation}) => {
+  const [Prisoners,setPrisoners]=useState([])
+  const [name,setName]=useState('')
+  const [email,setEmail]=useState('')
+  const [phonenumber,setPhonenumber]=useState('')
+  const [PrisonIdnumber,setPrisonIdnumber]=useState('')
+  const [uid,setUid]=useState('')
+  const user = auth.currentUser.uid;
   useEffect(()=>{
-    db.ref('/Puser').on('value',snap=>{
+    db.ref(`/Pfamily/`+ user).on('value',snap=>{
+      setName(snap.val() && snap.val().name);
+  setEmail(snap.val().email)
+  setPhonenumber(snap.val().phonenumber)
+  setPrisonIdnumber(snap.val().PrisonId)
+setUid(snap.val().uid)
+    })
+    db.ref('Puser').on('value',snap=>{
           
       const Pusers=[]
          snap.forEach(action=>{
@@ -22,22 +51,58 @@ const UserDetails = ({route}) => {
                 
              })
        })
-       setPusers(Pusers)
+     
+
+      if (PrisonIdnumber) {
+        const newData = Pusers.filter(function (element) {
+          const itemData = element.IDnumber ? element.IDnumber : ''
+          return itemData.indexOf(PrisonIdnumber) > -1
+        })
+        setPrisoners(newData)
+      }
+     
      
          
      })
   },[])
+  console.log(PrisonIdnumber,'new one')
   return (
-    <SafeAreaView>
-      <ImageBackground 
-      source={{ uri: 'https://images.vexels.com/media/users/3/140759/isolated/preview/328ff48684eef92268d8e22b173925ac-man-cartoon-thinking.png'}}
-      style={{width:'100%',height:imgContainer}}>
-       
-      </ImageBackground>
-      <View style={{marginTop:imgContainer-container, backgroundColor:'#fff',padding:20,height:'100%'}}>
-
-      </View>
-    </SafeAreaView>
+    <SafeAreaView style={{flex:1}}>
+      {
+        Prisoners.map(details=>
+          <>
+    <View style={styles.imgContaner}>
+   
+   <ImageBackground  source={{uri:details.url}}style={{ width: "100%", height: "100%" }} >
+   <View style={styles.headerContainer} 
+       >
+          <View style={{backgroundColor: 'white',
+opacity: 0.7,width:30,
+ height:30,justifyContent:'center',alignItems:'center',
+ borderRadius:10,}}>
+          <Feather name="arrow-left" size={30} color='black'
+        onPress={()=>navigation.goBack()} /> 
+        </View>
+       <Text style={styles.headerTitle}></Text>
+       </View>
+   </ImageBackground>
+ </View>
+ <View style={styles.cardBox}>
+   
+     <Text style={{fontSize:30,fontWeight:'bold',color:'gray'}}>{details.name} {details.surname}</Text>
+     <Text>{details.IDnumber} {details.age}</Text>
+     <Card.Divider/>
+     <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'stretch'}}>
+       <Text>{details.Arrestdesc}</Text>
+       <Text>{details.sentence}</Text>
+       <Text>{details.caseDesc}</Text>
+     </View>
+ <Card.Divider/>
+ </View>
+ </>
+ )
+}
+ </SafeAreaView>
   )
 }
 
@@ -56,5 +121,39 @@ const styles = StyleSheet.create({
 inputSubContainer:{
     flexDirection:'row',
     alignItems:'center'
+},
+cardBox: {
+  paddingTop: 30,
+  borderTopRightRadius: 40,
+  borderTopLeftRadius: 40,
+  padding: 20,
+  marginTop: imgContainerHeight - sub,
+  backgroundColor: "white",
+  flex:1,
+
+},
+imgContaner: {
+  width: screenWidth,
+  height: imgContainerHeight,
+  position: "absolute",
+  top: 0,
+},
+headerContainer:{
+  top:10,
+  flexDirection:'row',justifyContent:'space-between',
+  alignContent:'center'
+  
+
+},
+header:{
+  backgroundColor:'#fff',
+  shadowColor:'#333333',
+  shadowOffset:{width:-1,height:-2},
+  shadowRadius:2,
+  shadowOpacity:0.4,
+  paddingTop:20,
+  borderTopLeftRadius:20,
+  borderTopRightRadius:20
+
 },
 })

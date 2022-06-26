@@ -1,14 +1,16 @@
 import { View, Text, SafeAreaView, ImageBackground ,
-Dimensions,StyleSheet,TextInput,Image} from 'react-native'
+Dimensions,StyleSheet,TextInput,Image,TouchableOpacity} from 'react-native'
 import React,{useEffect,useState} from 'react'
 import Feather from 'react-native-vector-icons/Feather'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import { FlatList, ScrollView } from 'react-native-gesture-handler'
 import { db } from '../../firebase'
+import { Card } from 'react-native-elements'
+import { NavigationContainer } from '@react-navigation/native'
 const screenHeight=Dimensions.get('screen').height
 const imgContainer = screenHeight *0.3
 const container =screenHeight *0.3
-const SearchScreen = () => {
+const SearchScreen = ({navigation}) => {
   const [searchtext,setSearchtext]=useState('')
   const [Pusers,setPusers]=useState([])
   const [filteredDataSource,setFilteredDataSource]=useState([])
@@ -27,11 +29,10 @@ const SearchScreen = () => {
                  url:data.url,
                 
              })
-      
-           
+  
          })
          setPusers(Pusers)
-      setFilteredDataSource(Pusers);
+      // setFilteredDataSource(Pusers);
      setMasterDataSource(Pusers);
      })
   },[])
@@ -47,7 +48,7 @@ const SearchScreen = () => {
       setFilteredDataSource(newData)
       setSearchtext(text)
     }else{
-      setFilteredDataSource(masterDataSource)
+      // setFilteredDataSource(masterDataSource)
       setSearchtext(text)
     }
   }
@@ -68,11 +69,11 @@ const SearchScreen = () => {
     return (
       
       <View style={{padding:5}}>
-      <ScrollView>
+      <TouchableOpacity onPress={()=>navigation.navigate("PolUserDetails",{data:item})}>
 <View style={{flexDirection:'row'}} >
     
       <View style={{padding:10}}>
-    <Image source={{uri:item.url}} style={{height:120,width:120,borderRadius:10}}/>
+    <Image source={{uri:item.url}} style={{height:80,width:80,borderRadius:40}}/>
     </View>
     <View style={{marginTop:20,}}>
     <View style={{flexDirection:'row',alignItems:'stretch',justifyContent:'space-between'}}>
@@ -92,7 +93,8 @@ const SearchScreen = () => {
  
     </View>
     </View>
-    </ScrollView>
+    <Card.Divider/>
+    </TouchableOpacity>
     </View>
     );
   };

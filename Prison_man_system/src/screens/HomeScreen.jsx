@@ -7,8 +7,8 @@ import { Display } from '../utils'
 import Feather from "react-native-vector-icons/Feather"
 import { Card } from 'react-native-elements'
 const screenHeight=Dimensions.get('screen').height
-const imgContainer = screenHeight *0.3
-const container =screenHeight *0.3
+const imgContainer = screenHeight *0.2
+const container =screenHeight *0.1
 const HomeScreen = ({navigation,route}) => {
   const [error,setError]=useState('')
   const [Pusers,setPusers]=useState([])
@@ -39,7 +39,14 @@ setUid(snap.val().uid)
                  name:data.name,
                  url:data.url,
                  IDnumber:data.IDnumber,
-                
+                 Arrestdesc:data.Arrestdesc,
+                 age:data.age,
+                 caseDesc:data.caseDesc,
+                 mentality:data.mentality,
+                 sentence:data.sentence,
+                 Transfed:data.Transfed,
+                 illness:data.illness,
+                 PrisonerDeath:data.PrisonerDeath,
              })
        })
        setPrisoner(Pusers)
@@ -79,14 +86,20 @@ setUid(snap.val().uid)
  
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{backgroundColor:'#fff'}}>
       
      
-      <ImageBackground 
-      source={{ uri: 'https://images.vexels.com/media/users/3/140759/isolated/preview/328ff48684eef92268d8e22b173925ac-man-cartoon-thinking.png'}}
-      style={{width:'100%',height:imgContainer}}>
-       
-      </ImageBackground>
+      <View 
+      style={{width:'100%',height:imgContainer,backgroundColor:'#000',
+      justifyContent:'center',alignItems:'center',borderBottomLeftRadius:50,
+      borderBottomRightRadius:50}}>
+       <View
+       style={{justifyContent:'center',alignItems:'center',width:200,height:200,backgroundColor:'#fff',
+       marginTop:imgContainer,borderRadius:20}}>
+         <Text style={{fontWeight:'bold',color:'gray',fontSize:30}}>Looking for</Text>
+         <Text style={{fontWeight:'bold',color:'gray',fontSize:30}}>Someone?</Text>
+       </View>
+      </View>
       <View style={{marginTop:imgContainer-container, backgroundColor:'#fff',padding:20,height:'100%'}}>
       
      <Text style={{fontWeight:'bold'}}>Enter Prisoner ID number</Text>
@@ -107,6 +120,7 @@ setUid(snap.val().uid)
                         style={{
                           justifyContent: "center",
                           alignItems: "center",
+                          justifyContent:'center',
                           backgroundColor: "#DEEDF0",
                           width: 40,
                           height: 40,
@@ -118,7 +132,7 @@ setUid(snap.val().uid)
                        <TextInput
                         style={styles.input}
                         autoCorrect={false}
-                        placeholder="Title"
+                        placeholder="ID Number"
                         // onChangeText={(text) => Search(text)}
                         onChangeText={(text) => setPrisonidnumber(text)}
                       />

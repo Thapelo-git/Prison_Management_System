@@ -9,7 +9,7 @@ const Location = () => {
     // longitudeDelta:0.0121,
   }
   return (
-    <View>
+    
      
             <View style={{flex:1,
             backgroundColor:"#fff",alignItems:'center',justifyContent:'center'}}>
@@ -32,7 +32,7 @@ const Location = () => {
                
                 </MapView>
             </View>
-    </View>
+   
   )
 }
 

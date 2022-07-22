@@ -22,15 +22,15 @@ const Interveiws = () => {
     }) 
   },[])
   console.log(Interveiws)
-  const updateBooking = (bookingNumb, status) => {
+  const updateBooking = (index, status) => {
 
-    // db.ref('Interveiws').child(bookingNumb).update({Status:status})
-    // .then(()=>db.ref('Interveiws').once('value'))
-    // .then(snapshot=>snapshot.val())
-    // .catch(error => ({
-    //   errorCode: error.code,
-    //   errorMessage: error.message
-    // }));
+    db.ref('Interview').child(index).update({Status:status})
+    .then(()=>db.ref('Interview').once('value'))
+    .then(snapshot=>snapshot.val())
+    .catch(error => ({
+      errorCode: error.code,
+      errorMessage: error.message
+    }));
     
     
   };

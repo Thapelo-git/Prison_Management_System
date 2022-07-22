@@ -37,11 +37,21 @@ function Viewuser() {
       Object.keys(data).map((userId)=>{
         if(userId === id){
           return(<>
-          <h1> {data[id].name}  {data[id].surname}</h1>
+          <div className='viewRow'>
+             <div className='input_column'>
+          <div className='imageCover'>
+          <img src={data[id].url} className="image"/>
+      </div>
+      <div className='inforRow'>
+         <p>Name</p> <h3> {data[id].name}</h3> 
+         </div>
+         <h1> <p>Surname</p>  {data[id].surname}</h1>
           <div className='inforRow'>
          <p>ID number</p> <h3> {data[id].IDnumber}</h3> 
          </div>
          <div className='inforRow'><p>Age</p> <h3> {data[id].age}</h3></div>
+         </div>
+          <div>
          <div className='viewRow'>
          <div className='input_column'>
           <h4>Illness</h4>
@@ -83,6 +93,8 @@ function Viewuser() {
          </div>
          <div className='headings'>
           <button onClick={()=>update()} className='button'><label className='button_Lable'>Submit</label></button>
+        </div>
+        </div>
         </div>
 </>
           )

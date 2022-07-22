@@ -27,7 +27,15 @@ const SearchScreen = ({navigation}) => {
                 surname:data.surname,
                  name:data.name,
                  url:data.url,
-                
+                 IDnumber:data.IDnumber,
+                 Arrestdesc:data.Arrestdesc,
+                 age:data.age,
+                 caseDesc:data.caseDesc,
+                 mentality:data.mentality,
+                 sentence:data.sentence,
+                 Transfed:data.Transfed,
+                 illness:data.illness,
+                 PrisonerDeath:data.PrisonerDeath,
              })
   
          })

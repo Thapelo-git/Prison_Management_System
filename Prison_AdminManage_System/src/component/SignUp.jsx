@@ -106,7 +106,7 @@ function SignUp() {
         
         </td>
         <td><th><label>Phonenumber</label></th>
-        <input placeholder='Enter Phonenumber' type='number' className='Signinput' name='phonenumber'
+        <input placeholder='Enter Phonenumber' type='text' className='Signinput' name='phonenumber'
         value={values.phonenumber}  onChange={handleChange} onBlur={handleBlur}
         />
         {

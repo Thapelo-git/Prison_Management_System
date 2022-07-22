@@ -1,11 +1,23 @@
 import React from 'react'
-import { StyleSheet, Text, View ,StatusBar,TextInput,TouchableOpacity} from 'react-native'
+import { StyleSheet, Text, View ,StatusBar,TextInput,TouchableOpacity,
+Alert} from 'react-native'
 import {Separator} from '../components'
 import Ionicons from "react-native-vector-icons/Ionicons"
 import Feather from "react-native-vector-icons/Feather"
 import { Images ,Colors} from '../contants'
 import { Display } from '../utils'
+import { db,auth } from '../../firebase'
 const forgetPassword = ({navigation}) => {
+    const [email,setEmail]=useState();
+    const reset =async()=>{
+        try{
+            await auth
+            .sendPasswordResetEmail(email)
+            setEmail('')
+        }catch(error){
+            Alert.alert(error.message)
+        }
+    }
     return (
         <View style={styles.container}>
             {/* <StatusBar
@@ -34,10 +46,13 @@ const forgetPassword = ({navigation}) => {
                     <TextInput placeholder="email"
                     selectionColor='gainsboro'
                     style={styles.inputText}
+                    value={email}
+             onChangeText={(e)=>(setEmail(e))}
                     />
                 </View>
             </View>
-            <TouchableOpacity style={styles.signinButton}>
+            <TouchableOpacity style={styles.signinButton} 
+             onPress={()=>reset()}>
                 <Text style={styles.signinButtonText}>Reset Password</Text>
             </TouchableOpacity>
         </View>

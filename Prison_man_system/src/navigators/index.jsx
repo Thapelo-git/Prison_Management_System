@@ -18,6 +18,7 @@ import PolUserDetails from "../screens/PolUserDetails";
 import Visits from "../screens/Visits";
 import Visitshistory from "../screens/Visitshistory";
 import Visitsupcoming from "../screens/Visitsupcoming";
+import Notification from "../screens/Notification";
 const Stack = createNativeStackNavigator()
 
 const Navigators =()=>{
@@ -38,7 +39,7 @@ const Navigators =()=>{
             {!signedIn ?(
                 <>
                 <Stack.Navigator screenOptions={{headerShown:false}}>
-                               <Stack.Screen name="Splash" component={SplashScreen} />
+                 <Stack.Screen name="Splash" component={SplashScreen} />
                 <Stack.Screen name="Welcome" component={GetStarted}/> 
                 <Stack.Screen name="Signup" component={SignupScreen}/> 
                 <Stack.Screen name="Signin" component={SigninScreen}/> 
@@ -61,6 +62,7 @@ const Navigators =()=>{
             {/* <Stack.Screen name="Visits" component={Visits}/> */}
             <Stack.Screen name="Visisthistory" component={Visitshistory}/>
             <Stack.Screen name="Visistupcoming" component={Visitsupcoming}/>
+            <Stack.Screen name="Notification" component={Notification}/>
         </Stack.Navigator>
                 </>
             )}

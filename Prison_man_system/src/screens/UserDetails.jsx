@@ -48,7 +48,13 @@ setUid(snap.val().uid)
                  name:data.name,
                  url:data.url,
                  IDnumber:data.IDnumber,
-                
+                 caseDesc:data.caseDesc,
+                 mentality:data.mentality,
+                 Arrestdesc:data.Arrestdesc,
+                 sentence:data.sentence,
+                 PrisonDeath:data.PrisonDeath,
+                 Transfed:data.Transfed,
+                 illness:data.illness,
              })
        })
      

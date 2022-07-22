@@ -4,7 +4,7 @@ import { Text, View, StyleSheet,TouchableOpacity,  ToastAndroid } from 'react-na
 import { Card } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/Ionicons';
 import { auth } from '../../firebase';
-const Profile = () => {
+const Profile = ({navigation}) => {
  
   return (
     <View style={{backgroundColor: '#ffffff', justifyContent: 'center', 
@@ -43,7 +43,7 @@ const Profile = () => {
                     </View>
                     </TouchableOpacity>
                     <Card.Divider/>
-
+                    <TouchableOpacity onPress={()=>navigation.navigate('Notification')}>
                     {/* Other Groups     */}
                     <Text style={{paddingBottom: 10, paddingTop: 15}}>
                         Notifications
@@ -62,7 +62,7 @@ const Profile = () => {
                             <Icon name="ios-chevron-forward" size={15} style={styles.moreIcon}/>
                         </View>
                     </View>
-                    
+                    </TouchableOpacity>
                     <Card.Divider/>
 
                     <TouchableOpacity onPress={()=>navigation.navigate('Help And Support')}>

@@ -1,6 +1,6 @@
 import { View, Text, SafeAreaView, ImageBackground ,
 Dimensions,StyleSheet,TextInput,Image,TouchableOpacity} from 'react-native'
-import React,{useEffect,useState} from 'react'
+import React,{useEffect,useState,Component} from 'react'
 import Feather from 'react-native-vector-icons/Feather'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import { FlatList, ScrollView } from 'react-native-gesture-handler'

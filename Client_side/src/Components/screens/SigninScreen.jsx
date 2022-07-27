@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,Component} from 'react'
 import { StyleSheet, Text, View ,StatusBar,
     TextInput,TouchableOpacity,Image,Modal,Dimensions} from 'react-native'
 import Ionicons from "react-native-vector-icons/Ionicons"

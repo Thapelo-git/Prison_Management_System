@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Component} from 'react';
 import SplashScreen from "./SplashScreen";
 import WelcomeScreen from "./WelcomeScreen";
 import SignupScreen from "./SignupScreen";

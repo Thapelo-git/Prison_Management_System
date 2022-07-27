@@ -1,5 +1,5 @@
 
-import React,{useEffect,useState} from 'react'
+import React,{useEffect,useState,Component} from 'react'
 import { db,auth } from '../../../firebase'
 import { View, Text, SafeAreaView, ImageBackground ,FlatList,ScrollView,
   Dimensions,StyleSheet,TextInput,Image,TouchableOpacity} from 'react-native'
@@ -24,7 +24,7 @@ const HomeScreen = ({navigation,route}) => {
       setName(snap.val() && snap.val().name);
   setEmail(snap.val().email)
   setPhonenumber(snap.val().phonenumber)
-  setPrisonIdnumber(snap.val().PrisonId)
+  // setPrisonIdnumber(snap.val().PrisonId)
 setUid(snap.val().uid)
     })
     db.ref('/Puser').on('value',snap=>{
@@ -50,21 +50,33 @@ setUid(snap.val().uid)
              })
        })
        setPrisoner(Pusers)
-       if (PrisonIdnumber) {
-        const newData = Pusers.filter(function (element) {
-          const itemData = element.IDnumber ? element.IDnumber : ''
-          return itemData.indexOf(PrisonIdnumber) > -1
-        })
-        setPusers(newData)
-      }
+      //  if (PrisonIdnumber) {
+      //   const newData = Pusers.filter(function (element) {
+      //     const itemData = element.IDnumber ? element.IDnumber : ''
+      //     return itemData.indexOf(PrisonIdnumber) > -1
+      //   })
+      //   setPusers(newData)
+      // }
       
       
      })
   },[])
   console.log(Prisoner,'details.....')
+  const [NewPrisoner,setNewPrisoner]=useState([])
   const [searchtext,setSearchtext] = useState('');
   const [Prisonidnumber,setPrisonidnumber]=useState('')
+  const FilterFunction =(text)=>{
+    if(text){
+        const newData = Prisoner.filter(function(item){
+            const itemData = item.name? item.name.toUpperCase()
+            :''.toUpperCase();
+            const textData = text.toUpperCase();
+            return itemData.indexOf( textData)>-1;
 
+        })
+        setNewPrisoner(newData)
+        setSearchtext(text)
+    }}
   const updateID=()=>{
     
     {
@@ -102,7 +114,7 @@ setUid(snap.val().uid)
       </View>
       <View style={{marginTop:imgContainer-container, backgroundColor:'#fff',padding:20,height:'100%'}}>
       
-     <Text style={{fontWeight:'bold'}}>Enter Prisoner ID number</Text>
+     <Text style={{fontWeight:'bold'}}>Enter Prisoner Name</Text>
 
        <View
                       style={{
@@ -131,23 +143,24 @@ setUid(snap.val().uid)
                       style={{marginRight:10}}/></View>
                        <TextInput
                         style={styles.input}
-                        autoCorrect={false}
-                        placeholder="ID Number"
+                      value={searchtext}
+                        placeholder="Name"
                         // onChangeText={(text) => Search(text)}
-                        onChangeText={(text) => setPrisonidnumber(text)}
+                        onChangeText={(text) => FilterFunction(text)}
                       />
                     </View>
-       <Text style={{color:'red'}}>{error}</Text>
+       {/* <Text style={{color:'red'}}>{error}</Text>
        <TouchableOpacity style={styles.signinButton}
                        onPress={()=>updateID()}
               >
                 <Text style={styles.signinButtonText}
                 
                 >Submit</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             {
-              Pusers.map(item=>
+              NewPrisoner.map(item=>
                 <View style={{padding:5}}>
+                  <Text>If this is the correct person click to view all their infor</Text>
                 <TouchableOpacity onPress={()=>navigation.navigate("PolUserDetails",{data:item})}>
           <View style={{flexDirection:'row'}} >
               

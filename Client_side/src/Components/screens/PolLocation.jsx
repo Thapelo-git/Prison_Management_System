@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View ,Dimensions} from 'react-native'
-import React from 'react'
+import React, {Component} from 'react';
 import MapView, { PROVIDER_GOOGLE ,Marker} from "react-native-maps";
 import Feather from 'react-native-vector-icons/Feather'
 const PolLocation = () => {

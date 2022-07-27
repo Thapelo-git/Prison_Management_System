@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View,Image,SafeAreaView,TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, {Component} from 'react';
 
 
 const GetStarted = ({navigation}) => {

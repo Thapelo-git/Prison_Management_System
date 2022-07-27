@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View ,SafeAreaView,TouchableOpacity,TextInput,
 Button,Alert} from 'react-native'
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,Component} from 'react'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import moment from 'moment'
 import Icon from "react-native-vector-icons/Ionicons"

@@ -1,5 +1,5 @@
 import { SafeAreaView, StyleSheet, Text, View,Dimensions } from 'react-native'
-import React,{useEffect,useState} from 'react'
+import React,{useEffect,useState,Component} from 'react'
 import { db } from '../../../firebase';
 const height = Dimensions.get('screen').height;
 const width = Dimensions.get('screen').width;

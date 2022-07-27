@@ -1,5 +1,5 @@
 
-import React from 'react'
+import React, {Component} from 'react';
 import { Text, View, StyleSheet,TouchableOpacity,  ToastAndroid } from 'react-native';
 import { Card } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/Ionicons';

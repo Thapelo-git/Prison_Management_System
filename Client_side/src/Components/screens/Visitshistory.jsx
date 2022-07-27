@@ -1,5 +1,5 @@
 import { SafeAreaView, StyleSheet, Text, View,Dimensions } from 'react-native'
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,Component} from 'react'
 import { db } from '../../../firebase'
 import { Card } from 'react-native-elements'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'

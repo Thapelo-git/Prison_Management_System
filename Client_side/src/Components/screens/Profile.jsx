@@ -1,11 +1,34 @@
 
-import React, {Component} from 'react';
+import React, {useState,useEffect} from 'react';
 import { Text, View, StyleSheet,TouchableOpacity,  ToastAndroid } from 'react-native';
 import { Card } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/Ionicons';
-
+import { db,auth } from '../../../firebase';
 const Profile = ({navigation}) => {
- 
+    
+    
+      const [name,setName]=useState('')
+      const [email,setEmail]=useState('')
+      const [phonenumber,setPhonenumber]=useState('')
+      const [img,setImg]=useState('')
+      const [uid,setUid]=useState('')
+      const user = auth.currentUser.uid;
+      useEffect(()=>{
+          db.ref(`/Pfamily/`+ user).on('value',snap=>{
+            setName(snap.val() && snap.val().name);
+        setEmail(snap.val().email)
+        setPhonenumber(snap.val().phonenumber)
+     
+      setUid(snap.val().uid)
+          })
+     
+        },[])
+    
+      const onSignout =()=>{
+          auth
+          .signOut()
+          
+      }
   return (
     <View style={{backgroundColor: '#ffffff', justifyContent: 'center', 
         alignItems: 'center', alignContent: 'center', width: '100%'}}>
@@ -20,7 +43,12 @@ const Profile = ({navigation}) => {
                     <View style={{paddingTop: 70, width: '100%', height: 1000}}>
 
                     {/* Account Details */}
-                    <TouchableOpacity >
+                    <TouchableOpacity onPress={()=>navigation.navigate('AccountDetails',{
+                        name:name,
+                        email:email,
+                        phoneNo:phonenumber,
+                        uid:uid
+                    })}>
                     <Text style={{paddingBottom: 10}}>
                         My Account
                     </Text>

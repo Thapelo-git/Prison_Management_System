@@ -104,11 +104,12 @@ const Interviews = ({route}) => {
      <View>{show && <DateShow/>}</View>
         <TouchableOpacity style={styles.datebutton} 
         onPress={()=>showDatepicker()} >
-        
+        <Text>Date</Text>
         <FontAwesome name='calendar' size={20}/>
         </TouchableOpacity>
         <TouchableOpacity style={styles.datebutton}
         onPress={()=>showTimepicker()} >
+          <Text>Time</Text>
         <FontAwesome name='clock-o' size={20}/>
         </TouchableOpacity>
       </View>

@@ -51,12 +51,14 @@ const Visitsupcoming = () => {
      <View style={{width:deviceWidth *0.9,top:30,backgroundColor:'#DEEDF0',height:80}}>
      <View style={{flexDirection:'row',justifyContent:'space-around',paddingVertical:12,
      alignItems:'stretch'}}>
-     <FontAwesome name='calendar' size={20}/>
+      <Text>Date</Text>
+     {/* <FontAwesome name='calendar' size={20}/> */}
      <Text>{element.startDateone}</Text>
      </View>
      <View  style={{flexDirection:'row',justifyContent:'space-around',
      alignItems:'stretch',paddingVertical:12,}}>
-     <FontAwesome name='clock-o' size={20}/>
+      <Text>Time</Text>
+     {/* <FontAwesome name='clock-o' size={20}/> */}
      <Text>      {element.time}</Text>
      </View>
      </View>

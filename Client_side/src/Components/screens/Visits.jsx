@@ -1,5 +1,5 @@
 
-import React,{useState,Component} from 'react'
+import React,{useState} from 'react'
 import Visitsupcoming from './Visitsupcoming'
 import Visitshistory from './Visitshistory'
 import { StyleSheet, Text, View ,StatusBar,SafeAreaView,

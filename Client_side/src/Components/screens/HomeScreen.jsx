@@ -113,7 +113,7 @@ setUid(snap.val().uid)
        </View>
       </View>
       <View style={{marginTop:imgContainer-container, backgroundColor:'#fff',padding:20,height:'100%'}}>
-      
+      {/* 22758486 */}
      <Text style={{fontWeight:'bold'}}>Enter Prisoner Name</Text>
 
        <View

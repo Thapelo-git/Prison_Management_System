@@ -5,6 +5,7 @@ import { Link, Outlet } from 'react-router-dom'
 import { useAuth } from './contexts/AuthContext'
 import { useNavigate } from 'react-router-dom'
 import { db } from '../firebase'
+
 function SideNaveBar() {
     const [Prisoners,setPrisoners]=useState([])
     useEffect(()=>{
@@ -31,6 +32,7 @@ function SideNaveBar() {
             setError('Failed to log out')
         }
     }
+   
   return (
     <div className='nav-main-container'>
         <div className='inner-container'>
@@ -111,7 +113,9 @@ function SideNaveBar() {
     </div>
         </div>
         <div className='inner_Container'>
-    <Outlet/>
+        <Outlet/>
+        
+   
     {/* <div className='headings'>
         <h3>Welcome</h3>
       </div>

@@ -40,7 +40,7 @@ const SearchScreen = ({navigation}) => {
   
          })
          setPusers(Pusers)
-      // setFilteredDataSource(Pusers);
+      setFilteredDataSource(Pusers);
      setMasterDataSource(Pusers);
      })
   },[])
@@ -55,10 +55,10 @@ const SearchScreen = ({navigation}) => {
       )
       setFilteredDataSource(newData)
       setSearchtext(text)
-    }else{
-      // setFilteredDataSource(masterDataSource)
+    }else {
+      setFilteredDataSource(masterDataSource);
       setSearchtext(text)
-    }
+  }
   }
   const ItemSeparatorView = () => {
     return (

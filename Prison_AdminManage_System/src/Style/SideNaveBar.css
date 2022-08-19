@@ -8,21 +8,31 @@
     width: 100%;                                       
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    align-items: center;
+    justify-content:flex-start;
+    align-items:flex-start;
     position: absolute;
     
 }
 
 .inner-container{
-    height: 670px;
-    width: 210px;
+    height: 650px;
+    width: 50px;
     background-color: black;
-    border-top-right-radius: 20px  ;
-    border-bottom-right-radius: 20px;
-    top: 0%;
-    left: 0;
-    right: 30%;
+    display: flex;
+   
+    justify-content:center;
+    align-items:center;
+    
+}
+.inner_Container{
+    background-color: white;
+    width: 90%;
+    height: 650px;
+    position: absolute;
+    left: 15%;
+
+    border-top-left-radius: 30px  ;
+    border-bottom-left-radius: 30px;
 }
 .logo{
     top: 0;
@@ -59,27 +69,37 @@
   bottom: 0;  
 }
 .SidebarList{
-    height: auto;
+    height: 500px;
     padding: 0;
     width: 100%;
+    display: flex;
+flex-direction: column;
+justify-content:space-around;
+align-items:stretch;
+
 }
 .SidebarList .row{
- width: 100%; 
- height: 70px;
+ width: 80px; 
+ height: 40px;
  /* border: 1px solid white; */
 list-style-type: none;
-margin: 0%;
-display: flex;
-flex-direction: row;
+left: 0px;
+
+transform: rotate(-90deg);
 color: white; 
-justify-content: center;
-align-items: center;
+
 font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 .SidebarList .row:hover{
     cursor: pointer;
     background-color: yellow;
     color: #000;
+    width: 100px;
+    height: 40px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .row .nav-icon{
     flex: 30%;
@@ -87,7 +107,8 @@ font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida San
     place-items: center;
 }
 .row .title{
-    flex: 70%;
+    /* flex: 70%; */
+    place-items: center;
 }
 /* .nav-menu{
     background: linear-gradient(145deg,#e2e8ec,#ffffff);
@@ -130,11 +151,7 @@ font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida San
     font-weight: 500;
     letter-spacing: 1px;
 }
-.inner_Container{
-    background-color: white;
-    width: 100%;
-    height: 650px;
-}
+
 .boxRow{
     width: 100%;
     height: 120px;

@@ -5,7 +5,7 @@ import { Link, Outlet } from 'react-router-dom'
 import { useAuth } from './contexts/AuthContext'
 import { useNavigate } from 'react-router-dom'
 import { db } from '../firebase'
-
+//https://dribbble.com/shots/18977642-POS-System-App
 function SideNaveBar() {
     const [Prisoners,setPrisoners]=useState([])
     useEffect(()=>{
@@ -36,17 +36,17 @@ function SideNaveBar() {
   return (
     <div className='nav-main-container'>
         <div className='inner-container'>
-    <img src={logo} className="logo"/>
-    <div className='nav-list'>
-        <nav>
+    {/* <img src={logo} className="logo"/> */}
+    {/* <div className='nav-list'> */}
+        {/* <nav> */}
     
 
         <ul className='SidebarList'>
             <li className='row'>
                  
-                    <div className='nav-icon'>
+                    {/* <div className='nav-icon'>
                     <i class="	fas fa-users"></i>
-                    </div>
+                    </div> */}
                     <div className='title'>
                     
                     <Link to="dashboard"><a>Dashboard</a></Link>
@@ -59,9 +59,9 @@ function SideNaveBar() {
             <li className='row'
             >
                  
-                    <div className='nav-icon'>
+                    {/* <div className='nav-icon'>
                     <i className='fas fa-handshake-o'></i>
-                    </div>
+                    </div> */}
                     <div className='title'>
                     <Link to="visits"><a>Visits</a></Link>
                 </div>
@@ -69,9 +69,9 @@ function SideNaveBar() {
             </li>
             <li className='row'>
                  
-                    <div className='nav-icon'>
+                    {/* <div className='nav-icon'>
                     <i className='fas fa-user-circle'></i>
-                    </div>
+                    </div> */}
                     
                     <div className='title'>
                     <Link to="interviews" >
@@ -84,9 +84,9 @@ function SideNaveBar() {
             </li>
             <li className='row'>
                   
-                    <div className='nav-icon'>
+                    {/* <div className='nav-icon'>
                     <i class="fas fa-user-circle"></i>
-                    </div>
+                    </div> */}
                     <div className='title'>
                     <Link to="account" >
                     <a >
@@ -98,19 +98,19 @@ function SideNaveBar() {
             </li>
         </ul>
   
-    </nav>
-    {/* <hr/> */}
+    {/* </nav> */}
     
     
-    </div>
     
-    <div className='loguot-btn'>
+    {/* </div> */}
+    
+    {/* <div className='loguot-btn'>
     <button className='btn' onClick={handleLogout}>
     <a>Logout</a>
     <i class="fas fa-sign-out-alt"></i>
     
     </button>
-    </div>
+    </div> */}
         </div>
         <div className='inner_Container'>
         <Outlet/>

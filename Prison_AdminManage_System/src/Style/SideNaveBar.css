@@ -16,19 +16,19 @@
 
 .inner-container{
     height: 650px;
-    width: 50px;
+    width: 200px;
     background-color: black;
     display: flex;
-   
+   flex-direction: column;
     justify-content:center;
     align-items:center;
     
 }
 .inner_Container{
     background-color: white;
-    width: 90%;
+    width: 70%;
     height: 650px;
-    position: absolute;
+    /* position: absolute; */
     left: 15%;
 
     border-top-left-radius: 30px  ;
@@ -69,7 +69,7 @@
   bottom: 0;  
 }
 .SidebarList{
-    height: 500px;
+    height: 300px;
     padding: 0;
     width: 100%;
     display: flex;
@@ -85,17 +85,22 @@ align-items:stretch;
 list-style-type: none;
 left: 0px;
 
-transform: rotate(-90deg);
+/* transform: rotate(-90deg); */
 color: white; 
 
 font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
+/* 1658909356328R
+
+infor@RPANUGGETS.com
+sub:RPA Intern Remote Role */
 .SidebarList .row:hover{
     cursor: pointer;
     background-color: yellow;
     color: #000;
-    width: 100px;
+    width:100px;
     height: 40px;
+    left: 0px;
     border-radius: 20px;
     display: flex;
     justify-content: center;
@@ -168,4 +173,21 @@ font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida San
     justify-content: center;
     align-items: center;
 }
-
+@media only screen and (max-width:600px){
+    .default{
+        display: none;
+    }
+    .default-mobile{
+        display: block;
+        
+    }
+    .inner-container{
+        height: 50px;
+        width: 100%;
+        background-color: black;
+        display: flex;
+       position: absolute;
+        justify-content:center;
+        align-items:center;
+    }
+    }

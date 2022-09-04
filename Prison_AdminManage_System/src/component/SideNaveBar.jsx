@@ -36,9 +36,9 @@ function SideNaveBar() {
   return (
     <div className='nav-main-container'>
         <div className='inner-container'>
-    {/* <img src={logo} className="logo"/> */}
-    {/* <div className='nav-list'> */}
-        {/* <nav> */}
+    <img src={logo} className="logo"/>
+    <div className='nav-list'>
+        <nav>
     
 
         <ul className='SidebarList'>
@@ -98,19 +98,19 @@ function SideNaveBar() {
             </li>
         </ul>
   
-    {/* </nav> */}
+    </nav>
     
     
     
-    {/* </div> */}
+    </div>
     
-    {/* <div className='loguot-btn'>
+    <div className='loguot-btn'>
     <button className='btn' onClick={handleLogout}>
     <a>Logout</a>
     <i class="fas fa-sign-out-alt"></i>
     
     </button>
-    </div> */}
+    </div>
         </div>
         <div className='inner_Container'>
         <Outlet/>

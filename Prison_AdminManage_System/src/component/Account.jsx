@@ -18,8 +18,8 @@ function Account() {
   
     useEffect(()=>{
       db.ref(`/AdminPuser/`+ user).on('value',snap=>{
-    setPhonenumber(snap.val().phonenumber)
-    setEmail(snap.val().email)
+    // setPhonenumber(snap.val().phonenumber)
+    // setEmail(snap.val().email)
     
   
       })
@@ -31,7 +31,37 @@ function Account() {
     <div className='img_cover'>
     <img src={logo} className="profile_pic"/>
     </div>
-    <div className='Account_form'>
+    <div className='right_box_shadow'>
+      {/* onSubmit={formSubmit} */}
+      <form >
+      <div className='f_flex'>
+        <div className='inputrow'>
+          <span>Your Email</span>
+          {/* placeholder={email} */}
+          <input type='text' name='email' />
+        </div>
+        <div className='inputrow'>
+          <span>Your Phone Number</span>
+          {/* placeholder={Phonenumber} */}
+          <input type='number' name='phonenumber' />
+        </div>
+        </div>
+        <div className='input'>
+          <span>Your Password</span>
+          <input type='password' name='password' placeholder='*******'/>
+        </div>
+        <div className='input'>
+          <span>Confirm Password</span>
+          <input type='password' name='confirmpassword' placeholder='*******'/>
+        </div>
+        <div className='input'>
+          <span>Your message</span>
+          <textarea cols='password' rows='10' name='message' placeholder='message'/>
+        </div>
+      <button className='btn_shadow'>Update</button>
+      </form>
+    </div>
+    {/* <div className='Account_form'>
         <div className='Acc_column'>
             <div className='row_Accinput'>
     <div className='Acc_input'>
@@ -62,7 +92,7 @@ function Account() {
         <button className='button'><label className='button_Lable'>Update</label></button>
     </div>
     </div>
-    </div>
+    </div> */}
     
     </div>
     </>

@@ -12,7 +12,7 @@ import { Display } from '../utils'
 import { useNavigation } from '@react-navigation/native'
 import forgetPassword from './forgetPassword'
 import { auth } from '../../../firebase'
-import AsyncStorageLib from '@react-native-async-storage/async-storage'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 const deviceHeight=Dimensions.get("window").height
 const deviceWidth=Dimensions.get("window").width
 const PoliceSignin = () => {
@@ -29,7 +29,7 @@ const PoliceSignin = () => {
                     .then( async res => {
                         try {
                             const jsonValue = JSON.stringify(res.user)
-                            await AsyncStorageLib.setItem("Police", res.user.uid)
+                            await AsyncStorage.setItem("Police", res.user.uid)
                           
         
                             navigation.navigate('Polhome')

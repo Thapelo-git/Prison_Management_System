@@ -2,7 +2,9 @@
     height: 630px;
     width: 100%;
     background-color: white;
-   
+    
+   justify-content: center;
+   align-items: center;
 }
 .img_cover{
     width: 100%;
@@ -56,8 +58,16 @@
     align-items: center;
 }
 .profile_pic{
+    top: 20px;
     height: 100px;
     width: 100px;
     border-radius: 50px;
 
+}
+.right_box_shadow{
+    top: 100px;
+width: 100%;
+display: flex;
+justify-content: center;
+align-items: center;
 }

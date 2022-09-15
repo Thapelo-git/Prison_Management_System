@@ -13,6 +13,7 @@ import Account from './component/Account';
 import Visits from './component/Visits';
 import Interveiws from './component/Interveiws';
 import Viewuser from './component/Viewuser';
+import Header from './component/Header';
 function App() {
   const [signedin,setSignin]=useState(false)
   auth.onAuthStateChanged((user)=>{
@@ -43,7 +44,7 @@ function App() {
      ):(
       <>
       
-     <Route  path="/" element={<SideNaveBar/>}>
+     <Route  path="/" element={<Header/>}>
     <Route path='account' element={<Account/>}/>
     <Route  path='dashboard/*' element={<Home/>}/>
     <Route path='visits' element={<Visits/>}/>

@@ -4,7 +4,7 @@ import Visitsupcoming from './Visitsupcoming'
 import Visitshistory from './Visitshistory'
 import { StyleSheet, Text, View ,StatusBar,SafeAreaView,
     TextInput,TouchableOpacity,Image,Modal,Dimensions} from 'react-native'
-import { Display } from '../utils'
+
 const Visits = () => {
     const [page,setPage]=useState(0)
   return (

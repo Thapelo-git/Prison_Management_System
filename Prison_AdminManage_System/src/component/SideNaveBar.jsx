@@ -32,16 +32,26 @@ function SideNaveBar() {
             setError('Failed to log out')
         }
     }
+    const [mobile,setMobile]=useState(false)
    
   return (
     <div className='nav-main-container'>
         <div className='inner-container'>
     <img src={logo} className="logo"/>
-    <div className='nav-list'>
+    <div className='toggle' onClick={()=>setMobile(!mobile)}>
+      {mobile?<i className='fas fa-times close'></i>:<i className='fas fa-bars open'></i>}
+      
+      
+    </div>
+    <div className='separator'>
+                    
+                    </div>
         <nav>
     
 
-        <ul className='SidebarList'>
+        {/* <ul className=' SidebarList'> */}
+          <ul className={mobile ? "nav-links-mobile" :"SidebarList"} onClick={()=>setMobile(false)}>
+             
             <li className='row'>
                  
                     {/* <div className='nav-icon'>
@@ -96,21 +106,24 @@ function SideNaveBar() {
                 </div>
                    
             </li>
-        </ul>
-  
-    </nav>
-    
-    
-    
-    </div>
-    
-    <div className='loguot-btn'>
+            <li className='row'>
+            <div className='loguot-btn'>
     <button className='btn' onClick={handleLogout}>
     <a>Logout</a>
     <i class="fas fa-sign-out-alt"></i>
     
     </button>
     </div>
+    </li>
+        </ul>
+  
+    </nav>
+    
+    
+    
+    
+    
+    
         </div>
         <div className='inner_Container'>
         <Outlet/>

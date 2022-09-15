@@ -10,9 +10,9 @@ import { Formik } from 'formik'
 import * as yup from 'yup'
 import { Display } from '../utils'
 import forgetPassword from './forgetPassword'
-
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { ScrollView } from 'react-native-gesture-handler'
-import AsyncStorageLib from '@react-native-async-storage/async-storage'
+
 import { db,auth } from '../../../firebase' 
 const deviceHeight=Dimensions.get("window").height
 const deviceWidth=Dimensions.get("window").width
@@ -43,7 +43,7 @@ const FamilySignIn = ({props}) => {
                     .then( async res => {
                         try {
                             const jsonValue = JSON.stringify(res.user)
-                            await AsyncStorageLib.setItem("Pfamily", res.user.uid)
+                            await AsyncStorage.setItem("Pfamily", res.user.uid)
                           
         
                             navigation.navigate('homeScreen')

@@ -22,6 +22,7 @@ import Notification from "../screens/Notification";
 import AccountDetails from "../screens/AccountDetails";
 import ForgetPassword from "../screens/forgetPassword";
 import UpdateProfile from "../screens/UpdateProfile";
+import PasswordForget from "../screens/PasswordForget";
 const Stack = createNativeStackNavigator()
 
 const Navigators =()=>{
@@ -57,7 +58,7 @@ const Navigators =()=>{
                 <Stack.Screen name="Welcome" component={GetStarted}/> 
                 <Stack.Screen name="Signup" component={SignupScreen}/> 
                 <Stack.Screen name="Signin" component={SigninScreen}/> 
-                <Stack.Screen name="forgetPassword" component={ForgetPassword}/>
+                <Stack.Screen name="forgetPassword" component={PasswordForget}/>
                 <Stack.Screen name="RegisterPhone" component={RegisterPhone}/> 
  
             <Stack.Screen name="homeScreen" component={AuthStack}/>

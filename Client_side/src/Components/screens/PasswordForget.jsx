@@ -7,7 +7,7 @@ import Feather from "react-native-vector-icons/Feather"
 import { Images ,Colors} from '../contants'
 import { Display } from '../utils'
 import { db,auth } from '../../../firebase'
-const ForgetPassword = ({navigation}) => {
+const PasswordForget = ({navigation}) => {
     const [email,setEmail]=useState();
     const reset =async()=>{
         try{
@@ -59,7 +59,7 @@ const ForgetPassword = ({navigation}) => {
     )
 }
 
-export default ForgetPassword
+export default PasswordForget
 
 const styles = StyleSheet.create({
     container:{

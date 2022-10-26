@@ -111,7 +111,7 @@ const Interviews = ({route}) => {
         <TouchableOpacity style={styles.datebutton}
         onPress={()=>showTimepicker()} >
           <Text>Time</Text>
-        <FontAwesome name='clock-o' size={20}/>
+          <Image source={require("../assets/Images/clock.png")} style={{height:20,width:20}}/>
         </TouchableOpacity>
       </View>
 {/*       
@@ -143,10 +143,9 @@ const Interviews = ({route}) => {
                           height: 40,
                           borderRadius: 10
                         }}
-                      ><SimpleLineIcons
-                      name="note"
-                      type="material"
-                    /></View>
+                      >
+                     <Image source={require("../assets/Images/note.png")} style={{height:20,width:20}}/>
+                    </View>
                     <TextInput
                         style={styles.input}
                         autoCorrect={false}
@@ -178,7 +177,7 @@ const Interviews = ({route}) => {
                           borderRadius: 10
                         }}
                       >
-                        <SimpleLineIcons name="note" type="material" />
+                         <Image source={require("../assets/Images/note.png")} style={{height:20,width:20}}/>
                       </View>
                       <TextInput
                         style={{

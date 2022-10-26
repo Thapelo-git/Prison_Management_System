@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React,{useState} from 'react';
 import { StyleSheet, Text, View ,StatusBar,TextInput,TouchableOpacity,
 Alert} from 'react-native'
 import {Separator} from './comp'

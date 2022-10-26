@@ -76,9 +76,7 @@ const PoliceSignUp = () => {
         </View>
             <View style={styles.inputContainer}>
                 <View style={styles.inputSubContainer}>
-                    <Feather name="user" size={22}
-                    color='#000'
-                    style={{marginRight:10}}/>
+                <Image source={require("../assets/Images/profile.png")} style={{height:20,width:20}}/>
                     
                     <TextInput placeholder="Persal Number"
                     selectionColor='gainsboro'

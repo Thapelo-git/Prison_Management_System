@@ -138,9 +138,9 @@ setUid(snap.val().uid)
                           height: 40,
                           borderRadius: 10
                         }}
-                      ><Feather name="user" size={22}
- 
-                      style={{marginRight:10}}/></View>
+                      >
+                        <Image source={require("../assets/Images/profile.png")} style={{height:20,width:20}}/>
+                      </View>
                        <TextInput
                         style={styles.input}
                       value={searchtext}

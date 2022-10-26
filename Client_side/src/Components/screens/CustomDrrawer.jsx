@@ -22,8 +22,9 @@ const CustomDrrawer = (props) => {
     },[])
 
   const onSignout =()=>{
-      auth
-      .signOut()
+      // auth
+      // .signOut()
+      navigation.navigate('Welcome')
       
   }
   return (
@@ -37,12 +38,12 @@ const CustomDrrawer = (props) => {
       </View>
         <DrawerItemList {...props}/>
     </DrawerContentScrollView>
-    <View style={{padding:20,borderTopWidth:1,borderTopColor:'#ccc',
+    {/* <View style={{padding:20,borderTopWidth:1,borderTopColor:'#ccc',
   backgroundColor:'red'}}>
       <TouchableOpacity  onPress={()=>onSignout() }>
       <Text>Sign Out</Text>
       </TouchableOpacity>
-    </View>
+    </View> */}
     </View>
   )
 }

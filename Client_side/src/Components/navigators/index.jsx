@@ -20,7 +20,7 @@ import Visitshistory from "../screens/Visitshistory";
 import Visitsupcoming from "../screens/Visitsupcoming";
 import Notification from "../screens/Notification";
 import AccountDetails from "../screens/AccountDetails";
-import ForgetPassword from "../screens/forgetPassword";
+// import ForgetPassword from "../screens/forgetPassword";
 import UpdateProfile from "../screens/UpdateProfile";
 import PasswordForget from "../screens/PasswordForget";
 const Stack = createNativeStackNavigator()

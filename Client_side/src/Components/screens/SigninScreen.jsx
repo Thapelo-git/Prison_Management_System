@@ -7,7 +7,7 @@ import Feather from "react-native-vector-icons/Feather"
 import Separator from './comp/Separator'
 import { Images ,Colors} from '../contants'
 import { Display } from '../utils'
-import forgetPassword from './forgetPassword'
+
 import FamilySignIn from './FamilySignIn'
 import PoliceSignin from './PoliceSignin'
 const deviceHeight=Dimensions.get("window").height

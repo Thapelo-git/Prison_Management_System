@@ -9,7 +9,7 @@ import { useNavigation } from '@react-navigation/native'
 import { Formik } from 'formik'
 import * as yup from 'yup'
 import { Display } from '../utils'
-import forgetPassword from './forgetPassword'
+
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { ScrollView } from 'react-native-gesture-handler'
 

@@ -10,7 +10,7 @@ import { Formik } from 'formik'
 import * as yup from 'yup'
 import { Display } from '../utils'
 import { useNavigation } from '@react-navigation/native'
-import forgetPassword from './forgetPassword'
+
 import { auth } from '../../../firebase'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 const deviceHeight=Dimensions.get("window").height

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import { StyleSheet, Text, View ,StatusBar,TextInput,TouchableOpacity,
 Alert} from 'react-native'
 import {Separator} from './comp'
@@ -7,7 +7,7 @@ import Feather from "react-native-vector-icons/Feather"
 import { Images ,Colors} from '../contants'
 import { Display } from '../utils'
 import { db,auth } from '../../../firebase'
-const forgetPassword = ({navigation}) => {
+const ForgetPassword = ({navigation}) => {
     const [email,setEmail]=useState();
     const reset =async()=>{
         try{
@@ -59,7 +59,7 @@ const forgetPassword = ({navigation}) => {
     )
 }
 
-export default forgetPassword
+export default ForgetPassword
 
 const styles = StyleSheet.create({
     container:{

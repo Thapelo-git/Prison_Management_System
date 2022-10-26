@@ -97,9 +97,7 @@ const PoliceSignUp = () => {
         </View>
             <View style={styles.inputContainer}>
                 <View style={styles.inputSubContainer}>
-                    <Feather name="mail" size={22}
-                    color='#000'
-                    style={{marginRight:10}}/>
+                <Image source={require("../assets/Images/email.jpg")} style={{height:20,width:20}}/>
                     
                     <TextInput placeholder="email@gmail.com"
                     selectionColor='gainsboro'
@@ -141,9 +139,7 @@ const PoliceSignUp = () => {
         </View>
             <View style={styles.inputContainer}>
                 <View style={styles.inputSubContainer}>
-                <Feather name="lock" size={22}
-                    color='#000'
-                    style={{marginRight:10}}/>
+                <Image source={require("../assets/Images/log.jpg")} style={{height:20,width:20}}/>
                  <TextInput
                  secureTextEntry={isPasswordShow? false :true}
                  placeholder="Password"
@@ -168,9 +164,7 @@ const PoliceSignUp = () => {
         </View>
             <View style={styles.inputContainer}>
                 <View style={styles.inputSubContainer}>
-                <Feather name="lock" size={22}
-                    color='#000'
-                    style={{marginRight:10}}/>
+                <Image source={require("../assets/Images/log.jpg")} style={{height:20,width:20}}/>
                  <TextInput
                  secureTextEntry={isPasswordShow? false :true}
                  placeholder=" confirm Password"

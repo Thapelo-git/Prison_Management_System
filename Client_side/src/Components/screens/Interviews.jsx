@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View ,SafeAreaView,TouchableOpacity,TextInput,
-Button,Alert} from 'react-native'
+Button,Alert,Image} from 'react-native'
 import React,{useState,useEffect,Component} from 'react'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import moment from 'moment'
@@ -105,7 +105,8 @@ const Interviews = ({route}) => {
         <TouchableOpacity style={styles.datebutton} 
         onPress={()=>showDatepicker()} >
         <Text>Date</Text>
-        <FontAwesome name='calendar' size={20}/>
+        <Image source={require("../assets/Images/date.jpg")} style={{height:20,width:20}}/>
+        {/* <FontAwesome name='calendar' size={20}/> */}
         </TouchableOpacity>
         <TouchableOpacity style={styles.datebutton}
         onPress={()=>showTimepicker()} >

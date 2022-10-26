@@ -20,6 +20,7 @@ import Visitshistory from "../screens/Visitshistory";
 import Visitsupcoming from "../screens/Visitsupcoming";
 import Notification from "../screens/Notification";
 import AccountDetails from "../screens/AccountDetails";
+import ForgetPassword from "../screens/forgetPassword";
 const Stack = createNativeStackNavigator()
 
 const Navigators =()=>{
@@ -37,7 +38,7 @@ const Navigators =()=>{
   });
     return(
         <NavigationContainer>
-            {!signedIn ?(
+            {/* {!signedIn ?(
                 <>
                 <Stack.Navigator screenOptions={{headerShown:false}}>
                  <Stack.Screen name="Splash" component={SplashScreen} />
@@ -49,9 +50,14 @@ const Navigators =()=>{
                 </Stack.Navigator>
                 </>
             ):(
-                <>
+                <> */}
              <Stack.Navigator screenOptions={{headerShown:false}}>
-            
+             <Stack.Screen name="Splash" component={SplashScreen} />
+                <Stack.Screen name="Welcome" component={GetStarted}/> 
+                <Stack.Screen name="Signup" component={SignupScreen}/> 
+                <Stack.Screen name="Signin" component={SigninScreen}/> 
+                <Stack.Screen name="forgetPassword" component={ForgetPassword}/>
+                <Stack.Screen name="RegisterPhone" component={RegisterPhone}/> 
  
             <Stack.Screen name="homeScreen" component={AuthStack}/>
             <Stack.Screen name="UserDetails" component={UserDetails}/>
@@ -66,8 +72,8 @@ const Navigators =()=>{
             <Stack.Screen name="Notification" component={Notification}/>
             <Stack.Screen name="AccountDetails" component={AccountDetails}/>
         </Stack.Navigator>
-                </>
-            )}
+                {/* </>
+            )} */}
   
         </NavigationContainer>
     )

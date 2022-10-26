@@ -90,9 +90,7 @@ const FamilySignIn = ({props}) => {
         
             <View style={styles.inputContainer}>
                 <View style={styles.inputSubContainer}>
-                    <Feather name="mail" size={22}
-      
-                    style={{marginRight:10}}/>
+                <Image source={require("../assets/Images/email.jpg")} style={{height:20,width:20}}/>
                     
                     <TextInput placeholder="Email"
                      onChangeText={props.handleChange('email')}
@@ -111,8 +109,7 @@ const FamilySignIn = ({props}) => {
             
             <View style={styles.inputContainer}>
                 <View style={styles.inputSubContainer}>
-                <Feather name="lock" size={22} color="#000"
-                    style={{marginRight:10}}/>
+                <Image source={require("../assets/Images/log.jpg")} style={{height:20,width:20}}/>
                  <TextInput
                  secureTextEntry={isPasswordShow? false :true}
                  placeholder="Password"
@@ -121,6 +118,7 @@ const FamilySignIn = ({props}) => {
                  onBlur={props.handleBlur('password')}
                  selectionColor='gainsboro'
                  style={styles.inputText}/>
+                  
                  <Feather
                  name="eye" size={22}
                  style={{marginRight:10}}
@@ -135,9 +133,9 @@ const FamilySignIn = ({props}) => {
                 <View>
                     <Text style={styles.rememberMeText}></Text>
                 </View>
-                {/* <Text style={styles.forgotPasswordText}
+                <Text style={styles.forgotPasswordText}
                 onPress={()=>navigation.navigate('forgetPassword')}
-                >Forget Password</Text> */}
+                >Forget Password</Text>
             </View>
     
             <TouchableOpacity style={styles.signinButton}

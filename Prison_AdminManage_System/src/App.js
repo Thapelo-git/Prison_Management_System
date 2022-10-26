@@ -15,35 +15,35 @@ import Interveiws from './component/Interveiws';
 import Viewuser from './component/Viewuser';
 import Header from './component/Header';
 function App() {
-  const [signedin,setSignin]=useState(false)
-  auth.onAuthStateChanged((user)=>{
-    if(user){
-      setSignin(true)
-    }else{
-      setSignin(false)
-    }
-  })
+  // const [signedin,setSignin]=useState(false)
+  // auth.onAuthStateChanged((user)=>{
+  //   if(user){
+  //     setSignin(true)
+  //   }else{
+  //     setSignin(false)
+  //   }
+  // })
   return (
     <AuthProvider>
   <BrowserRouter>
    
    <Routes>
    
-   {/* <Route  path="login" element={<WelcomScreen/>} />
-   <Route  path="/" element={<SideNaveBar/>}>
+   <Route  path="login" element={<WelcomScreen/>} />
+   <Route  path="/" element={<Header/>}>
     <Route path='account' element={<Account/>}/>
     <Route  path='dashboard/*' element={<Home/>}/>
     <Route path='visits' element={<Visits/>}/>
     <Route path='interviews' element={<Interveiws/>}/>
    
-    </Route> */}
-     {!signedin?(
+    </Route>
+     {/* {!signedin?(
        <>
      <Route  path="login" element={<WelcomScreen/>} />
        </>
      ):(
       <>
-      
+       <Route  path="login" element={<WelcomScreen/>} />
      <Route  path="/" element={<Header/>}>
     <Route path='account' element={<Account/>}/>
     <Route  path='dashboard/*' element={<Home/>}/>
@@ -51,7 +51,7 @@ function App() {
     <Route path='interviews' element={<Interveiws/>}/>
    
     </Route></>
-     )}
+     )} */}
    
    
      

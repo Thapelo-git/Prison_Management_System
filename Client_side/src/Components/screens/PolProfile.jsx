@@ -1,13 +1,31 @@
 
-import React, {Component} from 'react';
+import React, {useState,useEffect} from 'react';
 import { Text, View, StyleSheet,TouchableOpacity,  ToastAndroid } from 'react-native';
 import { Card } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/Ionicons';
 import { auth,db } from '../../../firebase';
-const PolProfile = () => {
+const PolProfile = ({navigation}) => {
+    const [name,setName]=useState('')
+    const [email,setEmail]=useState('')
+    const [phonenumber,setPhonenumber]=useState('')
+    const [img,setImg]=useState('')
+    const [uid,setUid]=useState('')
+    const user = auth.currentUser.uid;
+    useEffect(()=>{
+        db.ref(`/Police/`+ user).on('value',snap=>{
+          setName(snap.val() && snap.val().persalnumber
+          );
+      setEmail(snap.val().email)
+      setPhonenumber(snap.val().phonenumber)
+   
+    setUid(snap.val().uid)
+        })
+   
+      },[])
   const onSignout =()=>{
-    auth
-    .signOut()
+    // auth
+    // .signOut()
+    navigation.navigate('Welcome')
     
 }
   return (
@@ -24,7 +42,12 @@ const PolProfile = () => {
                     <View style={{paddingTop: 70, width: '100%', height: 1000}}>
 
                     {/* Account Details */}
-                    <TouchableOpacity >
+                    <TouchableOpacity onPress={()=>navigation.navigate('UpdateProfile',{
+                        name:name,
+                        email:email,
+                        phoneNo:phonenumber,
+                        uid:uid
+                    })}>
                     <Text style={{paddingBottom: 10}}>
                         My Account
                     </Text>
@@ -69,7 +92,7 @@ const PolProfile = () => {
                     
                     <Card.Divider/>
 
-                    <TouchableOpacity onPress={()=>navigation.navigate('Help And Support')}>
+                    {/* <TouchableOpacity onPress={()=>navigation.navigate('Help And Support')}>
                     <Text style={{paddingBottom: 10, paddingTop: 15}}>
                         Help
                     </Text>
@@ -87,7 +110,7 @@ const PolProfile = () => {
                             <Icon name="ios-chevron-forward" size={15} style={styles.moreIcon}/>
                         </View>
                     </View>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                     <Card.Divider/>
 
                     {/* Logout     */}
@@ -95,11 +118,11 @@ const PolProfile = () => {
                     <TouchableOpacity onPress={onSignout} style={{backgroundColor:'red', width:140, marginTop: 50, borderRadius:5, padding:5}}>
 
                     <View style={{flexDirection: 'row', justifyContent:'center'}}>
-                    <Icon
+                    {/* <Icon
                         name='ios-log-out'
                         type='Ionicon'
                         color='#fff'
-                        size={25}/>
+                        size={25}/> */}
                         <Text style={{padding: 5, paddingTop: -15, fontSize: 18, color: '#fff'}}>
                             Log-out
                         </Text>

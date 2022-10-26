@@ -21,6 +21,7 @@ import Visitsupcoming from "../screens/Visitsupcoming";
 import Notification from "../screens/Notification";
 import AccountDetails from "../screens/AccountDetails";
 import ForgetPassword from "../screens/forgetPassword";
+import UpdateProfile from "../screens/UpdateProfile";
 const Stack = createNativeStackNavigator()
 
 const Navigators =()=>{
@@ -71,6 +72,7 @@ const Navigators =()=>{
             <Stack.Screen name="Visistupcoming" component={Visitsupcoming}/>
             <Stack.Screen name="Notification" component={Notification}/>
             <Stack.Screen name="AccountDetails" component={AccountDetails}/>
+            <Stack.Screen name="UpdateProfile" component={UpdateProfile}/>
         </Stack.Navigator>
                 {/* </>
             )} */}

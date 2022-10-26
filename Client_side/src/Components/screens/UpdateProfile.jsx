@@ -11,7 +11,7 @@ import FontAwesome from "react-native-vector-icons/FontAwesome"
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { Display } from '../utils';
 import { db,auth } from '../../../firebase';
-const AccountDetails = ({navigation,route}) => {
+const UpdateProfile = ({navigation,route}) => {
     const [name,setName]=useState(route.params.name)
     const [email,setEmail]=useState(route.params.email)
     const [phoneNo,setPhoneNo]=useState(route.params.phoneNo)
@@ -28,8 +28,8 @@ const AccountDetails = ({navigation,route}) => {
     })
     const updateBooking = () => {
 
-        db.ref('Pfamily').child(uid).update({name,email,phoneNo})
-        .then(()=>db.ref('Pfamily').once('value'))
+        db.ref('Police').child(uid).update({name,email,phoneNo})
+        .then(()=>db.ref('Police').once('value'))
         .then(snapshot=>snapshot.val())
         .catch(error => ({
           errorCode: error.code,
@@ -113,13 +113,13 @@ const AccountDetails = ({navigation,route}) => {
                     value={phoneNo}
                     onChangeText={(text)=>setPhoneNo(text)}
                     
-                    onBlur={props.handleBlur('phonenumber')}
+                    // onBlur={props.handleBlur('phonenumber')}
                     style={styles.inputText}
                     />
                 </View>
              
             </View>
-            <Text style={styles.errortext}>{props.touched.phonenumber && props.errors.phonenumber}</Text>
+            {/* <Text style={styles.errortext}>{props.touched.phonenumber && props.errors.phonenumber}</Text> */}
             {/* <View style={styles.inputContainer}>
                 <View style={styles.inputSubContainer}>
                 <Icon name="lock" size={22}
@@ -169,7 +169,7 @@ const AccountDetails = ({navigation,route}) => {
             {/* <Text style={styles.errortext}>{props.touched.confirmpassword && props.errors.confirmpassword}</Text>
             <Text></Text> */}
             <TouchableOpacity style={styles.signinButton}
-            onPress={updateBooking()}>
+            onPress={()=>updateBooking()}>
                 <Text style={styles.signinButtonText}>UPDATE</Text>
             </TouchableOpacity>
             
@@ -180,7 +180,7 @@ const AccountDetails = ({navigation,route}) => {
     )
 }
 
-export default AccountDetails
+export default UpdateProfile
 
 const styles = StyleSheet.create({
     headerContainer:{

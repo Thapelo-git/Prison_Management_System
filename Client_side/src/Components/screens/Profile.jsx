@@ -94,7 +94,7 @@ const Profile = ({navigation}) => {
                     </TouchableOpacity>
                     <Card.Divider/>
 
-                    <TouchableOpacity onPress={()=>navigation.navigate('Help And Support')}>
+                    {/* <TouchableOpacity onPress={()=>navigation.navigate('Help And Support')}>
                     <Text style={{paddingBottom: 10, paddingTop: 15}}>
                         Help
                     </Text>
@@ -112,7 +112,7 @@ const Profile = ({navigation}) => {
                             <Icon name="ios-chevron-forward" size={15} style={styles.moreIcon}/>
                         </View>
                     </View>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                     <Card.Divider/>
 
                     {/* Logout     */}

@@ -42,15 +42,25 @@ const TabScreen = () => {
       }}
     />
     <Tab.Screen
-      name="PolProfile"
+      name="Visits"
       component={RegisterPhone}
       options={{
         tabBarLabel: 'Visits',
-        tabBarIcon: ({ color }) => (
-        <FontAwesome name="user" color={color} size={24} />
-        ),
+        // tabBarIcon: ({ color }) => (
+        // <FontAwesome name="user" color={color} size={24} />
+        // ),
       }}
     />
+     {/* <Tab.Screen
+      name="PolProfile"
+      component={PolProfile}
+      options={{
+        tabBarLabel: 'Profile',
+        // tabBarIcon: ({ color }) => (
+        // <FontAwesome name="user" color={color} size={24} />
+        // ),
+      }}
+    /> */}
     </Tab.Navigator>
   )
 }

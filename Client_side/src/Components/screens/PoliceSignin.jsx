@@ -124,11 +124,11 @@ const PoliceSignin = () => {
                  onBlur={props.handleBlur('password')}
                  selectionColor='gainsboro'
                  style={styles.inputText}/>
-                 <Feather
+                 {/* <Feather
                  name="eye" size={22}
                  style={{marginRight:10}}
                  onPress={()=>setPasswordShow(!isPasswordShow)}
-                 />
+                 /> */}
                 </View>
             </View>
             {props.errors.password? <Text style={{color:"red"}}>{props.errors.password}</Text>:null}

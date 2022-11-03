@@ -29,16 +29,16 @@ const SignupScreen = ({navigation}) => {
         <View style={{justifyContent:'center',alignItems:'center'}}>
         <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center',
         width:250,height:60,backgroundColor:'gainsboro',borderRadius:30}}>
-              <TouchableOpacity style={{width:130,height:58,backgroundColor:page === 0?'#EC8F05':'gainsboro',justifyContent:'center',
+              <TouchableOpacity style={{width:160,height:58,backgroundColor:page === 0?'#EC8F05':'gainsboro',justifyContent:'center',
             alignItems:'center',borderRadius:30}} 
             onPress={()=>setPage(0)}>
-                  <Text style={{color:page===0?'#fff':'#000',fontWeight:'bold'}}>Family/Friends</Text>
+                  <Text style={{color:page===0?'#fff':'#000',fontWeight:'bold'}}>Family,Friends/Police</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={{width:130,height:58,backgroundColor:page === 1?'#EC8F05':'gainsboro',justifyContent:'center',
+              {/* <TouchableOpacity style={{width:130,height:58,backgroundColor:page === 1?'#EC8F05':'gainsboro',justifyContent:'center',
             alignItems:'center',borderRadius:30}}
             onPress={()=>setPage(1)}>
                   <Text style={{color:page===1?'#fff':'#000',fontWeight:'bold'}}>Police</Text>
-              </TouchableOpacity>
+              </TouchableOpacity> */}
           </View>
         </View>
         <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center',
@@ -46,9 +46,9 @@ const SignupScreen = ({navigation}) => {
             {
                 page === 0?(<FamilySignUp/>):(null)
             }
-            {
+            {/* {
                 page === 1?(<PoliceSignUp/>):(null)
-            }
+            } */}
             
             </View>
             <View style={styles.signupContainer}>

@@ -210,9 +210,7 @@ const Interviews = ({route}) => {
                        <TouchableOpacity style={styles.signinButton}
                        onPress={()=>addBooking()}
               >
-                <Text style={styles.signinButtonText}
-                
-                >Submit</Text>
+                <Text style={styles.signinButtonText}>Submit</Text>
             </TouchableOpacity>
       </View>
     </SafeAreaView>

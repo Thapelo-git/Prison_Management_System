@@ -11,30 +11,12 @@ const RegisterPhone = () => {
    
     return (
         <View style={styles.container}>
-               {/* <StatusBar
-            barStyle="dark-content"
-            style={{backgroundColor:'#fff'}}
-           translucent
-            />
-            <Separator
-            height={StatusBar.currentHeight}
-            /> */}
-            <View style={styles.headerContainer} 
-            >
-            <Ionicons name="chevron-back-outline" size={30}
-            onPress={()=>navigation.goBack()}/>
-            <Text style={styles.headerTitle}>Sign up</Text>
-            </View>
+            
+            
             <Text style={styles.title}>Create Account</Text>
             <Text style={styles.content}>Enter your Registered Phone
             number to login</Text>
-            <View>
-                <TouchableOpacity>
-                    <Images/>
-                    <Text></Text>
-                    <MaterialIcons/>
-                </TouchableOpacity>
-            </View>
+            
         </View>
     )
 }

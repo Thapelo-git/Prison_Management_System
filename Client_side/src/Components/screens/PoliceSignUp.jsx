@@ -1,7 +1,9 @@
-import React,{useState,Component} from 'react'
-import { StyleSheet, Text, View ,StatusBar,TextInput,
-TouchableOpacity,Image,Dimensions,Alert} from 'react-native'
-
+import React,{useEffect,useState} from 'react'
+import {
+    SafeAreaView, StyleSheet, Text, View, Image, TextInput, TouchableOpacity,
+    FlatList, Dimensions, ImageBackground, StatusBar,  ActivityIndicator
+} from 'react-native'
+import { Divider } from 'react-native-elements'
 import Ionicons from "react-native-vector-icons/Ionicons"
 import Feather from "react-native-vector-icons/Feather"
 import {Separator} from './comp/Separator'
@@ -13,183 +15,143 @@ import { auth,db } from '../../../firebase'
 const deviceHeight=Dimensions.get("window").height
 const deviceWidth=Dimensions.get("window").width
 const PoliceSignUp = () => {
-    const [isPasswordShow,setPasswordShow]=useState(false)
-    const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
-    const ReviewSchem=yup.object({
-        persalnumber:yup.number().required().min(8),
-        phonenumber:yup.string().required().matches(phoneRegExp,'Phone number is not valid'),
-        email:yup.string().required().min(6),
-        password:yup.string().required().min(6),
-        confirmpassword:yup.string().required().min(6).oneOf([yup.ref('password'),null],'password does not match')
-    })
-    const addUser= async (data)=>{
-        try{
-          const {uid,email,password,persalnumber,phonenumber} =data
-  await auth.createUserWithEmailAndPassword(
-      email.trim().toLowerCase(),password
-    ).then(res =>{
-       
-          db.ref(`/Police`).child(res.user.uid).set({
-            persalnumber:persalnumber,
-            email:email.trim().toLowerCase(),
-            phonenumber:phonenumber,
-            uid:res.user.uid
-          })
-          navigation.navigate('Signin')
-          res.user.sendEmailVerification()
-          })
-        }
-        catch(error){
-          if(error.code === 'auth/email-already-in-use'){
-            Alert.alert(
-              'That email address is already inuse'
-            )
-          }
-          if(error.code === 'auth/invalid-email'){
-            Alert.alert(
-              'That email address is invalid'
-            )
-          }
-          else{
-            Alert.alert(error.code)
-          }
+    const [Student, setStudent] = useState([])
+    const user = auth.currentUser.uid;
+    useEffect(() => {
+        db.ref('/Interview').on('value', snap => {
+
+            const Student = []
+            snap.forEach(action => {
+                const key = action.key
+                const data = action.val()
+                Student.push({
+                    key:key,desc:data.desc,
+                    Status:data.Status,email:data.email,interviewDate:data.interviewDate,
+                    interviewTime:data.interviewTime,title:data.title,phonenumber:data.phonenumber,
+                   
+                })
           
-        }
-        
-      }
+              
+
+            })
+            setStudent(Student)
+        })
+    }, [])
+    const updateAccept = (key,status) => {
+        db.ref('Interview').child(key).update({Status:status})
+          .then(()=>db.ref('Interview').once('value'))
+          .then(snapshot=>snapshot.val())
+          .catch(error => ({
+            errorCode: error.code,
+            errorMessage: error.message
+          }));
+     
+  
+    }
+    const NewCard = ({ element, index }) => {
+        return (
+           
+                <>
+                <View style={{ margin: 5,backgroundColor: '#fff',elevation: 3 }}>
+           <View style={{width:'100%'}}>
+                      <View style={{ backgroundColor: '#fff', justifyContent: 'flex-start', flexDirection: 'row', padding: 8, alignItems:'center', borderBottomRightRadius:10}}>
+                       
+                        <Text style={{color: 'blue'}}>
+                          Title
+                        </Text>
+                        <Text style={{color: 'blue'}}>
+                          {" "}{element.title}
+                        </Text>
+                      </View>
+                    </View>
+
+                    <Divider style={{width: 90, justifyContent:'flex-end', alignItems:'flex-end', alignSelf:'flex-end'}}/>
+
+                    {/* event type */}
+                    <View style={{flexDirection:'row',}}>
+                    <View style={{ backgroundColor: '#fff', justifyContent: 'flex-end', flexDirection: 'row', padding: 8, alignItems:'center'}}>
+                      {/* <Ionicons name="documents" color='#333' size={20} /> */}
+                      <Text style={{paddingHorizontal: 5,color:'#333'}}>
+                       
+                      </Text>
+                    </View>
+                    <View style={{ backgroundColor: '#fff', justifyContent:'flex-start', flexDirection: 'row', padding: 8, alignItems:'center'}}>
+                    
+                      <Text style={{paddingHorizontal: 5,color:'#333'}}>
+                     Description {element.desc}
+                      </Text>
+                    </View>
+                    </View>
+                    <Divider style={{width: 120, justifyContent:'flex-end', alignItems:'flex-end', alignSelf:'flex-end'}}/>
+
+                    {/* date */}
+                    <View style={{ backgroundColor: '#fff', justifyContent: 'flex-end', flexDirection: 'row', padding: 8, alignItems:'center' }}>
+                      {/* <Feather
+                        name="calendar" size={20}
+                        style={{ paddingHorizontal: 5 }}
+                        color='blue'
+                      /> */}
+                      <Text> Email: </Text>
+                      <Text style={{color:'blue', fontSize:12}}>
+                        {element.email} 
+                      </Text>
+                    </View>
+
+                    <Divider style={{width: 170, justifyContent:'flex-end', alignItems:'flex-end', alignSelf:'flex-end'}}/>
+
+                  {/* location */}
+ 
+                  {/* description */}
+                 
+                  {
+                    element.Status =='Pending'?(
+                        <View style={{justifyContent:'center',flexDirection:'row',marginVertical:10,}}>
+                        <TouchableOpacity style={{borderWidth:2,
+                            backgroundColor:'#fff',marginHorizontal:10,
+                            borderColor:'green',width:70,height:40,
+                            justifyContent:'center',alignItems:'center'
+                          }} 
+                          onPress={()=>updateAccept(element.key,'Accepted')}
+                        >
+                        <Text style={{color:'green'}}>Accept</Text>
+                        </TouchableOpacity >
+                        <TouchableOpacity style={ { borderWidth:2,
+                            backgroundColor:'#fff',marginHorizontal:10,
+                            borderColor:'red',width:70,height:40,
+                            justifyContent:'center',alignItems:'center'
+                          }}  
+                          onPress={()=>updateAccept(element.key,'Rejected')}
+                        >
+                        <Text style={{color:'red'}}>Reject</Text>   
+                        </TouchableOpacity>
+                         </View>
+                    ):(
+                        
+                        <Text style={{color:'red'}}>{element.Status}</Text>
+                        
+                    )
+                  }
+           
+                  </View>
+                </>
+           
+        )
+          
+    }
   return (
     <View>
-       <View style={{width:deviceWidth *0.9,top:10,}}>
-       <Formik
-        initialValues={{persalnumber:'',phonenumber:'',email:'',password:'',confirmpassword:''}}
-        validationSchema={ReviewSchem}
-        onSubmit={(values,action)=>{
-            action.resetForm()
-            addUser(values)
-        }}
-        >
-            {(props)=>(
-                <>
-            <View style={{ paddingHorizontal:15,
-        marginHorizontal:15,}}>
-            <Text style={{fontWeight:'bold'}}>Enter Persal number</Text>
-        </View>
-            <View style={styles.inputContainer}>
-                <View style={styles.inputSubContainer}>
-                <Image source={require("../assets/Images/profile.png")} style={{height:20,width:20}}/>
-                    
-                    <TextInput placeholder="Persal Number"
-                    selectionColor='gainsboro'
-                    style={styles.inputText}
-                    onChangeText={props.handleChange('persalnumber')}
-                    value={props.values.persalnumber}
-                    onBlur={props.handleBlur('persalnumber')}
-                    />
-                </View>
-            </View>
-            <Text style={{color:'red',marginTop:-10}}>{props.touched.persalnumber && props.errors.persalnumber}</Text>
-            <View style={{height:7}}></View>
-            <View style={{ paddingHorizontal:15,
-        marginHorizontal:15,}}>
-            <Text style={{fontWeight:'bold'}}>Email Address</Text>
-        </View>
-            <View style={styles.inputContainer}>
-                <View style={styles.inputSubContainer}>
-                <Image source={require("../assets/Images/email.jpg")} style={{height:20,width:20}}/>
-                    
-                    <TextInput placeholder="email@gmail.com"
-                    selectionColor='gainsboro'
-                    style={styles.inputText}
-                    keyboardType='email-address'
-             onChangeText={props.handleChange('email')}
-             value={props.values.email}
-             onBlur={props.handleBlur('email')}
-                    />
-                </View>
-            </View>
-            <Text style={{color:'red',marginTop:-15}}>{props.touched.email && props.errors.email}</Text>
-            <View style={{height:7}}></View>
-            <View style={{ paddingHorizontal:15,
-        marginHorizontal:15,}}>
-            <Text style={{fontWeight:'bold'}}>Phone Number</Text>
-        </View>
-            <View style={styles.inputContainer}>
-                <View style={styles.inputSubContainer}>
-                    <Feather name="phone" size={22}
-                    color='#000'
-                    style={{marginRight:10}}/>
-                    
-                    <TextInput placeholder="Phone number"
-                    selectionColor='gainsboro'
-                    style={styles.inputText}
-                    keyboardType='numeric'
-             onChangeText={props.handleChange('phonenumber')}
-             value={props.values.phonenumber}
-             onBlur={props.handleBlur('phonenumber')}
-                    />
-                </View>
-            </View>
-            <Text style={{color:'red',marginTop:-15}}>{props.touched.phonenumber && props.errors.phonenumber}</Text>
-            <View style={{height:7}}></View>
-            <View style={{ paddingHorizontal:15,
-        marginHorizontal:15,}}>
-            <Text style={{fontWeight:'bold'}}>Password</Text>
-        </View>
-            <View style={styles.inputContainer}>
-                <View style={styles.inputSubContainer}>
-                <Image source={require("../assets/Images/log.jpg")} style={{height:20,width:20}}/>
-                 <TextInput
-                 secureTextEntry={isPasswordShow? false :true}
-                 placeholder="Password"
-                 selectionColor='gainsboro'
-                 style={styles.inputText}
-                 onChangeText={props.handleChange('password')}
-             value={props.values.password}
-             onBlur={props.handleBlur('password')}/>
-                 <Feather
-                 name="eye" size={22}
-                 color='#000'
-                 style={{marginRight:10}}
-                 onPress={()=>setPasswordShow(!isPasswordShow)}
-                 />
-                </View>
-            </View>
-            <Text style={{color:'red',marginTop:-15}}>{props.touched.password && props.errors.password}</Text>
-            <View style={{height:7}}></View>
-            <View style={{ paddingHorizontal:15,
-        marginHorizontal:15,}}>
-            <Text style={{fontWeight:'bold'}}>Confirm Password</Text>
-        </View>
-            <View style={styles.inputContainer}>
-                <View style={styles.inputSubContainer}>
-                <Image source={require("../assets/Images/log.jpg")} style={{height:20,width:20}}/>
-                 <TextInput
-                 secureTextEntry={isPasswordShow? false :true}
-                 placeholder=" confirm Password"
-                 selectionColor='gainsboro'
-                 style={styles.inputText}
-                 onChangeText={props.handleChange('confirmpassword')}
-                 value={props.values.confirmpassword}
-                 onBlur={props.handleBlur('confirmpassword')}/>
-                 <Feather
-                 name="eye" size={22}
-                 color='#000'
-                 style={{marginRight:10}}
-                 onPress={()=>setPasswordShow(!isPasswordShow)}
-                 />
-                </View>
-            </View>
-            <Text style={{color:'red',marginTop:-15}}>{props.touched.confirmpassword && props.errors.confirmpassword}</Text>
-            <TouchableOpacity style={styles.signinButton}
-            // onPress={()=>navigation.navigate('RegisterPhone')}
-            onPress={props.handleSubmit}
+      <View style={styles.headerContainer}
             >
-                <Text style={styles.signinButtonText}>Create Account</Text>
-            </TouchableOpacity>
-            </>
-                )}
-            </Formik>
-       </View>
+     <Text style={styles.headerTitle}>Interviews</Text>
+            </View>
+            <FlatList
+                    keyExtractor={(_, key) => key.toString()}
+                   
+                    showsVerticalScrollIndicator={false}
+                    contentContainerStyle={{ paddingLeft: 20 }}
+                    data={Student}
+                    renderItem={({ item, index }) => <NewCard element={item} index={index} />}
+                />
     </View>
   )
 }

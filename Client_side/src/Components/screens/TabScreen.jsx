@@ -6,6 +6,8 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import SearchScreen from './SearchScreen'
 import PolProfile from './PolProfile'
 import PolLocation from './PolLocation'
+import PoliceSignUp from './PoliceSignUp';
+import RegisterPhone from './RegisterPhone';
 const Tab = createMaterialBottomTabNavigator()
 const TabScreen = () => {
   return (
@@ -22,28 +24,28 @@ const TabScreen = () => {
       name="Search"
       component={SearchScreen}
       options={{
-        tabBarLabel: 'Search',
-        tabBarIcon: ({ color }) => (
-        <FontAwesome name="search" color={color} size={24} />
-        ),
+        tabBarLabel: 'Home',
+        // tabBarIcon: ({ color }) => (
+        // <FontAwesome name="search" color={color} size={24} />
+        // ),
       }}
     />
    
     <Tab.Screen
       name="PolLocation"
-      component={PolLocation}
+      component={PoliceSignUp}
       options={{
-        tabBarLabel: 'Location',
-        tabBarIcon: ({ color }) => (
-        <Icon name="location-sharp" color={color} size={24} />
-        ),
+        tabBarLabel: 'Interviews',
+        // tabBarIcon: ({ color }) => (
+        // <Icon name="location-sharp" color={color} size={24} />
+        // ),
       }}
     />
     <Tab.Screen
       name="PolProfile"
-      component={PolProfile}
+      component={RegisterPhone}
       options={{
-        tabBarLabel: 'profile',
+        tabBarLabel: 'Visits',
         tabBarIcon: ({ color }) => (
         <FontAwesome name="user" color={color} size={24} />
         ),

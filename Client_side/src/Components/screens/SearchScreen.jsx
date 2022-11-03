@@ -120,7 +120,7 @@ const SearchScreen = ({navigation}) => {
  
                style={{marginRight:10}}/>
                
-               <TextInput placeholder="Search by Prisoner ID Number"
+               <TextInput placeholder="Search by Prisoner Name"
                selectionColor='gainsboro'
                onChangeText={(text) => searchFilterFunction(text)}
                style={styles.inputText}

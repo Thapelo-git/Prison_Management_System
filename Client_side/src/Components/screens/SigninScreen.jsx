@@ -54,7 +54,7 @@ const SigninScreen = ({navigation}) => {
               <TouchableOpacity style={{width:130,height:58,backgroundColor:page === 1?'#EC8F05':'gainsboro',justifyContent:'center',
             alignItems:'center',borderRadius:30}}
             onPress={()=>setPage(1)}>
-                  <Text style={{color:page===1?'#fff':'#000',fontWeight:'bold'}}>Police</Text>
+                  <Text style={{color:page===1?'#fff':'#000',fontWeight:'bold'}}>Admin</Text>
               </TouchableOpacity>
           </View>
           <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center',

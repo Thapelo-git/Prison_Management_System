@@ -12,23 +12,36 @@ import {
   ImageBackground, ToastAndroid,
   Dimensions, ImageBackgroud, Animated, Pressable, TextInput
 } from "react-native";
-import Feather from 'react-native-vector-icons/Feather'
-import Ionicons from "react-native-vector-icons/Ionicons";
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import AntDesign from "react-native-vector-icons/AntDesign"
+import {Picker} from '@react-native-picker/picker';
+import { db } from '../../../firebase';
 import { Card } from 'react-native-elements'
+import { useState } from 'react';
 const screenWidth = Dimensions.get("screen").width;
 const screenHeight = Dimensions.get("screen").height;
 const { height } = Dimensions.get('window')
 const imgContainerHeight = screenHeight * 0.4;
-const sub = imgContainerHeight * 0.2;
+const sub = screenHeight * 0.3;
 const PolUserDetails = ({ navigation, route }) => {
   const details = route.params.data;
+
+  const [illness,setIllness]=useState('')
+  const [Transfed,setTransfed]=useState('')
+  const updateAccept = () => {
+    db.ref('Puser').child(details.key).update({Transfed:Transfed,illness:illness})
+      .then(()=>db.ref('Puser').once('value'))
+      .then(snapshot=>snapshot.val())
+      .catch(error => ({
+        errorCode: error.code,
+        errorMessage: error.message
+      }));
+ 
+
+}
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.imgContaner}>
 
-        <ImageBackground source={{ uri: details.url }} style={{ width: "100%", height: "100%" }} >
+        {/* <ImageBackground source={{ uri: details.url }} style={{ width: "100%", height: "100%" }} >
           <View style={styles.headerContainer}
           >
             <View style={{
@@ -42,7 +55,7 @@ const PolUserDetails = ({ navigation, route }) => {
             </View>
             <Text style={styles.headerTitle}></Text>
           </View>
-        </ImageBackground>
+        </ImageBackground> */}
       </View>
       <View style={styles.cardBox}>
         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
@@ -78,15 +91,53 @@ Case Details
 <Text>{details.Arrestdesc}</Text>
 </View>
 <View>
-<Text style={{ color: '#032B7A', fontWeight: 'bold', fontSize: 20 }} >
+{/* <Text style={{ color: '#032B7A', fontWeight: 'bold', fontSize: 20 }} >
 Health Details
 </Text>
 <Text>Illness: {details.illness}</Text>
 <Text>Death: {details.PrisonerDeath}</Text>
-<Text>Transfed: {details.Transfed}</Text>
+<Text>Transfed: {details.Transfed}</Text> */}
 </View>
         </View>
+        <View style={{ backgroundColor: '#fff', justifyContent:'flex-start', flexDirection: 'row', padding: 8, alignItems:'center'}}>
+      <View>
+<Text style={styles.titles}>Any Illness ?</Text>
+
+<Picker
+     selectedValue={illness}
+     style={{ width: 160, height: 50, backgroundColor: '#eee' }}
+     onValueChange={(text)=>setIllness(text)}   >
+    <Picker.Item label="select" value="" />
+    <Picker.Item label="No" value="No" />
+    <Picker.Item label="Yes" value="Yes" />
+    
+</Picker>
+</View>
+<View>
+<Text style={styles.titles}>Transfed</Text>
+
+<Picker
+     selectedValue={Transfed}
+     style={{ width: 160, height: 50, backgroundColor: '#eee' }}
+     onValueChange={(text)=>setTransfed(text)}   >
+    <Picker.Item label="select" value="" />
+    <Picker.Item label="No" value="No" />
+    <Picker.Item label="Yes" value="Yes" />
+   
+</Picker>
+</View>
       </View>
+      <TouchableOpacity style={ { borderWidth:2,
+                            backgroundColor:'#fff',marginHorizontal:10,
+                            borderColor:'red',width:70,height:40,
+                            justifyContent:'center',alignItems:'center'
+                          }}  
+                          onPress={()=>updateAccept()}
+                        >
+                        <Text style={{color:'red'}}>Submit</Text>   
+                        </TouchableOpacity>
+      </View>
+  
     </SafeAreaView>
   )
 }

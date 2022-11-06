@@ -44,7 +44,7 @@ const SignupScreen = ({navigation}) => {
         <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center',
         width:'100%',}}>
             {
-                page === 0?(<FamilySignUp/>):(null)
+                page === 0?(<FamilySignUp navigation={navigation}/>):(null)
             }
             {/* {
                 page === 1?(<PoliceSignUp/>):(null)

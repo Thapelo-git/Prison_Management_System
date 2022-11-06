@@ -16,23 +16,23 @@ import { ScrollView } from 'react-native-gesture-handler'
 import { db,auth } from '../../../firebase' 
 const deviceHeight=Dimensions.get("window").height
 const deviceWidth=Dimensions.get("window").width
-const FamilySignIn = ({props}) => {
-    const navigation =useNavigation()
+const FamilySignIn = ({navigation}) => {
+    // const navigation =useNavigation()
     const [Idnumber,setIdnumber]=useState([])
     const [isPasswordShow,setPasswordShow]=useState(false)
     
-    useEffect(()=>{
-        db.ref('Puser').on('value',snap=>{
-            let item =[];
-            const a_=snap.val();
-            for(let x in a_){
-                item.push({IDnumber:a_[x].IDnumber,key:x
-                })
-            }
-            setIdnumber(item)
-        })
-    },[])
-    console.log(Idnumber,"no data ");
+    // useEffect(()=>{
+    //     db.ref('Puser').on('value',snap=>{
+    //         let item =[];
+    //         const a_=snap.val();
+    //         for(let x in a_){
+    //             item.push({IDnumber:a_[x].IDnumber,key:x
+    //             })
+    //         }
+    //         setIdnumber(item)
+    //     })
+    // },[])
+    // console.log(Idnumber,"no data ");
     
     const signIn = async(data)=>{
         const { email, password ,idnumber} = data;
@@ -43,7 +43,7 @@ const FamilySignIn = ({props}) => {
                     .then( async res => {
                         try {
                             const jsonValue = JSON.stringify(res.user)
-                            await AsyncStorage.setItem("Pfamily", res.user.uid)
+                            await AsyncStorage.setItem("EmployeeUser", res.user.uid)
                           
         
                             navigation.navigate('homeScreen')

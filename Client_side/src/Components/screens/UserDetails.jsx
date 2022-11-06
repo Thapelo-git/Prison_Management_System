@@ -1,5 +1,5 @@
 
-import React,{useState,useEffect,Component} from 'react'
+import React, { Component } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -9,157 +9,175 @@ import {
   Image,
   ScrollView,
   FlatList,
-  ImageBackground,ToastAndroid,
-  Dimensions,ImageBackgroud,Animated,Pressable,TextInput
+  ImageBackground, ToastAndroid,
+  Dimensions, ImageBackgroud, Animated, Pressable, TextInput
 } from "react-native";
-import Feather from 'react-native-vector-icons/Feather'
-import { db,auth } from '../../../firebase';
+import {Picker} from '@react-native-picker/picker';
+import { db } from '../../../firebase';
 import { Card } from 'react-native-elements'
-  const screenWidth = Dimensions.get("screen").width;
+import { useState } from 'react';
+const screenWidth = Dimensions.get("screen").width;
 const screenHeight = Dimensions.get("screen").height;
-const {height} = Dimensions.get('window')
+const { height } = Dimensions.get('window')
 const imgContainerHeight = screenHeight * 0.4;
-const sub = imgContainerHeight * 0.2;
-const UserDetails = ({route,navigation}) => {
-  const [Prisoners,setPrisoners]=useState([])
-  const [name,setName]=useState('')
-  const [email,setEmail]=useState('')
-  const [phonenumber,setPhonenumber]=useState('')
-  const [PrisonIdnumber,setPrisonIdnumber]=useState('')
-  const [uid,setUid]=useState('')
-  const user = auth.currentUser.uid;
-  useEffect(()=>{
-    db.ref(`/Pfamily/`+ user).on('value',snap=>{
-      setName(snap.val() && snap.val().name);
-  setEmail(snap.val().email)
-  setPhonenumber(snap.val().phonenumber)
-  setPrisonIdnumber(snap.val().PrisonId)
-setUid(snap.val().uid)
-    })
-    db.ref('Puser').on('value',snap=>{
-          
-      const Pusers=[]
-         snap.forEach(action=>{
-             const key=action.key
-             const data =action.val()
-             Pusers.push({
-                 key:key,
-                surname:data.surname,
-                 name:data.name,
-                 url:data.url,
-                 IDnumber:data.IDnumber,
-                 caseDesc:data.caseDesc,
-                 mentality:data.mentality,
-                 Arrestdesc:data.Arrestdesc,
-                 sentence:data.sentence,
-                 PrisonDeath:data.PrisonDeath,
-                 Transfed:data.Transfed,
-                 illness:data.illness,
-             })
-       })
-     
+const sub = screenHeight * 0.3;
+//UserDetails
+const UserDetails = ({ navigation, route }) => {
+  const details = route.params.data;
 
-      if (PrisonIdnumber) {
-        const newData = Pusers.filter(function (element) {
-          const itemData = element.IDnumber ? element.IDnumber : ''
-          return itemData.indexOf(PrisonIdnumber) > -1
-        })
-        setPrisoners(newData)
-      }
-     
-     
-         
-     })
-  },[])
-  console.log(PrisonIdnumber,'new one')
-  return (
-    <SafeAreaView style={{flex:1}}>
-      {
-        Prisoners.map(details=>
-          <>
-    <View style={styles.imgContaner}>
-   
-   <ImageBackground  source={{uri:details.url}}style={{ width: "100%", height: "100%" }} >
-   <View style={styles.headerContainer} 
-       >
-          <View style={{backgroundColor: 'white',
-opacity: 0.7,width:30,
- height:30,justifyContent:'center',alignItems:'center',
- borderRadius:10,}}>
-          <Feather name="arrow-left" size={30} color='black'
-        onPress={()=>navigation.goBack()} /> 
-        </View>
-       <Text style={styles.headerTitle}></Text>
-       </View>
-   </ImageBackground>
- </View>
- <View style={styles.cardBox}>
-   
-     <Text style={{fontSize:30,fontWeight:'bold',color:'gray'}}>{details.name} {details.surname}</Text>
-     <Text>{details.IDnumber} {details.age}</Text>
-     <Card.Divider/>
-     <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'stretch'}}>
-       <Text>{details.Arrestdesc}</Text>
-       <Text>{details.sentence}</Text>
-       <Text>{details.caseDesc}</Text>
-     </View>
- <Card.Divider/>
- </View>
- </>
- )
+  const [illness,setIllness]=useState('')
+  const [Transfed,setTransfed]=useState('')
+  const updateAccept = () => {
+    db.ref('Puser').child(details.key).update({Transfed:Transfed,illness:illness})
+      .then(()=>db.ref('Puser').once('value'))
+      .then(snapshot=>snapshot.val())
+      .catch(error => ({
+        errorCode: error.code,
+        errorMessage: error.message
+      }));
+ 
+
 }
- </SafeAreaView>
+  return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <View style={styles.imgContaner}>
+
+        {/* <ImageBackground source={{ uri: details.url }} style={{ width: "100%", height: "100%" }} >
+          <View style={styles.headerContainer}
+          >
+            <View style={{
+              backgroundColor: 'white',
+              opacity: 0.7, width: 30,
+              height: 30, justifyContent: 'center', alignItems: 'center',
+              borderRadius: 10,
+            }}>
+              <Feather name="arrow-left" size={30} color='black'
+                onPress={() => navigation.goBack()} />
+            </View>
+            <Text style={styles.headerTitle}></Text>
+          </View>
+        </ImageBackground> */}
+      </View>
+      <View style={styles.cardBox}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
+          <Text style={{ color: '#032B7A', fontWeight: 'bold', fontSize: 20 }} >
+
+            Name:  {details.name}
+
+          </Text>
+          <Text style={{ color: '#032B7A', fontWeight: 'bold', fontSize: 20 }} >
+
+Surname:  {details.surname}
+
+</Text>
+        </View>
+
+        <Card.Divider />
+        <Text>ID Number: {details.IDnumber} </Text>
+        <Card.Divider style={{width:0}}/>
+        <View style={{justifyContent:'flex-end',alignItems:'flex-end'}}>
+        <Text>Age: {details.age}</Text>
+        <Card.Divider style={{width:10}}/>
+        </View>
+        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
+        <View>
+        <Text style={{ color: '#032B7A', fontWeight: 'bold', fontSize: 20 }} >
+Case Details
+</Text>
+
+<Text>Case Description: {details.caseDesc}</Text>
+<Text>Life Sentence: {details.sentence}</Text>
+<Text>Mental Health: {details.mentality}</Text>
+<Text>Arrest Description: </Text>
+<Text>{details.Arrestdesc}</Text>
+</View>
+<View>
+<Text style={{ color: '#032B7A', fontWeight: 'bold', fontSize: 20 }} >
+Health Details
+</Text>
+<Text>Illness: {details.illness}</Text>
+<Text>Death: {details.PrisonerDeath}</Text>
+<Text>Transfed: {details.Transfed}</Text>
+</View>
+        </View>
+        {/* <View style={{ backgroundColor: '#fff', justifyContent:'flex-start', flexDirection: 'row', padding: 8, alignItems:'center'}}>
+      <View>
+<Text style={styles.titles}>Any Illness ?</Text>
+
+<Picker
+     selectedValue={illness}
+     style={{ width: 160, height: 50, backgroundColor: '#eee' }}
+     onValueChange={(text)=>setIllness(text)}   >
+    <Picker.Item label="select" value="" />
+    <Picker.Item label="No" value="No" />
+    <Picker.Item label="Yes" value="Yes" />
+    
+</Picker>
+</View>
+<View>
+<Text style={styles.titles}>Transfed</Text>
+
+<Picker
+     selectedValue={Transfed}
+     style={{ width: 160, height: 50, backgroundColor: '#eee' }}
+     onValueChange={(text)=>setTransfed(text)}   >
+    <Picker.Item label="select" value="" />
+    <Picker.Item label="No" value="No" />
+    <Picker.Item label="Yes" value="Yes" />
+   
+</Picker>
+</View>
+      </View> */}
+      {/* <TouchableOpacity style={ { borderWidth:2,
+                            backgroundColor:'#fff',marginHorizontal:10,
+                            borderColor:'red',width:70,height:40,
+                            justifyContent:'center',alignItems:'center'
+                          }}  
+                          onPress={()=>updateAccept()}
+                        >
+                        <Text style={{color:'red'}}>Submit</Text>   
+                        </TouchableOpacity> */}
+      </View>
+  
+    </SafeAreaView>
   )
 }
 
 export default UserDetails
 
 const styles = StyleSheet.create({
-  inputContainer:{
-    backgroundColor:'#fff',
-    
-    borderRadius:8,
-    borderWidth:0.5,
-    borderColor:'#000',
-    justifyContent:'center',
-   
-},
-inputSubContainer:{
-    flexDirection:'row',
-    alignItems:'center'
-},
-cardBox: {
-  paddingTop: 30,
-  borderTopRightRadius: 40,
-  borderTopLeftRadius: 40,
-  padding: 20,
-  marginTop: imgContainerHeight - sub,
-  backgroundColor: "white",
-  flex:1,
+  cardBox: {
+    paddingTop: 30,
+    borderTopRightRadius: 40,
+    borderTopLeftRadius: 40,
+    padding: 20,
+    marginTop: imgContainerHeight - sub,
+    backgroundColor: "white",
+    flex: 1,
 
-},
-imgContaner: {
-  width: screenWidth,
-  height: imgContainerHeight,
-  position: "absolute",
-  top: 0,
-},
-headerContainer:{
-  top:10,
-  flexDirection:'row',justifyContent:'space-between',
-  alignContent:'center'
-  
+  },
+  imgContaner: {
+    width: screenWidth,
+    height: imgContainerHeight,
+    position: "absolute",
+    top: 0,
+  },
+  headerContainer: {
+    top: 10,
+    flexDirection: 'row', justifyContent: 'space-between',
+    alignContent: 'center'
 
-},
-header:{
-  backgroundColor:'#fff',
-  shadowColor:'#333333',
-  shadowOffset:{width:-1,height:-2},
-  shadowRadius:2,
-  shadowOpacity:0.4,
-  paddingTop:20,
-  borderTopLeftRadius:20,
-  borderTopRightRadius:20
 
-},
+  },
+  header: {
+    backgroundColor: '#fff',
+    shadowColor: '#333333',
+    shadowOffset: { width: -1, height: -2 },
+    shadowRadius: 2,
+    shadowOpacity: 0.4,
+    paddingTop: 20,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20
+
+  },
 })

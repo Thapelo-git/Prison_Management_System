@@ -16,7 +16,7 @@ import { ScrollView } from 'react-native-gesture-handler'
 import { db,auth } from '../../../firebase' 
 const deviceHeight=Dimensions.get("window").height
 const deviceWidth=Dimensions.get("window").width
-const FamilySignIn = ({props}) => {
+const FamilySignIn = ({navigation}) => {
     const navigation =useNavigation()
     const [Idnumber,setIdnumber]=useState([])
     const [isPasswordShow,setPasswordShow]=useState(false)

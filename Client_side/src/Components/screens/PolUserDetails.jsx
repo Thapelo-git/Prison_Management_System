@@ -21,6 +21,7 @@ const screenHeight = Dimensions.get("screen").height;
 const { height } = Dimensions.get('window')
 const imgContainerHeight = screenHeight * 0.4;
 const sub = screenHeight * 0.3;
+//UserDetails
 const PolUserDetails = ({ navigation, route }) => {
   const details = route.params.data;
 

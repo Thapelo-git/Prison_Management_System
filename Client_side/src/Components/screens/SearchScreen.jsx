@@ -87,7 +87,7 @@ const SearchScreen = ({navigation}) => {
     <View style={{flexDirection:'row',alignItems:'stretch',justifyContent:'space-between'}}>
     <Text
       style={{color:'#032B7A',fontWeight:'bold',fontSize:20}}
-      onPress={() => getItem(item)}>
+      >
         
        Name:  {item.name}
 

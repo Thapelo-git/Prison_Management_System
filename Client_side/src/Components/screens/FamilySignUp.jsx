@@ -12,7 +12,7 @@ import * as yup from 'yup'
 import { auth,db } from '../../../firebase'
 const deviceHeight=Dimensions.get("window").height
 const deviceWidth=Dimensions.get("window").width
-const FamilySignUp = () => {
+const FamilySignUp = ({navigation}) => {
     const [isPasswordShow,setPasswordShow]=useState(false)
     const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
     const ReviewSchem=yup.object({

@@ -1,19 +1,19 @@
 import { StyleSheet, Text, View ,Dimensions} from 'react-native'
 import React, {Component} from 'react';
-import MapView, { PROVIDER_GOOGLE ,Marker} from "react-native-maps";
+// import MapView, { PROVIDER_GOOGLE ,Marker} from "react-native-maps";
 import Feather from 'react-native-vector-icons/Feather'
 const PolLocation = () => {
-  const coordinates = {  latitude:-23.896172,
-    longitude:29.448626,
-    // latitudeDelta:0.015,
-    // longitudeDelta:0.0121,
-  }
+  // const coordinates = {  latitude:-23.896172,
+  //   longitude:29.448626,
+  //   // latitudeDelta:0.015,
+  //   // longitudeDelta:0.0121,
+  // }
   return (
     
  
             <View style={{flex:1,
             backgroundColor:"#fff",alignItems:'center',justifyContent:'center'}}>
-                <MapView
+                {/* <MapView
                 style={styles.map}
                 provider={PROVIDER_GOOGLE}
              
@@ -28,7 +28,7 @@ const PolLocation = () => {
                   <Marker coordinate={coordinates}
                   />
                
-                </MapView>
+                </MapView> */}
             </View>
    
   )

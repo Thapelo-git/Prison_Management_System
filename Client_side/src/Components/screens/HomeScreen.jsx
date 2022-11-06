@@ -50,13 +50,7 @@ setUid(snap.val().uid)
              })
        })
        setPrisoner(Pusers)
-      //  if (PrisonIdnumber) {
-      //   const newData = Pusers.filter(function (element) {
-      //     const itemData = element.IDnumber ? element.IDnumber : ''
-      //     return itemData.indexOf(PrisonIdnumber) > -1
-      //   })
-      //   setPusers(newData)
-      // }
+      
       
       
      })
@@ -68,7 +62,7 @@ setUid(snap.val().uid)
   const FilterFunction =(text)=>{
     if(text){
         const newData = Prisoner.filter(function(item){
-            const itemData = item.name? item.name.toUpperCase()
+            const itemData = item.IDnumber? item.IDnumber.toUpperCase()
             :''.toUpperCase();
             const textData = text.toUpperCase();
             return itemData.indexOf( textData)>-1;
@@ -114,7 +108,7 @@ setUid(snap.val().uid)
       </View>
       <View style={{marginTop:imgContainer-container, backgroundColor:'#fff',padding:20,height:'100%'}}>
       {/* 22758486 */}
-     <Text style={{fontWeight:'bold'}}>Enter Prisoner Name</Text>
+     <Text style={{fontWeight:'bold'}}>Enter Prisoner Id number</Text>
 
        <View
                       style={{
@@ -161,7 +155,7 @@ setUid(snap.val().uid)
               NewPrisoner.map(item=>
                 <View style={{padding:5}}>
                   <Text>If this is the correct person click to view all their infor</Text>
-                <TouchableOpacity onPress={()=>navigation.navigate("PolUserDetails",{data:item})}>
+                <TouchableOpacity onPress={()=>navigation.navigate("UserDetails",{data:item})}>
           <View style={{flexDirection:'row'}} >
               
                 <View style={{padding:10}}>

@@ -5,6 +5,7 @@ import DateTimePicker from '@react-native-community/datetimepicker'
 import moment from 'moment'
 import Icon from "react-native-vector-icons/Ionicons"
 import { Display } from '../utils'
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
 import { db,auth } from '../../../firebase'
@@ -60,8 +61,24 @@ const Interviews = ({route}) => {
   const _myDate = date.toString();
  
 
-    let interviewDate = moment(_myDate).format("DD-MM-YYYY");
-    let interviewTime = moment(_myDate).format("LT");
+    let interviewDate = moment(_myDate).format("YYYY/MM/DD");
+    // let interviewTime = moment(_myDate).format("LT");
+    let interviewTime = moment(_myDate).format("DD-MM-YYYY");
+    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+    const [checkout,setCheckout]=useState(moment(new Date()).add(1,'days').format('YYYY/MM/DD'))
+    const showDatePicker = () => {
+      setDatePickerVisibility(true);
+    };
+  
+    const hideDatePicker = () => {
+      setDatePickerVisibility(false);
+    };
+  
+    const handleConfirm = (date) => {
+      setCheckout(moment(date).format('YYYY/MM/DD') )
+      // console.warn("A date has been picked: ", date);//8152486760 pin:2022
+      hideDatePicker();
+    };
     const [Department,setDepartment]=useState('')
     const [Supervisor,setSupervisor]=useState('')
     const [LeaveReason,setLeaveReason]=useState('')
@@ -79,20 +96,24 @@ const Interviews = ({route}) => {
           },
         ]);
       } else {
-        db.ref('Interview').push({
+        db.ref('LeaveRequest').push({
           Status:'Pending',
           LeaveReason,
           Department,
           Supervisor, 
           interviewDate,
-          interviewTime,email,phonenumber,
-          userId:uid
+          checkout,diff,
+          userId:user
         })
         setSupervisor('')
         setDepartment('')
         setLeaveReason('')
       }
     };
+    var a =moment(checkout)
+    var b =moment(interviewDate)
+    
+   var diff=0
   return (
     <SafeAreaView>
       <View style={styles.headerContainer}
@@ -120,20 +141,31 @@ const Interviews = ({route}) => {
      <View>{show && <DateShow/>}</View>
         <TouchableOpacity style={styles.datebutton} 
         onPress={()=>showDatepicker()} >
-        <Text>Date</Text>
+        <Text>From:</Text>
         <Image source={require("../assets/Images/date.jpg")} style={{height:20,width:20}}/>
         {/* <FontAwesome name='calendar' size={20}/> */}
         <Text>{interviewDate}</Text>
         </TouchableOpacity>
         
         <TouchableOpacity style={styles.datebutton}
-        onPress={()=>showTimepicker()} >
-          <Text>Time</Text>
-          <Image source={require("../assets/Images/clock.png")} style={{height:20,width:20}}/>
+        // onPress={()=>showTimepicker()}
+        onPress={()=>showDatePicker()}>
+          <Text>To:</Text>
+          <Image source={require("../assets/Images/date.jpg")} style={{height:20,width:20}}/>
+          <Text>{checkout}</Text>
+          
         </TouchableOpacity>
+        
+                        <DateTimePickerModal
+                          isVisible={isDatePickerVisible}
+                          mode="date"
+                          minimumDate={new Date()}
+                          onConfirm={handleConfirm}
+                          onCancel={hideDatePicker}
+                        />
       </View>
 
-                  
+      <Text>{diff=(a.diff(b,'days'))} days</Text>       
       <View>
       <View
                       style={{

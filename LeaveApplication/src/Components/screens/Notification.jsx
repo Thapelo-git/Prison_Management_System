@@ -8,13 +8,13 @@ const Notification = () => {
     const [notification,setNotification]=useState([])
     useEffect(()=>{
         
-        db.ref('Interview').on('value',snap=>{
+        db.ref('LeaveRequest').on('value',snap=>{
           let item = [];
           const a_ =snap.val();
           for (let x in a_){
-            item.push({Status:a_[x].Status,key:x,title:a_[x].title,userId:a_[x].userId,
-              desc:a_[x].desc,email:a_[x].email,interviewDate:a_[x].interviewDate,
-              interviewTime:a_[x].interviewTime ,phonenumber:a_[x].phonenumber,})
+            item.push({Status:a_[x].Status,key:x,diff:a_[x].diff,userId:a_[x].userId,
+              Department:a_[x].Department,LeaveReason:a_[x].LeaveReason,interviewDate:a_[x].interviewDate,
+              checkout:a_[x].checkout,Supervisor:a_[x].Supervisor,})
           }
           if(user){
             const userinfor = item.filter(function(item){
@@ -33,10 +33,10 @@ const Notification = () => {
  
 },[])
 const updateBooking = (key, status) => {
-  Alert.alert('Confirm','Your Interview will be cancelled?',[
+  Alert.alert('Confirm','Your Request will be cancelled?',[
     {text:'Yes',
-   onPress:()=>db.ref('Interview').child(key).update({Status:status})
-   .then(()=>db.ref('Interview').once('value'))
+   onPress:()=>db.ref('LeaveRequest').child(key).update({Status:status})
+   .then(()=>db.ref('LeaveRequest').once('value'))
    .then(snapshot=>snapshot.val())
    .catch(error => ({
      errorCode: error.code,
@@ -52,7 +52,7 @@ const updateBooking = (key, status) => {
 const handleDelete=(key)=>{
   Alert.alert('Confirm','Are you sure you want to delete?',[
     {text:'Yes',
-   onPress:()=>db.ref('Interview').child(key).remove(),
+   onPress:()=>db.ref('LeaveRequest').child(key).remove(),
   },
   {text:'No'},
   ]);
@@ -78,9 +78,10 @@ const handleDelete=(key)=>{
           )
         }
    
-        <Text >You booked your interview for {element.title} </Text>
+        <Text >You Requested your Leave for {element.Department} </Text>
         
-        <Text> Date: {element.interviewDate} time: {element.interviewTime}</Text>
+        <Text> From: {element.interviewDate} To: {element.checkout}</Text>
+        <Text>  {element.diff}days  Reason: {element.LeaveReason}</Text>
         {
           element.Status === "Pending"?(
             <TouchableOpacity style={{height:30,width:70,justifyContent:'center',borderColor:'red',

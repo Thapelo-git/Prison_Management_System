@@ -14,7 +14,7 @@ const Profile = ({navigation}) => {
       const [uid,setUid]=useState('')
       const user = auth.currentUser.uid;
       useEffect(()=>{
-          db.ref(`/Pfamily/`+ user).on('value',snap=>{
+          db.ref(`/EmployeeUser/`+ user).on('value',snap=>{
             setName(snap.val() && snap.val().name);
         setEmail(snap.val().email)
         setPhonenumber(snap.val().phonenumber)

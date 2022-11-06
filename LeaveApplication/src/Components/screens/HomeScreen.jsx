@@ -27,7 +27,7 @@ const HomeScreen = ({navigation,route}) => {
   // setPrisonIdnumber(snap.val().PrisonId)
 setUid(snap.val().uid)
     })
-    db.ref('/EmployeeUser').on('value',snap=>{
+    db.ref('/EmployeeList').on('value',snap=>{
           
       const Pusers=[]
          snap.forEach(action=>{
@@ -102,47 +102,15 @@ setUid(snap.val().uid)
        <View
        style={{justifyContent:'center',alignItems:'center',width:200,height:200,backgroundColor:'#fff',
        marginTop:imgContainer,borderRadius:20}}>
-         <Text style={{fontWeight:'bold',color:'gray',fontSize:30}}>Looking for</Text>
-         <Text style={{fontWeight:'bold',color:'gray',fontSize:30}}>Someone?</Text>
+         <Text style={{fontWeight:'bold',color:'gray',fontSize:30}}>Request for</Text>
+         <Text style={{fontWeight:'bold',color:'gray',fontSize:30}}>Leave?</Text>
        </View>
       </View>
       <View style={{marginTop:imgContainer-container, backgroundColor:'#fff',padding:20,height:'100%'}}>
       {/* 22758486 */}
-     <Text style={{fontWeight:'bold'}}>Enter Prisoner Id number</Text>
+     {/* <Text style={{fontWeight:'bold'}}>Enter Prisoner Id number</Text> */}
 
-       <View
-                      style={{
-                        flexDirection: "row",
-                        alignItems: "center",
-                        borderColor: "rgba(0,0,0,.2)",
-                        borderWidth: 1,
-                        height: 60,
-                        borderRadius: 15,
-                        paddingHorizontal: 5,
-                        marginVertical: 10
-                      }}
-                    >
-                      <View
-                        style={{
-                          justifyContent: "center",
-                          alignItems: "center",
-                          justifyContent:'center',
-                          backgroundColor: "#DEEDF0",
-                          width: 40,
-                          height: 40,
-                          borderRadius: 10
-                        }}
-                      >
-                        <Image source={require("../assets/Images/profile.png")} style={{height:20,width:20}}/>
-                      </View>
-                       <TextInput
-                        style={styles.input}
-                      value={searchtext}
-                        placeholder="Name"
-                        // onChangeText={(text) => Search(text)}
-                        onChangeText={(text) => FilterFunction(text)}
-                      />
-                    </View>
+     
        {/* <Text style={{color:'red'}}>{error}</Text>
        <TouchableOpacity style={styles.signinButton}
                        onPress={()=>updateID()}
@@ -153,36 +121,57 @@ setUid(snap.val().uid)
             </TouchableOpacity> */}
             {
               Prisoner.map(item=>
-                // item.
-                <View style={{padding:5}}>
+                item.EmployeeNumber==name?(
+                  <>
+                  <View style={{padding:5}}>
                  
-                <TouchableOpacity onPress={()=>navigation.navigate("PolUserDetails",{data:item})}>
-          <View style={{flexDirection:'row'}} >
+                
+           <View style={{flexDirection:'row'}} >
+               
+                 {/* <View style={{padding:10}}>
+               <Image source={{uri:item.url}} style={{height:80,width:80,borderRadius:40}}/>
+               </View> */}
+               <View style={{marginTop:20,}}>
+               <View style={{flexDirection:'row',alignItems:'stretch',justifyContent:'space-between'}}>
+               <Text
+                 style={{color:'#032B7A',fontWeight:'bold',fontSize:20}}
+                 >
+                   
+                   Number: {item.EmployeeNumber}
+           
+               </Text>
+            
+               </View>
+                 <View style={{flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
+                   
+                 <Text> Surname: {item.Name}</Text>
+               </View>
+            
+               </View>
+               </View>
+               <Card.Divider/>
               
-                <View style={{padding:10}}>
-              <Image source={{uri:item.url}} style={{height:80,width:80,borderRadius:40}}/>
-              </View>
-              <View style={{marginTop:20,}}>
-              <View style={{flexDirection:'row',alignItems:'stretch',justifyContent:'space-between'}}>
-              <Text
-                style={{color:'#032B7A',fontWeight:'bold',fontSize:20}}
-                >
-                  
-                 Name:  {item.name}
-          
-              </Text>
-           
-              </View>
-                <View style={{flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
-                  
-                <Text> Surname: {item.surname}</Text>
-              </View>
-           
-              </View>
-              </View>
-              <Card.Divider/>
-              </TouchableOpacity>
-              </View>
+               <TouchableOpacity onPress={()=>navigation.navigate("Interviews",{data:item})}
+                      style={{
+                        justifyContent:'center',
+                        alignItems: "center",
+                        borderColor: "rgba(0,0,0,.2)",
+                        borderWidth: 1,
+                        height: 60,
+                        borderRadius: 15,
+                        paddingHorizontal: 5,
+                        marginVertical: 10
+                      }}
+                    >
+                    <View>
+                      <Text style={{fontWeight:'bold',fontSize:20}}>Request</Text>
+                    </View>
+                       
+                    </TouchableOpacity>
+               </View>
+                  </>
+                ):(<></>)
+                
                 )
             }
       </View>

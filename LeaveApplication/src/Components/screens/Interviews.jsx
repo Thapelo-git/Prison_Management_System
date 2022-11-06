@@ -9,7 +9,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
 import { db,auth } from '../../../firebase'
 const Interviews = ({route}) => {
-  
+  const data=route.params.data
   const [email,setEmail]=useState()
   const [phonenumber,setPhonenumber]=useState()
   const [date, setDate] = useState(new Date());
@@ -18,14 +18,7 @@ const Interviews = ({route}) => {
   const [displayDate, setDisplayDate] = useState();
   const [uid,setUid]=useState('')
   const user = auth.currentUser.uid;
-  useEffect(()=>{
-    db.ref(`/Pfamily/`+ user).on('value',snap=>{
-  setEmail(snap.val().email)
-  setPhonenumber(snap.val().phonenumber)
-  setUid(snap.val().uid)
-    })
-
-  },[])
+ 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     setShow(Platform.OS === "ios");
@@ -69,13 +62,15 @@ const Interviews = ({route}) => {
 
     let interviewDate = moment(_myDate).format("DD-MM-YYYY");
     let interviewTime = moment(_myDate).format("LT");
-    const [title,setTitle]=useState('')
-    const [desc,setDescription]=useState('')
+    const [Department,setDepartment]=useState('')
+    const [Supervisor,setSupervisor]=useState('')
+    const [LeaveReason,setLeaveReason]=useState('')
     const addBooking = () => {
       if (
       
-        title == '' ||
-        desc == '' 
+        LeaveReason == '' ||
+        Supervisor == '' ||
+        Department == ''
 
       ) {
         Alert.alert("Error", "Enter all the fields", [
@@ -86,19 +81,40 @@ const Interviews = ({route}) => {
       } else {
         db.ref('Interview').push({
           Status:'Pending',
-          title,
-          desc, 
+          LeaveReason,
+          Department,
+          Supervisor, 
           interviewDate,
           interviewTime,email,phonenumber,
           userId:uid
         })
-        setDescription('')
-        setTitle('')
-      
+        setSupervisor('')
+        setDepartment('')
+        setLeaveReason('')
       }
     };
   return (
     <SafeAreaView>
+      <View style={styles.headerContainer}
+        >
+          <View style={{
+            backgroundColor: 'white',
+            opacity: 0.7, width: 30,
+            height: 30, justifyContent: 'center', alignItems: 'center',
+            borderRadius: 10,
+          }}>
+            <Text onPress={() => navigation.goBack()} style={styles.headerTitle}>back</Text>
+          </View>
+          
+        </View>
+      <View style={{flexDirection:'row',}}>
+      <View style={{display:'flex',alignItems:'flex-start',justifyContent:'flex-start'}}>
+<Text> Employee No: {data.EmployeeNumber}</Text>
+</View>
+      <View style={{display:'flex',alignItems:'flex-end',justifyContent:'flex-end'}}>
+      <Text> Surname: {data.Name}</Text>
+      </View>
+      </View>
       <Text>Select Date and Time</Text>
       <View style={{flexDirection:'row',alignItems:'center',padding:20,justifyContent:'space-around'}}>
      <View>{show && <DateShow/>}</View>
@@ -107,19 +123,16 @@ const Interviews = ({route}) => {
         <Text>Date</Text>
         <Image source={require("../assets/Images/date.jpg")} style={{height:20,width:20}}/>
         {/* <FontAwesome name='calendar' size={20}/> */}
+        <Text>{interviewDate}</Text>
         </TouchableOpacity>
+        
         <TouchableOpacity style={styles.datebutton}
         onPress={()=>showTimepicker()} >
           <Text>Time</Text>
           <Image source={require("../assets/Images/clock.png")} style={{height:20,width:20}}/>
         </TouchableOpacity>
       </View>
-{/*       
-                    <Text style={{  fontWeight: "bold" }}>
-                      {todoDate}
-                    </Text>
-                  
-                    <Text style={{ fontWeight: "bold" }}>{todoTime}</Text> */}
+
                   
       <View>
       <View
@@ -149,10 +162,43 @@ const Interviews = ({route}) => {
                     <TextInput
                         style={styles.input}
                         autoCorrect={false}
-                        placeholder="Title"
-                        onChangeText={(title)=>setTitle(title)}
+                        placeholder="Enter your Department"
+                        onChangeText={(title)=>setDepartment(title)}
                    
-                        value={title}
+                        value={Department}
+                      />
+                    </View>
+                    <View
+                      style={{
+                        flexDirection: "row",
+                        alignItems: "center",
+                        borderColor: "rgba(0,0,0,.2)",
+                        borderWidth: 1,
+                        height: 60,
+                        borderRadius: 15,
+                        paddingHorizontal: 5,
+                        marginVertical: 10
+                      }}
+                    >
+                      <View
+                        style={{
+                          justifyContent: "center",
+                          alignItems: "center",
+                          backgroundColor: "#DEEDF0",
+                          width: 40,
+                          height: 40,
+                          borderRadius: 10
+                        }}
+                      >
+                     <Image source={require("../assets/Images/note.png")} style={{height:20,width:20}}/>
+                    </View>
+                    <TextInput
+                        style={styles.input}
+                        autoCorrect={false}
+                        placeholder="Enter Supervisor Name"
+                        onChangeText={(title)=>setSupervisor(title)}
+                   
+                        value={Supervisor}
                       />
                     </View>
                     <View
@@ -190,13 +236,13 @@ const Interviews = ({route}) => {
                           textAlign: "auto",
                          
                         }}
-                        placeholder="Add description"
+                        placeholder="Enter Reason for leave"
                         multiline={true}
-                        numberOfLines={5}
+                        numberOfLines={3}
                         textAlignVertical={"top"}
-                        onChangeText={(desc)=>setDescription(desc)}
+                        onChangeText={(desc)=>setLeaveReason(desc)}
                         
-                        value={desc}
+                        value={LeaveReason}
                       />
                     </View>
                     {/* <Button

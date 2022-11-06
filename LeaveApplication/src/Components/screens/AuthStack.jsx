@@ -27,7 +27,7 @@ const AuthStack = () => {
     
     {/* <Drawer.Screen name="location" component={Location} /> */}
     <Drawer.Screen name='Notification' component={Notification}/>
-    <Drawer.Screen name="Interview" component={Interviews} />
+    {/* <Drawer.Screen name="Interview" component={Interviews} /> */}
     <Drawer.Screen name="Visits" component={Visits} />
     <Drawer.Screen name="Profile" component={Profile} options={{
       drawerIcon:({color})=>{

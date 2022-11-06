@@ -23,6 +23,7 @@ import AccountDetails from "../screens/AccountDetails";
 // import ForgetPassword from "../screens/forgetPassword";
 import UpdateProfile from "../screens/UpdateProfile";
 import PasswordForget from "../screens/PasswordForget";
+import Interviews from "../screens/Interviews";
 const Stack = createNativeStackNavigator()
 
 const Navigators =()=>{
@@ -74,6 +75,7 @@ const Navigators =()=>{
             <Stack.Screen name="Notification" component={Notification}/>
             <Stack.Screen name="AccountDetails" component={AccountDetails}/>
             <Stack.Screen name="UpdateProfile" component={UpdateProfile}/>
+            <Stack.Screen name="Interviews" component={Interviews}/>
         </Stack.Navigator>
                 {/* </>
             )} */}

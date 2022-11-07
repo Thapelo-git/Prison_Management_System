@@ -84,7 +84,7 @@ import { SafeAreaView, StyleSheet, Text, View ,Dimensions,TouchableOpacity,
               userId:user
             })
             setPosition('')
-            
+             
           }
         };
     return (

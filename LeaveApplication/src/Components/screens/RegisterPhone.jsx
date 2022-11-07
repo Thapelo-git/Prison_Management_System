@@ -1,6 +1,6 @@
 
 import React,{useState,useEffect,Component} from 'react'
-import { StyleSheet, Text, View ,Image,TouchableOpacity} from 'react-native'
+import { StyleSheet, Text, View ,Image,TouchableOpacity,FlatList} from 'react-native'
 import Ionicons from "react-native-vector-icons/Ionicons"
 import Feather from "react-native-vector-icons/Feather"
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
@@ -8,90 +8,108 @@ import {Separator} from './comp/Separator'
 import { Images,Colors } from '../contants'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import moment from 'moment'
+//SplashScreen
+import { Card } from 'react-native-elements'
 import { Display } from '../utils'
 import { db } from '../../../firebase'
 const RegisterPhone = () => {
-    const [date, setDate] = useState(new Date());
-  const [mode, setMode] = useState("date");
-  const [show, setShow] = useState(false);
-  const [displayDate, setDisplayDate] = useState();
-    const onChange = (event, selectedDate) => {
-        const currentDate = selectedDate || date;
-        setShow(Platform.OS === "ios");
-        setDate(currentDate);
-        setDateIsSet(true);
-        console.log(currentDate, "-------");
-        if (mode === "date") {
-          showMode("time");
-          const d = moment(currentDate).format("d MMM");
-          setDisplayDate(d);
-          console.log(d, "<<<------->>>>>");
-    
-          setShow(false);
-        }
-    
-      };
-      const showMode = (currentMode) => {
-        setShow(true);
-        setMode(currentMode);
-      };
-    
-      const showDatepicker = () => {
-        showMode("date");
-      };
-    
-      const showTimepicker = () => {
-        showMode("time");
-      };
-      const DateShow = () => (
-        <DateTimePicker
-          testID="dateTimePicker"
-          value={date}
-          mode={mode}
-          is24Hour={true}
-          display="default"
-          onChange={onChange}
-        />
-      );
-      const _myDate = date.toString();
-     
-    
-        let startDateone= moment(_myDate).format("DD-MM-YYYY");
-        let time= moment(_myDate).format("LT");
-        const addBooking = () => {
-           
-              db.ref('Visits').push({
-                startDateone,
-               time
+  const [Resignation,setResignation]=useState([])
+ 
+  useEffect(()=>{
+  
+      db.ref('/Resignation').on('value',snap=>{
+            
+        const Visits=[]
+           snap.forEach(action=>{
+               const key=action.key
+               const data =action.val()
+               Visits.push({
+                   key:key,
+                   Initials:data.Initials,
+                   Name:data.Name,
+                   Position:data.Position,
+                   IDnumber:data.IDnumber,
+                   EmployeeNumber:data.EmployeeNumber,
+                  ResignDate:data.ResignDate,
+               })
               })
+              
+          
+                setResignation(Visits)
+           
+               
+              }
             
-          };
+      )
+       
+       
+    },[])
+    const NewCard = ({ item, index }) => {
+      return (
+         
+              <>
+              <View style={{ margin: 5,backgroundColor: '#fff',elevation: 3 }}>
+         <View style={{width:250,padding:10}}>
+         <Text>I {item.IDnumber} would like to inform you that I am 
+                  resigning from my position {item.Position}</Text>
+   
+                      <View>
+  <Text style={styles.titles}>select Effective Date </Text>
+  
+  <Text>{item.ResignDate}</Text>
+  <Card.Divider/>
+  <Text>Thank you for the opportunities for professional and personal development
+    that you have provided me .
+  </Text>
+  </View>
+  <Text>I have enjoyed working for your organization and appreciate the support
+    provided to me during my tenure with the company .
+  </Text>
+  
+             <View style={{flexDirection:'row'}} >
+                 
+                  
+                 <View style={{marginTop:20,}}>
+                 <Text>If I can be of any help during this transition,please let me know.
+  </Text>
+                 <Text style={{color:'#032B7A',fontWeight:'bold',fontSize:15}}>
+  Yours sincerely       </Text>
+                 <View style={{flexDirection:'row',alignItems:'stretch',justifyContent:'space-between'}}>
+                  <Text>Employee Number:</Text>
+                 <Text
+                   style={{color:'#032B7A',fontWeight:'bold',fontSize:15}} >
+                     
+                     {item.EmployeeNumber}
+             
+                 </Text>
+              
+                 </View>
+                   <View style={{flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
+                     
+                   <Text> Surname: {item.Name} {item.Initials}</Text>
+                 </View>
+              
+                 </View>
+                 </View>
+                 <Card.Divider/>
+                
+              
+                  </View>
+                </View>
+              </>
+         
+      )
+        
+  }
     return (
-        <View style={styles.container}>
-            
-            
-            <Text style={styles.title}>Update Visits Date and Time</Text>
-            <Text>Select Date and Time</Text>
-      <View style={{flexDirection:'row',alignItems:'center',padding:20,justifyContent:'space-around'}}>
-     <View>{show && <DateShow/>}</View>
-        <TouchableOpacity style={styles.datebutton} 
-        onPress={()=>showDatepicker()} >
-        <Text>Date</Text>
-        <Image source={require("../assets/Images/date.jpg")} style={{height:20,width:20}}/>
-        {/* <FontAwesome name='calendar' size={20}/> */}
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.datebutton}
-        onPress={()=>showTimepicker()} >
-          <Text>Time</Text>
-          <Image source={require("../assets/Images/clock.png")} style={{height:20,width:20}}/>
-        </TouchableOpacity>
-      </View>
-      <TouchableOpacity style={styles.signinButton}
-                       onPress={()=>addBooking()}
-              >
-                <Text style={styles.signinButtonText}>Submit</Text>
-            </TouchableOpacity>
-        </View>
+      <FlatList
+      keyExtractor={(_, key) => key.toString()}
+     horizontal
+      showsVerticalScrollIndicator={false}
+      contentContainerStyle={{ paddingLeft: 20 }}
+      data={Resignation}
+      renderItem={({ item, index }) => <NewCard item={item} index={index} />}
+  />
     )
 }
 

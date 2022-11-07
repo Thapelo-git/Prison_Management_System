@@ -1,9 +1,16 @@
 import { StyleSheet, Text, View,TouchableOpacity } from 'react-native'
 import React, { useState, useEffect, useRef } from 'react'
 import PoliceSignUp from './PoliceSignUp'
-
+import RegisterPhone from './RegisterPhone'
+import SplashScreen from './SplashScreen'
+import { auth } from '../../../firebase'
 const Location = ({navigation}) => {
     const [page,setPage]=useState(0)
+    const onSignout =()=>{
+      auth.signOut()
+      // navigation.navigate('Welcome')
+      
+  }
   return (
     <View>
        {/* <View style={styles.headerContainer}>
@@ -18,7 +25,7 @@ const Location = ({navigation}) => {
             borderRadius: 10,
           }}>
            <Text style={styles.headerTitle}
-          onPress={() => navigation.navigate('Signin')}>Logout</Text>
+          onPress={()=>onSignout()}>Logout</Text>
           </TouchableOpacity>
           
         </View>
@@ -33,12 +40,12 @@ const Location = ({navigation}) => {
           <TouchableOpacity style={{width:130,height:45,borderColor:page === 1?'#3EA055':'gainsboro',justifyContent:'center',
         alignItems:'center',borderWidth:1}} 
         onPress={()=>setPage(1)}>
-              <Text style={{color:page===1?'#3EA055':'gainsboro',fontWeight:'bold'}}>Active Tickets</Text>
+              <Text style={{color:page===1?'#3EA055':'gainsboro',fontWeight:'bold'}}>Resignation</Text>
           </TouchableOpacity>
           <TouchableOpacity style={{width:130,height:45,borderColor:page === 2?'#3EA055':'gainsboro',justifyContent:'center',
         alignItems:'center',borderWidth:1}}
         onPress={()=>setPage(2)}>
-              <Text style={{color:page===2?'#3EA055':'gainsboro',fontWeight:'bold'}}>Past Tickets</Text>
+              <Text style={{color:page===2?'#3EA055':'gainsboro',fontWeight:'bold'}}>Grievance</Text>
           </TouchableOpacity>
       </View>
       <View style={{
@@ -46,13 +53,13 @@ const Location = ({navigation}) => {
           {
             page === 0?(<PoliceSignUp navigation={navigation}/>):(null)
         }
-      {/* {
-            page === 1?(<ActiveTicket/>):(null)
+      {
+            page === 1?(<RegisterPhone/>):(null)
         }
     
          {
-            page === 2?(<PastTickets/>):(null)
-        } */}
+            page === 2?(<SplashScreen/>):(null)
+        }
         
         </View>
       

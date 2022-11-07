@@ -1,48 +1,173 @@
-import React ,{useState,useEffect,Component} from 'react'
-import { StyleSheet, Text,TextInput,
-  StatusBar,Image, View,Button } from 'react-native';
-  import {Colors,Images} from '../contants';
-  import Display from '../utils'
-const SplashScreen = ({navigation}) => {
 
-  useEffect(() => {
-    setTimeout(()=>{
-      navigation.navigate('Welcome')
-    },2000)
-  },[])
+import React,{useState,useEffect,Component} from 'react'
+import { StyleSheet, Text, View ,Image,TouchableOpacity,FlatList} from 'react-native'
+import Ionicons from "react-native-vector-icons/Ionicons"
+import Feather from "react-native-vector-icons/Feather"
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import {Separator} from './comp/Separator'
+import { Images,Colors } from '../contants'
+import DateTimePicker from '@react-native-community/datetimepicker'
+import moment from 'moment'
+//SplashScreen
+import { Card } from 'react-native-elements'
+import { Display } from '../utils'
+import { db } from '../../../firebase'
+const SplashScreen = () => {
+  const [Resignation,setResignation]=useState([])
+ 
+  useEffect(()=>{
+  
+      db.ref('/Grievance').on('value',snap=>{
+            
+        const Visits=[]
+           snap.forEach(action=>{
+               const key=action.key
+               const data =action.val()
+               Visits.push({
+                   key:key,
+                   Initials:data.Initials,
+                   Complaint:data.Complaint,
+                   Grievance:data.Grievance,
+                   IDnumber:data.IDnumber,
+                   EmployeeNumber:data.EmployeeNumber,
+                  ResignDate:data.ResignDate,
+               })
+              })
+              
+          
+                setResignation(Visits)
+           
+               
+              }
+            
+      )
+       
+       
+    },[])
+    const NewCard = ({ item, index }) => {
+      return (
+         
+              <>
+              <View style={{ margin: 5,backgroundColor: '#fff',elevation: 3 }}>
+         <View style={{width:250,padding:10}}>
+         <Text>I {item.IDnumber} wish to raise formal complaint.</Text>
+        
+         <Text style={{color:'#032B7A',fontWeight:'bold',fontSize:15}}>
+{item.Grievance}      </Text>
+                    <View>
+<Text style={styles.titles}>My Complain </Text>
+<Text style={{color:'#032B7A',fontWeight:'bold',fontSize:15}}>
+{item.Complaint}      </Text>
+
+<Text> include a complain of Bulling ,Harassment,Race,Transgender,etc</Text>
+</View>
+<Text>I would like to have a meeting with you to discuss my complain and look forward to hearing frm you</Text>
+
+           <View style={{flexDirection:'row'}} >
+               
+                
+               <View style={{marginTop:20,}}>
+               <Text style={{color:'#032B7A',fontWeight:'bold',fontSize:15}}>
+Yours sincerely       </Text>
+               <View style={{flexDirection:'row',alignItems:'stretch',justifyContent:'space-between'}}>
+                <Text>Employee Number:</Text>
+               <Text
+                 style={{color:'#032B7A',fontWeight:'bold',fontSize:15}} >
+                   
+                   {item.EmployeeNumber}
+           
+               </Text>
+            
+               </View>
+                 <View style={{flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
+                   
+                 <Text> Surname: {item.Name} {item.Initials}</Text>
+               </View>
+            
+               </View>
+               </View>
+               <Card.Divider/>
+                 
+                
+              
+                  </View>
+                </View>
+              </>
+         
+      )
+        
+  }
     return (
-        <>
-          <View style={styles.container}>
-            <StatusBar barStyle="light-content"
-            backgroundColor='#EC8F05'
-            translucent/>
-            <Image
-            source={require('../assets/Images/logo.png')}
-            resizeMode="contain"
-            style={styles.image}/>
-      <Text style={styles.titleText}>Prison Management System</Text>
-      
-    </View>  
-        </>
+      <FlatList
+      keyExtractor={(_, key) => key.toString()}
+     horizontal
+      showsVerticalScrollIndicator={false}
+      contentContainerStyle={{ paddingLeft: 20 }}
+      data={Resignation}
+      renderItem={({ item, index }) => <NewCard item={item} index={index} />}
+  />
     )
 }
-const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor:'#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding:30,
-    },
-    image:{
-      height:80,
-      width:100,
-      borderRadius:90
-    },
-    titleText:{
-      color:'#fff',
-      fontSize:40
-    }
-  });
 
 export default SplashScreen
+
+const styles = StyleSheet.create({
+    container:{
+        flex:1,
+        backgroundColor:'white'
+    }
+    ,
+    headerContainer:{
+        flexDirection:'row' ,
+        alignItems:'center',
+        justifyContent:'center',
+        paddingVertical:40,
+        paddingHorizontal:20
+     },
+     headerTitle:{
+       fontSize:20,
+       lineHeight:20 * 1.4,
+       width:Display.setWidth(80),
+       textAlign:'center'  
+ 
+     },
+     title:{
+        fontSize:20,
+        lineHeight:20 * 1.4,
+        marginTop:50,
+        marginBottom:10,
+        marginHorizontal:20
+            },
+            content:{
+                fontSize:20,
+                marginTop:10,
+                marginBottom:20,
+                marginHorizontal:20,
+            },
+            datebutton:{
+                height:60,
+                width:100,
+                borderRadius:10,
+                borderWidth:1,
+                borderColor: "rgba(0,0,0,.2)",
+                display:'flex',
+                alignItems:'center',
+                justifyContent:'center'
+            
+              },
+              signinButton:{
+                backgroundColor:'#000',
+                borderRadius:8,
+                marginHorizontal:20,
+                height:Display.setHeight(6),
+                justifyContent:'center',
+                alignItems:'center',
+                marginTop:20,
+              },
+              signinButtonText:{
+                fontSize:18,
+                lineHeight:18 * 1.4,
+                color:'#fff',
+                
+              },
+})

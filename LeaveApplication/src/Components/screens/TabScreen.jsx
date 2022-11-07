@@ -42,7 +42,7 @@ const TabScreen = () => {
         // ),
       }}
     />
-    <Tab.Screen
+    {/* <Tab.Screen
       name="Visits"
       component={RegisterPhone}
       options={{
@@ -51,7 +51,7 @@ const TabScreen = () => {
         // <FontAwesome name="user" color={color} size={24} />
         // ),
       }}
-    />
+    /> */}
      {/* <Tab.Screen
       name="PolProfile"
       component={PolProfile}

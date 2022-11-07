@@ -9,6 +9,8 @@ import Notification from './Notification';
 import CustomDrrawer from './CustomDrrawer';
 import Interviews from './Interviews';
 import Visits from './Visits';
+import Visitsupcoming from './Visitsupcoming';
+import Visitshistory from './Visitshistory';
 
 const Drawer = createDrawerNavigator();
 const AuthStack = () => {
@@ -27,8 +29,8 @@ const AuthStack = () => {
     
     {/* <Drawer.Screen name="location" component={Location} /> */}
     <Drawer.Screen name='Notification' component={Notification}/>
-    {/* <Drawer.Screen name="Interview" component={Interviews} /> */}
-    <Drawer.Screen name="Visits" component={Visits} />
+    <Drawer.Screen name="Resignation" component={Visitshistory} />
+    <Drawer.Screen name="Grievance" component={Visitsupcoming} />
     <Drawer.Screen name="Profile" component={Profile} options={{
       drawerIcon:({color})=>{
           <FontAwesome name='user' size={20} color={color}/>

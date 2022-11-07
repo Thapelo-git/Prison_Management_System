@@ -25,12 +25,12 @@ const Visits = () => {
           </View>
           <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center',
         width:'100%',}}>
-            {
+            {/* {
                 page === 0?(<Visitsupcoming/>):(null)
             }
             {
                 page === 1?(<Visitshistory/>):(null)
-            }
+            } */}
             
             </View>
           

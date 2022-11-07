@@ -56,11 +56,11 @@ const Profile = ({navigation}) => {
                     
                     <View style={{flexDirection: 'row', justifyContent:'space-between'}}>
                     <View style={{flexDirection: 'row'}}>
-                    <Icon
+                    {/* <Icon
                         name='ios-person'
                         type='Ionicon'
                         color='#808080'
-                        size={18}/>
+                        size={18}/> */}
                         <Text style={{padding: 5, paddingTop: -15, fontSize: 11, color: '#808080'}}>
                             edit account details
                         </Text>
@@ -79,11 +79,11 @@ const Profile = ({navigation}) => {
                     </Text>
                     <View style={{flexDirection: 'row', justifyContent:'space-between'}}>
                     <View style={{flexDirection: 'row'}}>
-                    <Icon
+                    {/* <Icon
                         name='ios-notifications'
                         type='Ionicon'
                         color='#808080'
-                        size={18}/>
+                        size={18}/> */}
                         <Text style={{padding: 5, paddingTop: -15, fontSize: 11, color: '#808080'}}>
                             updates
                         </Text></View>

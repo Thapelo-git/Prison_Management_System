@@ -45,6 +45,10 @@ const searchFilterFunction =(text)=>{
       setSearchtext(text)
   }
 }
+const onDelete =(id)=>{
+  db.ref(`/Puser/${id}`).remove()
+ 
+ }
   return (
     <div className='dashboard_cover'>
         <div className='addbutton_cover'>
@@ -54,11 +58,11 @@ const searchFilterFunction =(text)=>{
             </button>
             </Link>
             </div>
-            <div className='search'>
+            {/* <div className='search'>
                 <div className='search_icon'><i className='fas fa-search'></i></div>
             <input type="text" className='search_input' placeholder='search' icon='search'
             onChange={(e)=>searchFilterFunction(e.target.value)}/>
-            </div>
+            </div> */}
             <div className='users_container'>
               {
               // Object.keys(user).length>0?(
@@ -70,7 +74,8 @@ const searchFilterFunction =(text)=>{
             <img src={filteredDataSource[id].url} className="profile_pic"/>
             <p>{filteredDataSource[id].name} </p>
             <p>{filteredDataSource[id].surname}</p>
-            <Link to={`viewuser/${id}`}><i className='fas fa-chevron-right'></i></Link>
+            <button className='deletebtn' onClick={()=>onDelete(id)}>Delete</button>
+            {/* <Link to={`viewuser/${id}`}><i className='fas fa-chevron-right'></i></Link> */}
             
             </div>
              )

@@ -102,6 +102,8 @@ function AddScreen() {
             onChange={handleInputChange} value={surname} />
          
           </div>
+          </div>
+          <div className='input_row'>
           <div className='input_column'>
             <label>age</label>
             <input name='age' type='number' className='input_infor' required="required"
@@ -140,6 +142,8 @@ function AddScreen() {
           </select>
           
           </div>
+          </div>
+          <div className='input_row'>
           <div className='input_column'>
           <label>Sentence</label>
             <input name='sentence' type='number' className='input_infor' required="required"

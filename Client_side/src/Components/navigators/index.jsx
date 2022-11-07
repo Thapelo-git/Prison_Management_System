@@ -43,7 +43,7 @@ const Navigators =()=>{
             {!signedIn ?(
                 <>
                 <Stack.Navigator screenOptions={{headerShown:false}}>
-                <Stack.Screen name="Splash" component={SplashScreen} />
+          {/* <Stack.Screen name="Splash" component={SplashScreen} /> */}
                 <Stack.Screen name="Welcome" component={GetStarted}/> 
                 <Stack.Screen name="Signup" component={SignupScreen}/> 
                 <Stack.Screen name="Signin" component={SigninScreen}/> 

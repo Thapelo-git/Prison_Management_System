@@ -1,5 +1,5 @@
 import { View, Text } from 'react-native'
-import React, {Component} from 'react';
+import React, { useState, useEffect, useRef } from 'react'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import Icon from 'react-native-vector-icons/Ionicons';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
@@ -8,6 +8,7 @@ import PolProfile from './PolProfile'
 import PolLocation from './PolLocation'
 import PoliceSignUp from './PoliceSignUp';
 import RegisterPhone from './RegisterPhone';
+import Location from './Location';
 const Tab = createMaterialBottomTabNavigator()
 const TabScreen = () => {
   return (
@@ -33,9 +34,9 @@ const TabScreen = () => {
    
     <Tab.Screen
       name="PolLocation"
-      component={PoliceSignUp}
+      component={Location}
       options={{
-        tabBarLabel: 'Interviews',
+        tabBarLabel: 'Notifications',
         // tabBarIcon: ({ color }) => (
         // <Icon name="location-sharp" color={color} size={24} />
         // ),

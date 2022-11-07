@@ -38,7 +38,7 @@ const addVehicle = (data) => {
     <SafeAreaView>
       <View style={{height:80}}>
       <View style={{display:'flex',alignItems:'flex-end',justifyContent:'flex-end'}}>
-        <Text>Enter  Initials </Text>
+        <Text> </Text>
     <View style={styles.inputInitials}>
       <TouchableOpacity onPress={()=>navigation.navigate("PolUserDetails")}>
         <Text>Employees</Text>

@@ -9,7 +9,7 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
 import { db,auth } from '../../../firebase'
-const Interviews = ({route}) => {
+const Interviews = ({route,navigation}) => {
   const data=route.params.data
   const [email,setEmail]=useState()
   const [phonenumber,setPhonenumber]=useState()
@@ -101,8 +101,8 @@ const Interviews = ({route}) => {
           LeaveReason,
           Department,
           Supervisor, 
-          interviewDate,
-          checkout,diff,
+          interviewDate,Surname:data.Name,
+          checkout,diff,EmployeeNumber:data.EmployeeNumber,
           userId:user
         })
         setSupervisor('')

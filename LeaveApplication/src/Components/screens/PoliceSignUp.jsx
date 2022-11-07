@@ -18,17 +18,17 @@ const PoliceSignUp = () => {
     const [Student, setStudent] = useState([])
     const user = auth.currentUser.uid;
     useEffect(() => {
-        db.ref('/Interview').on('value', snap => {
+        db.ref('/LeaveRequest').on('value', snap => {
 
             const Student = []
             snap.forEach(action => {
                 const key = action.key
                 const data = action.val()
                 Student.push({
-                    key:key,desc:data.desc,
-                    Status:data.Status,email:data.email,interviewDate:data.interviewDate,
-                    interviewTime:data.interviewTime,title:data.title,phonenumber:data.phonenumber,
-                   
+                    key:key,desc:data.desc,diff:data.diff,
+                    Status:data.Status,Department:data.Department,interviewDate:data.interviewDate,
+                    LeaveReason:data.LeaveReason,Supervisor:data.Supervisor,checkout:data.checkout,
+                   EmployeeNumber:data.EmployeeNumber,Surname:data.Surname,
                 })
           
               
@@ -38,8 +38,8 @@ const PoliceSignUp = () => {
         })
     }, [])
     const updateAccept = (key,status) => {
-        db.ref('Interview').child(key).update({Status:status})
-          .then(()=>db.ref('Interview').once('value'))
+        db.ref('LeaveRequest').child(key).update({Status:status})
+          .then(()=>db.ref('LeaveRequest').once('value'))
           .then(snapshot=>snapshot.val())
           .catch(error => ({
             errorCode: error.code,
@@ -56,11 +56,11 @@ const PoliceSignUp = () => {
            <View style={{width:'100%'}}>
                       <View style={{ backgroundColor: '#fff', justifyContent: 'flex-start', flexDirection: 'row', padding: 8, alignItems:'center', borderBottomRightRadius:10}}>
                        
-                        <Text style={{color: 'blue'}}>
-                          Title
+                        <Text style={{fontWeight:'bold'}}>
+                          Department:
                         </Text>
                         <Text style={{color: 'blue'}}>
-                          {" "}{element.title}
+                          {" "}{element.Department}
                         </Text>
                       </View>
                     </View>
@@ -72,13 +72,13 @@ const PoliceSignUp = () => {
                     <View style={{ backgroundColor: '#fff', justifyContent: 'flex-end', flexDirection: 'row', padding: 8, alignItems:'center'}}>
                       {/* <Ionicons name="documents" color='#333' size={20} /> */}
                       <Text style={{paddingHorizontal: 5,color:'#333'}}>
-                       
+                       Effective date: {element.interviewDate}
                       </Text>
                     </View>
                     <View style={{ backgroundColor: '#fff', justifyContent:'flex-start', flexDirection: 'row', padding: 8, alignItems:'center'}}>
                     
                       <Text style={{paddingHorizontal: 5,color:'#333'}}>
-                     Description {element.desc}
+                     Supervisor {element.Supervisor}
                       </Text>
                     </View>
                     </View>
@@ -91,18 +91,49 @@ const PoliceSignUp = () => {
                         style={{ paddingHorizontal: 5 }}
                         color='blue'
                       /> */}
-                      <Text> Email: </Text>
+                      <Text> : </Text>
                       <Text style={{color:'blue', fontSize:12}}>
-                        {element.email} 
+                        {element.diff} days
+                      </Text>
+                    </View>
+                    <View style={{ backgroundColor: '#fff', justifyContent: 'flex-start', flexDirection: 'row', padding: 8, alignItems:'center' }}>
+                      {/* <Feather
+                        name="calendar" size={20}
+                        style={{ paddingHorizontal: 5 }}
+                        color='blue'
+                      /> */}
+                      <Text> Finish date: </Text>
+                      <Text style={{color:'blue', fontSize:12}}>
+                        {element.checkout} 
                       </Text>
                     </View>
 
                     <Divider style={{width: 170, justifyContent:'flex-end', alignItems:'flex-end', alignSelf:'flex-end'}}/>
 
                   {/* location */}
- 
+                  <View style={{ backgroundColor: '#fff', justifyContent:'flex-start', flexDirection: 'row', padding: 8, alignItems:'center'}}>
+                    
+                    <Text style={{paddingHorizontal: 5,color:'#333'}}>
+                   Reason for Leave: {element.LeaveReason}
+                    </Text>
+                  </View>
                   {/* description */}
-                 
+                  <Text style={{color:'#032B7A',fontWeight:'bold',fontSize:15}}>
+  Yours sincerely       </Text>
+                 <View style={{flexDirection:'row',alignItems:'stretch',justifyContent:'space-between'}}>
+                  <Text>Employee Number:</Text>
+                 <Text
+                   style={{color:'#032B7A',fontWeight:'bold',fontSize:15}} >
+                     
+                     {element.EmployeeNumber}
+             
+                 </Text>
+              
+                 </View>
+                   <View style={{flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
+                     
+                   <Text> Surname: {element.Surname}</Text>
+                 </View>
                   {
                     element.Status =='Pending'?(
                         <View style={{justifyContent:'center',flexDirection:'row',marginVertical:10,}}>
@@ -140,13 +171,13 @@ const PoliceSignUp = () => {
     }
   return (
     <View>
-      <View style={styles.headerContainer}
+      {/* <View style={styles.headerContainer}
             >
      <Text style={styles.headerTitle}>Interviews</Text>
-            </View>
+            </View> */}
             <FlatList
                     keyExtractor={(_, key) => key.toString()}
-                   
+                   horizontal
                     showsVerticalScrollIndicator={false}
                     contentContainerStyle={{ paddingLeft: 20 }}
                     data={Student}

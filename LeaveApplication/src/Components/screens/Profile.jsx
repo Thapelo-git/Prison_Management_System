@@ -25,9 +25,9 @@ const Profile = ({navigation}) => {
         },[])
     
         const onSignout =()=>{
-            // auth
-            // .signOut()
-            navigation.navigate('Welcome')
+            auth
+            .signOut()
+            // navigation.navigate('Welcome')
             
         }
   return (
@@ -116,19 +116,15 @@ const Profile = ({navigation}) => {
                     <Card.Divider/>
 
                     {/* Logout     */}
-                    <TouchableOpacity onPress={onSignout} style={{backgroundColor:'red', width:140, marginTop: 50, borderRadius:5, padding:5}}>
+                    {/* <TouchableOpacity onPress={onSignout} style={{backgroundColor:'red', width:140, marginTop: 50, borderRadius:5, padding:5}}>
 
 <View style={{flexDirection: 'row', justifyContent:'center'}}>
-{/* <Icon
-    name='ios-log-out'
-    type='Ionicon'
-    color='#fff'
-    size={25}/> */}
+
     <Text style={{padding: 5, paddingTop: -15, fontSize: 18, color: '#fff'}}>
         Log-out
     </Text>
 </View>
-</TouchableOpacity>
+</TouchableOpacity> */}
 
 
                     </View>

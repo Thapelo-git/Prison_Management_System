@@ -15,7 +15,7 @@ const Location = ({navigation}) => {
     <View>
        {/* <View style={styles.headerContainer}>
      <Text style={styles.headerTitle}></Text>
-            </View> */}
+            </View> */} 
          <View style={styles.headerContainer}
         >
           <TouchableOpacity style={{

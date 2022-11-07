@@ -4,7 +4,7 @@ import React,{useEffect,useState,Component} from 'react'
 import Feather from 'react-native-vector-icons/Feather'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import { FlatList, ScrollView } from 'react-native-gesture-handler'
-import { db } from '../../../firebase'
+import { db,auth} from '../../../firebase'
 import { Card } from 'react-native-elements'
 import { NavigationContainer } from '@react-navigation/native'
 const screenHeight=Dimensions.get('screen').height
@@ -106,8 +106,27 @@ const SearchScreen = ({navigation}) => {
     </View>
     );
   };
+  const onSignout =()=>{
+    auth
+    .signOut()
+    // navigation.navigate('Welcome')
+    
+}
   return (
     <SafeAreaView>
+       <View style={styles.headerContainer}
+        >
+          <TouchableOpacity style={{
+            backgroundColor: 'white',
+            opacity: 0.7, width: '100%',
+            height: 30, justifyContent: 'center', alignItems: 'center',
+            borderRadius: 10,
+          }}>
+           <Text style={styles.headerTitle}
+          onPress={()=>onSignout()}>Logout</Text>
+          </TouchableOpacity>
+          
+        </View>
       <ImageBackground source={require('../assets/Images/RectangleP.png')}
       style={{width:'100%',height:imgContainer}}>
         <Text>Prison Management System</Text>

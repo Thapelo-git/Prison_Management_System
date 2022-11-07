@@ -26,40 +26,35 @@ import PasswordForget from "../screens/PasswordForget";
 const Stack = createNativeStackNavigator()
 
 const Navigators =()=>{
-//     const [signedIn,setSignedIn]=useState(false)
+    const [signedIn,setSignedIn]=useState(false)
 
-//     auth.onAuthStateChanged((user)=>{
-//       if(user){
-//           setSignedIn(true);
-//          console.log(user.uid,"user------------")
+    auth.onAuthStateChanged((user)=>{
+      if(user){
+          setSignedIn(true);
+         console.log(user.uid,"user------------")
        
-//       }else{
+      }else{
        
-//           setSignedIn(false);
-//       }
-//   });
+          setSignedIn(false);
+      }
+  });
     return(
         <NavigationContainer>
-            {/* {!signedIn ?(
+            {!signedIn ?(
                 <>
                 <Stack.Navigator screenOptions={{headerShown:false}}>
-                 <Stack.Screen name="Splash" component={SplashScreen} />
-                <Stack.Screen name="Welcome" component={GetStarted}/> 
-                <Stack.Screen name="Signup" component={SignupScreen}/> 
-                <Stack.Screen name="Signin" component={SigninScreen}/> 
-                <Stack.Screen name="forgetPassword" component={forgetPassword}/>
-                <Stack.Screen name="RegisterPhone" component={RegisterPhone}/> 
-                </Stack.Navigator>
-                </>
-            ):(
-                <> */}
-             <Stack.Navigator screenOptions={{headerShown:false}}>
-             <Stack.Screen name="Splash" component={SplashScreen} />
+                <Stack.Screen name="Splash" component={SplashScreen} />
                 <Stack.Screen name="Welcome" component={GetStarted}/> 
                 <Stack.Screen name="Signup" component={SignupScreen}/> 
                 <Stack.Screen name="Signin" component={SigninScreen}/> 
                 <Stack.Screen name="forgetPassword" component={PasswordForget}/>
-                <Stack.Screen name="RegisterPhone" component={RegisterPhone}/> 
+                <Stack.Screen name="RegisterPhone" component={RegisterPhone}/>  
+                </Stack.Navigator>
+                </>
+            ):(
+                <>
+             <Stack.Navigator screenOptions={{headerShown:false}}>
+       
  
             <Stack.Screen name="homeScreen" component={AuthStack}/>
             <Stack.Screen name="UserDetails" component={UserDetails}/>
@@ -75,8 +70,8 @@ const Navigators =()=>{
             <Stack.Screen name="AccountDetails" component={AccountDetails}/>
             <Stack.Screen name="UpdateProfile" component={UpdateProfile}/>
         </Stack.Navigator>
-                {/* </>
-            )} */}
+                </>
+            )}
   
         </NavigationContainer>
     )
